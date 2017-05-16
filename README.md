@@ -1,2 +1,2 @@
 # os-class-homework
-Pretty self-explanatory.
+The name itself is pretty self-explanatory.
