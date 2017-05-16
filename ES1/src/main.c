@@ -1,22 +1,42 @@
+#include <stdio.h>
+
 #include "globals.h"
+#include "list.h"
+#include "cmd.h"
+#include "io.h"
 
 int main() { 
 
-	//initialize tasks array
-	taskSize = 3;
-	tasks = malloc(taskSize * sizeof(tasks));
+	printf("Scheduler Simulator v1.0 - Simone Cipriani\n\n");
 
-	//enlarge array
-	taskSize += 5;
-
-	Task* reallocTask = realloc(tasks, taskSize * sizeof(Task));
-	if (reallocTask) 
-		tasks = reallocTask;
-	else {
-     // deal with realloc failing because memory could not be allocated.
+	while(1) {
+		printCmds();
+		break;
 	}
+
+	int iError;
+
+	iError = initTaskList(LIST_INIT_LEN);	
+	if (iError) 	{
+		printf("ERROR: could not initialize Task list!");
+		return iError;
+	}
+
+	
+	char name[10] = "0123456789";
+	insertTask(666, name, 7);
+	insertTask(666, name, 7);
+	insertTask(666, name, 7);
+	insertTask(666, name, 7);
+
+
+
+
+	printf("%d",tasks[3].iId);
+
+
+	printf("  %d", (int) sizeof(tasks));
+
 
 	return 0;
 };
-
-

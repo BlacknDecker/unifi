@@ -1,5 +1,8 @@
 #include <stdlib.h>
 
+#define LIST_INIT_LEN 5
+#define LIST_ENLARGE_STEP 5
+
 typedef struct {
 	int iId;
 	int iPriority;
@@ -7,5 +10,8 @@ typedef struct {
 	int iRemCycles;
 } Task;
 
-size_t taskSize;
 Task* tasks;
+size_t taskSize;
+int iNumTasks;
+
+int iAssignId;
