@@ -27,11 +27,23 @@ int alterListSize(int len)
 }
 
 int compare(Task *a, Task *b) {
-	//TODO: check with specs
+
 	if (*policy==PRIORITY)
-		return (a->iPriority>b->iPriority);
+	{
+		if (a->iPriority==b->iPriority)
+			return (a->iId<b->iId);
+		else
+			return (a->iPriority<b->iPriority);
+	}
+
 	if (*policy==SJF)
-		return (a->iRemCycles<b->iRemCycles);
+	{
+		if (a->iPriority==b->iPriority)
+			return (a->iId<b->iId);
+		else
+			return (a->iRemCycles>b->iRemCycles);
+	}
+
 	//default case, should never happen
 	return 0;
 }

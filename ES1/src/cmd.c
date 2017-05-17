@@ -25,3 +25,9 @@ int insertTask(int priority, char name[], int exec)
 		return iError;
 	}
 }
+
+int execTopTask() 
+{
+	//last in the list!!!
+	return 0;
+}
