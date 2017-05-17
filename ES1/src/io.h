@@ -1,3 +1,4 @@
+void printProgHead();
 void printCmds();
 void printTaskList();
 

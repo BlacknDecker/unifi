@@ -15,3 +15,9 @@ size_t taskSize;
 int iNumTasks;
 
 int iAssignId;
+
+typedef enum {
+	PRIORITY, SJF
+} Policy;
+
+Policy* policy;

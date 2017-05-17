@@ -2,6 +2,11 @@
 #include "cmd.h"
 #include "globals.h"
 
+void printProgHead()
+{
+	printf("\n*** Scheduler Simulator v1.0 - Simone Cipriani ***\n\n");
+}
+
 void printCmds() 
 {
 	printf("Enter one of the following commands:\n");
@@ -24,10 +29,11 @@ void printTaskList()
 	int i =0;
 	for (i=0; i<iNumTasks; i++)
 	{
-		printf("| %d", tasks->iId);
-		printf(" | %d", tasks->iPriority);
-		printf(" | %s", tasks->cName);
-		printf(" | %d", tasks->iRemCycles);
+		//is indentation required?
+		printf("| %d", tasks[i].iId);
+		printf(" | %d", tasks[i].iPriority);
+		printf(" | %s", tasks[i].cName);
+		printf(" | %d", tasks[i].iRemCycles);
 		printf(" |\n");
 		printf(SEPARATOR);
 	}
@@ -54,6 +60,9 @@ int dispatchCMD()
 
 		return insertTask(iPriority, cName,  iExec);
 	}
+
+	if(iCMD==7)
+		exit(0);
 
 //handle this
 	return 1;

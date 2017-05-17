@@ -19,7 +19,7 @@ int insertTask(int priority, char name[], int exec)
 		return EXIT_SUCCESS;
 	}
 	else {
-		int iError = alterListSize(5);
+		int iError = alterListSize(LIST_ENLARGE_STEP);
 		tasks[iNumTasks] = t;
 		iNumTasks++;
 		return iError;
