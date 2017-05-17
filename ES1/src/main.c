@@ -11,6 +11,8 @@ int main() {
 
 	while(1) {
 		printCmds();
+		dispatchCMD();
+		printTaskList();
 		break;
 	}
 
