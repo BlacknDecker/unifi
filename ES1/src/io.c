@@ -61,10 +61,54 @@ int dispatchCMD()
 		return insertTask(iPriority, cName,  iExec);
 	}
 
+	if(iCMD==2)
+		return execTopTask();
+
+	if(iCMD==3)
+	{
+		int iId;
+		printf("Insert task id:\n");
+		scanf( "%d", &iId );
+		return execTask(iId);
+	}
+
+
+	if(iCMD==4)
+	{
+		int iId;
+		printf("Insert task id:\n");
+		scanf( "%d", &iId );
+		return deleteTask(iId);
+	}
+
+	if(iCMD==5)
+	{
+		int iId, iPriority;
+		printf("Insert task id:\n");
+		scanf( "%d", &iId );
+		printf("Insert task priority:\n");
+		scanf( "%d", &iPriority );
+
+		return alterPriority(iId, iPriority);
+	}
+
+	if(iCMD==6)
+	{
+		if (switchSchedulingPolicy())
+		{
+			if (*policy == PRIORITY)
+				printf("Scheduling policy now set to PRIORITY\n");
+			if (*policy == SJF)
+				printf("Scheduling policy now set to SHORTEST JOB FIRST\n");
+
+			return EXIT_SUCCESS;
+		}
+	}
+
 	if(iCMD==7)
 		exit(0);
 
-//handle this
-	return 1;
+//unknown command
+	return 0;
 
 }

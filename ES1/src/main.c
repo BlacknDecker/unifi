@@ -7,7 +7,7 @@ int main() {
 
 	printProgHead();
 
-// init list
+	// init list
 	int iError;
 	iError = initTaskList(LIST_INIT_LEN);	
 	if (iError)		
@@ -26,22 +26,6 @@ int main() {
 		sortList();
 		printTaskList();
 	}
-
-
-	char name[10] = "0123456789";
-	insertTask(666, name, 7);
-	insertTask(666, name, 7);
-	insertTask(666, name, 7);
-	insertTask(666, name, 7);
-
-
-
-
-	//printf("%d",tasks[3].iId);
-
-
-	//printf("  %d", (int) sizeof(tasks));
-
 
 	return 0;
 };

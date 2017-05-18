@@ -4,9 +4,9 @@
 int initTaskList(int len) 
 {
 	iAssignId = 1;
-
-	taskSize = len;
 	iNumTasks = 0;
+	taskSize = len;
+
 	tasks = malloc(len * sizeof(Task));
 	if (tasks)
 		return EXIT_SUCCESS;
@@ -19,11 +19,16 @@ int alterListSize(int len)
 	taskSize += len;
 	Task* reallocTask = realloc(tasks, taskSize * sizeof(Task));
 	if (reallocTask) {
+		free(tasks);
 		tasks = reallocTask;
 		return EXIT_SUCCESS;
 	}
 	else 
 		return EXIT_FAILURE;
+}
+
+int garbageCollectList() {
+	return 0;
 }
 
 int compare(Task *a, Task *b) {
@@ -52,8 +57,8 @@ int compare(Task *a, Task *b) {
 void sortList() {
 	int i,k;
 	Task temp;
-	for(i = 0; i<iNumTasks-1; i++) {
-		for(k = 0; k<iNumTasks-1-i; k++) {
+	for(i = 0; i<taskSize-1; i++) {
+		for(k = 0; k<taskSize-1-i; k++) {
 			if (compare(&tasks[k],&tasks[k+1]))
 			{
 				temp = tasks[k];
