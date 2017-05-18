@@ -136,7 +136,7 @@ int dispatchCMD()
 		scanf( "%d", &i_priority );
 		if (alterPriority(i_id, i_priority) !=EXIT_SUCCESS)
 		{
-			printf("ERROR: could not delete specified task!");
+			printf("ERROR: could not alter priority of specified task!");
 			return EXIT_SUCCESS;
 		}
 		return EXIT_SUCCESS;

@@ -73,7 +73,7 @@ int deleteTask(int i_task_id)
 int alterPriority(int i_task_id, int i_new_p) 
 {
 	int k;
-	for(k = 0; k<i_num_task-1; k++) {
+	for(k = 0; k<i_num_task; k++) {
 		if (task_list[k].i_id == i_task_id)
 		{
 			task_list[k].i_priority = i_new_p;

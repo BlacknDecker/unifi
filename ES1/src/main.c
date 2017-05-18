@@ -25,8 +25,6 @@ int main() {
 			return i_ret_code;
 		sortList();
 		printTaskList();
-
-		printf("%d",i_num_task);
 	}
 
 	//should never reach here, but in case..
