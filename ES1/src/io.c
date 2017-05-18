@@ -20,23 +20,36 @@ void printCmds()
 	printf("	7 [exit]\n");
 }
 
-#define SEPARATOR "+----+----------+------+-----------------+\n"
+#define SEPARATOR "+----+----------+-------+----------+\n"
 
 void printTaskList() 
 {
 	printf("\n");
 	printf(SEPARATOR);
-	printf("| ID | PRIORITY | NAME | REMAINING EXEC. |\n");
+	printf("| ID | PRIORITY | EXEC. |   NAME   |\n");
 	printf(SEPARATOR);
 	int i =0;
 	for (i=0; i<i_num_task; i++)
 	{
-		//is indentation required?
-		printf("|	%d", task_list[i].i_id);
-		printf("	|	%d", task_list[i].i_priority);
-		printf("	|	%s", task_list[i].c_name);
-		printf("	|	%d", task_list[i].i_cycles);
-		printf("	|\n");
+		printf("| %d", task_list[i].i_id);
+
+		if (task_list[i].i_id < 10)
+			printf("  |");
+		else 
+			printf(" |");
+
+		printf(" %d", task_list[i].i_priority);
+
+		printf("        | %d", task_list[i].i_cycles);
+		if (task_list[i].i_cycles < 10)
+			printf("     ");
+		else 
+			printf("    ");
+
+		printf("| %s", task_list[i].c_name);
+
+		printf("\n");
+
 		printf(SEPARATOR);
 	}
 	printf("\n");
@@ -54,6 +67,11 @@ int dispatchCMD()
 
 		printf("Insert task priority:\n");
 		scanf( "%d", &i_priority );
+		if (i_priority > 9 || i_priority < 0)
+		{
+			printf("ERROR: please inster a number between 0 and 9!\n");
+			return EXIT_SUCCESS;
+		}
 
 		printf("Insert task name:\n");
 		scanf("%s", &c_name);
