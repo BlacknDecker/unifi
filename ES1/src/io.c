@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "cmd.h"
-#include "globals.h"
+
+#include "headers/globals.h"
+#include "headers/cmd.h"
 
 void printProgHead()
 {
@@ -23,94 +24,123 @@ void printCmds()
 
 void printTaskList() 
 {
+	printf("\n");
 	printf(SEPARATOR);
 	printf("| ID | PRIORITY | NAME | REMAINING EXEC. |\n");
 	printf(SEPARATOR);
 	int i =0;
-	for (i=0; i<iNumTasks; i++)
+	for (i=0; i<i_num_task; i++)
 	{
 		//is indentation required?
-		printf("| %d", tasks[i].iId);
-		printf(" | %d", tasks[i].iPriority);
-		printf(" | %s", tasks[i].cName);
-		printf(" | %d", tasks[i].iRemCycles);
-		printf(" |\n");
+		printf("|	%d", task_list[i].i_id);
+		printf("	|	%d", task_list[i].i_priority);
+		printf("	|	%s", task_list[i].c_name);
+		printf("	|	%d", task_list[i].i_cycles);
+		printf("	|\n");
 		printf(SEPARATOR);
 	}
+	printf("\n");
 }
 
 int dispatchCMD() 
 {
-	int iCMD;
-	scanf( "%d", &iCMD );
+	int i_cmd;
+	scanf( "%d", &i_cmd );
 
-	if (iCMD==1)
+	if (i_cmd==1)
 	{
-		int iPriority, iExec;
-		char cName[8];
+		int i_priority, i_exec;
+		char c_name[8];
 
 		printf("Insert task priority:\n");
-		scanf( "%d", &iPriority );
+		scanf( "%d", &i_priority );
 
 		printf("Insert task name:\n");
-		scanf("%s", &cName);
+		scanf("%s", &c_name);
 
 		printf("Insert remaining executions:\n");
-		scanf( "%d", &iExec );
+		scanf( "%d", &i_exec );
 
-		return insertTask(iPriority, cName,  iExec);
+		if (insertTask(i_priority, c_name,  i_exec)!=EXIT_SUCCESS)
+		{
+			printf("ERROR: could not insert task!");
+			printf("Probably something has gone very bad with memory, the program is closing.");
+			return EXIT_FAILURE;
+		}
+		return EXIT_SUCCESS;
+
 	}
 
-	if(iCMD==2)
-		return execTopTask();
-
-	if(iCMD==3)
+	if(i_cmd==2)
 	{
-		int iId;
-		printf("Insert task id:\n");
-		scanf( "%d", &iId );
-		return execTask(iId);
+		if (execTopTask() !=EXIT_SUCCESS)
+		{
+			printf("ERROR: could not execute first-in-queue task!");
+			printf("Probably something has gone very bad with memory, the program is closing.");
+			return EXIT_FAILURE;
+		}
+		return EXIT_SUCCESS;
 	}
 
-
-	if(iCMD==4)
+	if(i_cmd==3)
 	{
-		int iId;
+		int i_id;
 		printf("Insert task id:\n");
-		scanf( "%d", &iId );
-		return deleteTask(iId);
+		scanf( "%d", &i_id );
+		if (execTask(i_id) !=EXIT_SUCCESS)
+		{
+			printf("ERROR: could not execute specified task!");
+			return EXIT_SUCCESS;
+		}
+		return EXIT_SUCCESS;
+
 	}
 
-	if(iCMD==5)
+	if(i_cmd==4)
 	{
-		int iId, iPriority;
+		int i_id;
 		printf("Insert task id:\n");
-		scanf( "%d", &iId );
+		scanf( "%d", &i_id );
+		if (deleteTask(i_id) !=EXIT_SUCCESS)
+		{
+			printf("ERROR: could not delete specified task!");
+			return EXIT_SUCCESS;
+		}
+		return EXIT_SUCCESS;
+	}
+
+	if(i_cmd==5)
+	{
+		int i_id, i_priority;
+		printf("Insert task id:\n");
+		scanf( "%d", &i_id );
 		printf("Insert task priority:\n");
-		scanf( "%d", &iPriority );
-
-		return alterPriority(iId, iPriority);
+		scanf( "%d", &i_priority );
+		if (alterPriority(i_id, i_priority) !=EXIT_SUCCESS)
+		{
+			printf("ERROR: could not delete specified task!");
+			return EXIT_SUCCESS;
+		}
+		return EXIT_SUCCESS;
 	}
 
-	if(iCMD==6)
+	if(i_cmd==6)
 	{
 		if (switchSchedulingPolicy() == EXIT_SUCCESS)
 		{
-			if (policy == PRIORITY)
-				printf("Scheduling policy now set to PRIORITY\n");
-			if (policy == SJF)
-				printf("Scheduling policy now set to SHORTEST JOB FIRST\n");
+			if (i_policy == PRIORITY)
+				printf("\nScheduling policy now set to PRIORITY\n");
+			if (i_policy == LJF)
+				printf("\nScheduling policy now set to LONGEST JOB FIRST\n");
 
 			return EXIT_SUCCESS;
 		}
 	}
 
-	if(iCMD==7)
+	if(i_cmd==7)
 		exit(0);
 
-//unknown command
-	
-	printf("Oh shit\n");
-	return 1;
-
+	//unknown command
+	printf("Unknown command. Please enter a valid one:\n");
+	return dispatchCMD();
 }

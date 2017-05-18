@@ -1,52 +1,68 @@
-#include <stdio.h> //debug
-#include "globals.h"
+#include "headers/globals.h"
 
-int initTaskList(int len) 
+#include <stdio.h>
+
+int initTaskList(int i_len) 
 {
-	iAssignId = 1;
-	iNumTasks = 0;
-	taskSize = len;
+	i_assign_id = 1;
+	i_num_task = 0;
+	task_size = i_len;
 
-	tasks = malloc(len * sizeof(Task));
-	if (tasks)
+	task_list = malloc(i_len * sizeof(task_t));
+	if (task_list)
 		return EXIT_SUCCESS;
 	else
 		return EXIT_FAILURE;
 }
 
-int alterListSize(int len) 
+int alterListSize(int i_len) 
 {
-	taskSize += len;
-	Task* reallocTask = realloc(tasks, taskSize * sizeof(Task));
-	if (reallocTask) {
-		free(tasks);
-		tasks = reallocTask;
+	task_size += i_len;
+	task_t* realloc_task = realloc(task_list, task_size * sizeof(task_t));
+	if (realloc_task) 
+	{
+		free(task_list);
+		task_list = realloc_task;
 		return EXIT_SUCCESS;
 	}
 	else 
 		return EXIT_FAILURE;
 }
 
-int garbageCollectList() {
-	return 0;
+int releaseEmptySpace() 
+{
+	task_t* clean_task_list = malloc( (i_num_task +1) * sizeof(task_t));
+
+	if (!task_list)
+		return EXIT_FAILURE;
+
+	int i;
+	for (i=0; i<task_size; i++)
+		clean_task_list[i] = task_list[i];
+	
+	free(task_list);
+	task_list = clean_task_list;
+	task_size = i_num_task + 1;
+
+	return EXIT_SUCCESS;
 }
 
-int compare(Task *a, Task *b) {
-
-	if (policy==PRIORITY)
+int compare(task_t a, task_t b) 
+{
+	if (i_policy==PRIORITY)
 	{
-		if (a->iPriority==b->iPriority)
-			return (a->iId<b->iId);
+		if (a.i_priority==b.i_priority)
+			return (a.i_id<b.i_id);
 		else
-			return (a->iPriority<b->iPriority);
+			return (a.i_priority<b.i_priority);
 	}
 
-	if (policy==SJF)
+	if (i_policy==LJF)
 	{
-		if (a->iPriority==b->iPriority)
-			return (a->iId<b->iId);
+		if (a.i_cycles==b.i_cycles)
+			return (a.i_id<b.i_id);
 		else
-			return (a->iRemCycles>b->iRemCycles);
+			return (a.i_cycles>b.i_cycles);
 	}
 
 	//default case, should never happen
@@ -54,16 +70,19 @@ int compare(Task *a, Task *b) {
 }
 
 //bubble sort, terrible in performances but easy to implement
-void sortList() {
+void sortList() 
+{
 	int i,k;
-	Task temp;
-	for(i = 0; i<taskSize-1; i++) {
-		for(k = 0; k<taskSize-1-i; k++) {
-			if (compare(&tasks[k],&tasks[k+1]))
+	task_t temp;
+	for(i = 0; i<i_num_task-1; i++) 
+	{
+		for(k = 0; k<i_num_task-1-i; k++) 
+		{
+			if (compare(task_list[k],task_list[k+1]))
 			{
-				temp = tasks[k];
-				tasks[k] = tasks[k+1];
-				tasks[k+1] = temp;
+				temp = task_list[k];
+				task_list[k] = task_list[k+1];
+				task_list[k+1] = temp;
 			}
 		}
 	}
