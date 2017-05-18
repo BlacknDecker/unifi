@@ -81,10 +81,10 @@ int alterPriority(int id, int newPriority)
 
 int switchSchedulingPolicy() 
 {
-	if (*policy == PRIORITY)
-		*policy = SJF;
-	if (*policy == SJF)
-		*policy = PRIORITY;
+	if (policy == PRIORITY)
+		policy = SJF;
+	else if (policy == SJF)
+		policy = PRIORITY;
 
 	return EXIT_SUCCESS;
 }

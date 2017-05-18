@@ -94,11 +94,11 @@ int dispatchCMD()
 
 	if(iCMD==6)
 	{
-		if (switchSchedulingPolicy())
+		if (switchSchedulingPolicy() == EXIT_SUCCESS)
 		{
-			if (*policy == PRIORITY)
+			if (policy == PRIORITY)
 				printf("Scheduling policy now set to PRIORITY\n");
-			if (*policy == SJF)
+			if (policy == SJF)
 				printf("Scheduling policy now set to SHORTEST JOB FIRST\n");
 
 			return EXIT_SUCCESS;
@@ -109,6 +109,8 @@ int dispatchCMD()
 		exit(0);
 
 //unknown command
-	return 0;
+	
+	printf("Oh shit\n");
+	return 1;
 
 }

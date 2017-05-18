@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
-#define LIST_INIT_LEN 5
-#define LIST_ENLARGE_STEP 5
+#define LIST_INIT_LEN 3
+#define LIST_ENLARGE_STEP 3
 
 typedef struct {
 	int iId;
@@ -16,8 +16,6 @@ int iNumTasks;
 
 int iAssignId;
 
-typedef enum {
-	PRIORITY, SJF
-} Policy;
-
-Policy* policy;
+#define PRIORITY 1
+#define SJF 0
+int policy;

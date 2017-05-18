@@ -33,7 +33,7 @@ int garbageCollectList() {
 
 int compare(Task *a, Task *b) {
 
-	if (*policy==PRIORITY)
+	if (policy==PRIORITY)
 	{
 		if (a->iPriority==b->iPriority)
 			return (a->iId<b->iId);
@@ -41,7 +41,7 @@ int compare(Task *a, Task *b) {
 			return (a->iPriority<b->iPriority);
 	}
 
-	if (*policy==SJF)
+	if (policy==SJF)
 	{
 		if (a->iPriority==b->iPriority)
 			return (a->iId<b->iId);

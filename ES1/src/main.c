@@ -14,8 +14,7 @@ int main() {
 		return iError;
 
 	//default policy is priority
-	policy = malloc(sizeof(Policy));
-	*policy = PRIORITY; 
+	policy = SJF; 
 	
 	//main program loop
 	while(1) {
