@@ -2,8 +2,6 @@
 #include "headers/list.h"
 #include "headers/io.h"
 
-#include <stdio.h>
-
 int main() { 
 
 	printProgHead();
