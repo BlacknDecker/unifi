@@ -1,7 +1,5 @@
 #include "headers/globals.h"
 
-#include <stdio.h>
-
 int initTaskList(int i_len) 
 {
 	i_assign_id = 1;
