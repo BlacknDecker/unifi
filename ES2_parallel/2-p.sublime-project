@@ -1,0 +1,25 @@
+{
+	"build_systems":
+	[
+		{
+			"cmd": "./build.sh",
+			"name": "Build",
+			"working_dir": "${project_path:${folder}}"
+		}
+	],
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				"bin", "screenshots"
+			],
+			"path": "."
+		}
+	],
+	"settings":
+	{
+		"tab_size": 4,
+		"translate_tabs_to_spaces": false
+	}
+}
