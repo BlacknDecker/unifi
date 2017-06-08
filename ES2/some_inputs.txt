@@ -1,0 +1,3 @@
+ls -la
+date
+cat ./some_inputs.txt
