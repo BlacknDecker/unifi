@@ -30,21 +30,23 @@ int main() {
 	printf("All set up. Server running...\n");
 
 	// main server loop
-	while (1) 
+	while (1)
 	{
 		if (read(req_d, buffer, BUFFER_SIZE)) 
 		{
-			printf(buffer);
 			int req_to_serve = atoi(buffer);	
 				printf("serving %d\n", req_to_serve);
 
 				if (req_to_serve==3) {
-					printf(buffer);
+					if (read(req_d, buffer, BUFFER_SIZE))
+						printf("%s\n", buffer);
+					else
+						printf("Something went terribly wrong...");
 				}
 		}
 		else {
-			printf("	nothing to do\n");
-			sleep(1);
+			printf("None is connected: nothing to do...\n");
+			sleep(5);
 		}
 
 	}

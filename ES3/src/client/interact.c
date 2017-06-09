@@ -9,11 +9,14 @@ void printMenu() {
 	printf(" ...\n");
 }
 
-int dispatchCmd() {
+void dispatchCmd() {
 	char c_cmd[1];
 	char msg[BUFFER_SIZE-1];
+	int error;
 
 	scanf( "%s", c_cmd );
+	error = writeInPipe(c_cmd);
+	printf("	write returned code: %d\n", error);
 
 	int i_cmd = atoi(c_cmd);
 
@@ -21,8 +24,7 @@ int dispatchCmd() {
 	{
 		printf("Please insert your message:\n");
 		scanf( "%s", msg );
+		writeInPipe(msg);
+		printf("	write returned code: %d\n", error);
 	}
-
-	char *inPipe = strcat(c_cmd, msg);
-	return writeInPipe(inPipe);
 }
