@@ -34,16 +34,17 @@ int main() {
 	{
 		if (read(req_d, buffer, BUFFER_SIZE)) 
 		{
-			int req_to_serve = atoi(buffer);
+			printf(buffer);
+			int req_to_serve = atoi(buffer);	
+				printf("serving %d\n", req_to_serve);
 
-			if (req_to_serve==3)
-				printf("serving 3\n");
-			if (req_to_serve==4)
-				printf("serving 4\n");
+				if (req_to_serve==3) {
+					printf(buffer);
+				}
 		}
 		else {
 			printf("	nothing to do\n");
-			sleep(3);
+			sleep(1);
 		}
 
 	}

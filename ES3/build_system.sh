@@ -8,4 +8,4 @@ mkdir bin
 cc src/server/main.c -o bin/server
 
 # compile and link client
-cc src/client/main.c -o bin/client
+cc src/client/main.c src/client/interact.c src/client/pipe.c -o bin/client
