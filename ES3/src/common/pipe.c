@@ -1,6 +1,6 @@
 #include "pipe.h"
 
-int openPipe() 
+int openReqPipe() 
 {
 	int req_d;
 	do {
@@ -15,7 +15,9 @@ int openPipe()
 	return req_d;
 }
 
-int writeInPipe(char* toBeWritten) 
+int writeInPipe(int pipe, char* toBeWritten) 
 {
-	return write(req_d, toBeWritten, sizeof(toBeWritten));
+	int error = write(req_d, toBeWritten, BUFFER_SIZE);
+	sleep(1); //let the other process read command from from the pipe
+	return error;
 }
