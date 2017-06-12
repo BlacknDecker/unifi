@@ -72,6 +72,6 @@ int openResPipe()
 int writeInPipe(int pipe, char* toBeWritten) 
 {
 	int error = write(pipe, toBeWritten, strlen(toBeWritten) * sizeof(char));
-	sleep(1); //let the other process read command from from the pipe
+	sleep(1); //let the other process read from from the pipe
 	return error;
 }

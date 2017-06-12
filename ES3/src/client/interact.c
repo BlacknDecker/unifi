@@ -26,15 +26,10 @@ static void message(int req_d)
 	error = writeInPipe(req_d, msg);
 	printf("	write in pipe returned code: %d\n", error);
 
-	int id = 1;
-	while (id) 
-	{
-		printf("Please insert destinataries [0 = stop]: \n");
-		scanf( "%s", dest );
-		error = writeInPipe(req_d, dest);
-		printf("	write returned code: %d\n", error);
-		id = atoi(dest);
-	}
+	printf("Please insert destinatary: \n");
+	scanf( "%s", dest );
+	error = writeInPipe(req_d, dest);
+	printf("	write returned code: %d\n", error);
 }
 
 static void readIdList(int req_d)

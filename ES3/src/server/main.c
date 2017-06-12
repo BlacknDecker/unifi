@@ -79,30 +79,26 @@ static void req2(int req_d)
 static void req3(int req_d)
 {
 	char buffer[BUFFER_SIZE];
+	char msg[BUFFER_SIZE];
 	if (read(req_d, buffer, BUFFER_SIZE))
 	{
-		char msg[BUFFER_SIZE];
 		strcpy(msg, buffer);
-		printf("%s", buffer);
-		
-		int id[MAX_NUM_CLIENTS];
-		int i = 0;
-
-		while (1) 
-		{
-			char t[10];
-			read(req_d, t, sizeof(int));
-			id[i] = atoi(t);
-			printf("%d\n", id[i]);
-
-			if (id[i]==0)
-				break;
-
-			i++;
-		}
 	}
 	else
 		printf("Something went terribly wrong...");
+
+	char c_dest[5];
+	if (read(req_d, buffer, BUFFER_SIZE))
+	{
+		strcpy(c_dest, buffer);
+	}
+	else
+		printf("Something went terribly wrong...");
+
+	printf("printing msg %s", buffer);
+	printf("printing dest %s", c_dest);
+
+
 
 }
 
