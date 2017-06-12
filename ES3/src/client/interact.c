@@ -17,7 +17,7 @@ void printMenu()
 
 static void message(int req_d) 
 {
-	char dest[1];
+	char dest[10];
 	char msg[BUFFER_SIZE];
 	int error;
 
@@ -80,6 +80,4 @@ void dispatchCmd(int req_d)
 
 	if (i_cmd == 3)
 		message(req_d);
-
-	
 }

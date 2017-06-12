@@ -76,6 +76,36 @@ static void req2(int req_d)
 		printf(PIPE_READ_ERROR_MSG);
 }
 
+static void req3(int req_d)
+{
+	char buffer[BUFFER_SIZE];
+	if (read(req_d, buffer, BUFFER_SIZE))
+	{
+		char msg[BUFFER_SIZE];
+		strcpy(msg, buffer);
+		printf("%s", buffer);
+		
+		int id[MAX_NUM_CLIENTS];
+		int i = 0;
+
+		while (1) 
+		{
+			char t[10];
+			read(req_d, t, sizeof(int));
+			id[i] = atoi(t);
+			printf("%d\n", id[i]);
+
+			if (id[i]==0)
+				break;
+
+			i++;
+		}
+	}
+	else
+		printf("Something went terribly wrong...");
+
+}
+
 static void req4(int req_d) 
 {
 	char buffer[BUFFER_SIZE];
@@ -129,21 +159,15 @@ int main()
 			if (req_to_serve ==2)
 				req2(req_d);
 
-			if (req_to_serve==3) {
-				if (read(req_d, buffer, BUFFER_SIZE))
-					printf("%s\n", buffer);
-				else
-					printf("Something went terribly wrong...");
-			}
+			if (req_to_serve ==3) 
+				req3(req_d);
 
 			if (req_to_serve ==4)
 				req4(req_d);
 		}
 		else {
 			printf("None is connected: nothing to do...\n");
-			sleep(5);
+			sleep(3);
 		}
-
 	}
-
 }
