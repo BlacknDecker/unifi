@@ -54,10 +54,17 @@ void dispatchCmd(int req_d)
 	int error;
 
 	scanf( "%s", c_cmd );
+
+	// handle immediately close action
+	int i_cmd = atoi(c_cmd);
+	if (i_cmd == 5) 
+	{
+		kill(getpid(), SIGINT);
+		return;
+	}
+
 	error = writeInPipe(req_d, c_cmd);
 	printf("	write returned code: %d\n", error);
-
-	int i_cmd = atoi(c_cmd);
 
 	//log in, log out
 	if (i_cmd == 1 || i_cmd == 4)
@@ -73,4 +80,6 @@ void dispatchCmd(int req_d)
 
 	if (i_cmd == 3)
 		message(req_d);
+
+	
 }

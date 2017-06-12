@@ -44,8 +44,8 @@ static void req1(int req_d)
 static void req2(int req_d) 
 {
 	// read pid
-	char buffer[BUFFER_SIZE];
-	if (read(req_d, buffer, BUFFER_SIZE))
+	char buffer[sizeof(int)];
+	if (read(req_d, buffer, sizeof(int)))
 	{
 		// signal the client about the pipe
 		printf("	signal to %d ", atoi(buffer));
@@ -56,13 +56,14 @@ static void req2(int req_d)
 		int error, i;
 
 		if (pid_n <1)
+		{
 			strcpy(list, "No clients logged!\n");
+		}
 
 		for (i=0; i<pid_n; i++)
 		{
 			char temp[sizeof(int)];
 			sprintf(temp, "%d ", pid[i]);
-			printf("dafuq %s \n", temp);
 			strcat(list, temp);
 		}
 
@@ -128,15 +129,15 @@ int main()
 			if (req_to_serve ==2)
 				req2(req_d);
 
-			if (req_to_serve ==4)
-				req4(req_d);
-
 			if (req_to_serve==3) {
 				if (read(req_d, buffer, BUFFER_SIZE))
 					printf("%s\n", buffer);
 				else
 					printf("Something went terribly wrong...");
 			}
+
+			if (req_to_serve ==4)
+				req4(req_d);
 		}
 		else {
 			printf("None is connected: nothing to do...\n");

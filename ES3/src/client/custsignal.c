@@ -23,12 +23,20 @@ static void destinataryHandler(int sig)
 
 static void closeHandler(int sig) 
 {
-	printf("you are closing me");
-
+	printf("Client is closing. Disconnecting...");
+	char cmd[] = "4";
+	int error = writeInPipe(req_d, cmd);
+	printf("	write returned code: %d\n", error);
+	char c_pid[10];
+	sprintf(c_pid, "%d", getpid());
+	error = writeInPipe(req_d, c_pid);
+	printf("	write returned code: %d\n", error);
+	exit(0);
 }
 
-void setupSignals()
+void setupSignals(int r)
 {
+	req_d = r;
 	printf("...setting up signals...\n");
 	signal(SIG_MSG, msgHandler);
 	signal(SIG_N_EX, destinataryHandler);

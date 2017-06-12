@@ -3,8 +3,8 @@
 
 int main() {
 	printGreetings();
-	setupSignals();
 	int req_d = openReqPipe();
+	setupSignals(req_d);
 
 	while (1) 
 	{
