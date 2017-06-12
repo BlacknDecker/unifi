@@ -1,27 +1,19 @@
 #include "../common/pipe.h"
+#include "../common/custsignal.h"
 #include "main.h"
 
-static void init()
+static int init()
 {
 	printf("Starting server...\n");
-
 	pid_n = 0;
-
-	unlink(CLIENT_REQ); // remove named pipe if already exists
-	printf("	unlink errno: %d\n",errno);
-	errno = 0;
-
-	mkfifo(CLIENT_REQ, 0666);
-	printf("	mkfifo errno: %d\n",errno);
-
-	printf("Almost done, waiting for a client to open req pipe...\n");
-	req_d = open (CLIENT_REQ, O_RDONLY);
-	printf("	open descriptor: %d\n", req_d);
-
+	int req_d = createReqPipe();
 	printf("All set up. Server running...\n");
+	return req_d;
 }
 
-void req1() {
+static void req1(int req_d)
+{
+	char buffer[BUFFER_SIZE];
 	if (read(req_d, buffer, BUFFER_SIZE))
 	{
 		int temp_pid = atoi(buffer);
@@ -49,7 +41,43 @@ void req1() {
 		printf(PIPE_READ_ERROR_MSG);
 }
 
-void req4() {
+static void req2(int req_d) 
+{
+	// read pid
+	char buffer[BUFFER_SIZE];
+	if (read(req_d, buffer, BUFFER_SIZE))
+	{
+		// signal the client about the pipe
+		printf("	signal to %d ", atoi(buffer));
+		printf("returned code: %d\n", kill(atoi(buffer), SIG_MSG));
+		int res_d = createResPipe(buffer);
+
+		char list[BUFFER_SIZE] = {'\0'};
+		int error, i;
+
+		if (pid_n <1)
+			strcpy(list, "No clients logged!\n");
+
+		for (i=0; i<pid_n; i++)
+		{
+			char temp[sizeof(int)];
+			sprintf(temp, "%d ", pid[i]);
+			printf("dafuq %s \n", temp);
+			strcat(list, temp);
+		}
+
+		strcat(list, "\n\0");
+
+		error = writeInPipe(res_d, list);
+		printf("	write in pipe returned code: %d\n", error);
+	}
+	else
+		printf(PIPE_READ_ERROR_MSG);
+}
+
+static void req4(int req_d) 
+{
+	char buffer[BUFFER_SIZE];
 	if (read(req_d, buffer, BUFFER_SIZE))
 	{
 		int temp_pid = atoi(buffer);
@@ -69,7 +97,6 @@ void req4() {
 		if (index)
 		{
 			index--;
-
 			for (; index<pid_n; index++)
 			{
 				pid[index] = pid[index+1];
@@ -84,21 +111,25 @@ void req4() {
 
 int main() 
 {
-	init();
-
+	int req_d = init();
+	
 	// main server loop
 	while (1)
 	{
-		if (read(req_d, buffer, BUFFER_SIZE)) 
+		char buffer[1];
+		if (read(req_d, buffer, 1))
 		{
 			int req_to_serve = atoi(buffer);
 			printf("asked for req n° %d\n", req_to_serve);
 
 			if (req_to_serve ==1)
-				req1();
+				req1(req_d);
+
+			if (req_to_serve ==2)
+				req2(req_d);
 
 			if (req_to_serve ==4)
-				req4();
+				req4(req_d);
 
 			if (req_to_serve==3) {
 				if (read(req_d, buffer, BUFFER_SIZE))

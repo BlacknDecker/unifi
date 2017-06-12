@@ -1,13 +1,14 @@
 #include "interact.h"
+#include "../common/custsignal.h"
 
 int main() {
 	printGreetings();
-	req_d = openReqPipe();
+	setupSignals();
+	int req_d = openReqPipe();
 
 	while (1) 
 	{
 		printMenu();
-		dispatchCmd();
+		dispatchCmd(req_d);
 	}
-
 }

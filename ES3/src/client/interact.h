@@ -4,4 +4,4 @@
 
 void printGreetings();
 void printMenu();
-void dispatchCmd();
+void dispatchCmd(int req);
