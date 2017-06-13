@@ -12,13 +12,13 @@ static void msgHandler(int sig)
 
 	if (read(req_d, msg, BUFFER_SIZE))
 	{
-		printf("\n%s\n",msg);
+		printf("\nReceived message from server:\n%s\n",msg);
 	}
 }
 
 static void destinataryHandler(int sig)
 {
-
+	printf("\nERROR: chosen destinatary does not exists!\n");
 }
 
 static void closeHandler(int sig) 

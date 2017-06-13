@@ -79,27 +79,62 @@ static void req2(int req_d)
 static void req3(int req_d)
 {
 	char buffer[BUFFER_SIZE];
-	char msg[BUFFER_SIZE];
 	if (read(req_d, buffer, BUFFER_SIZE))
 	{
-		strcpy(msg, buffer);
+		char msg[BUFFER_SIZE];
+		msg[0] = '\0';
+		const char *start = strrchr(buffer, '_') + 1;
+		strncat(msg, start, strcspn(start, "#"));
+
+		char sender[10];
+		sender[0] = '\0';
+		const char *s = strrchr(buffer, '+') + 1;
+		strncat(sender, s, strcspn(s, "*"));
+
+		while (strchr(buffer, '_'))
+		{
+			// exrtact the destinatary from buffer string
+			char dest[10];
+			dest[0] = '\0';
+			strncat(dest, buffer, strcspn(start, "_")-1);
+
+			//strip away the destinatary taken
+			const char *start = strchr(buffer, '_') + 1;
+			char new_buffer[BUFFER_SIZE];
+			new_buffer[0] = '\0';
+			strncat(new_buffer, start, strcspn(start, "#"));
+			strcpy(buffer, new_buffer);
+
+			// check if destinatary exists
+			int i, ok = 0;
+			for (i=0; i<pid_n; i++)
+			{
+				if (pid[i]==atoi(dest))
+					ok = 1;
+			}
+
+			if (ok)
+			{
+				printf("	signal to %d ", atoi(dest));
+				printf("returned code: %d\n", kill(atoi(dest), SIG_MSG));
+
+				//this may not be elegant, but it wil clean dest pid from dirty chars
+				sprintf(dest, "%d", atoi(dest));
+				int res_d = createResPipe(dest);
+
+				int error = writeInPipe(res_d, msg);
+				printf("	write in pipe returned code: %d\n", error);
+			}
+			else
+			{
+				printf("	signal to %d ", atoi(sender));
+				printf("returned code: %d\n", kill(atoi(sender), SIG_N_EX));
+			}
+		}
+
 	}
 	else
 		printf("Something went terribly wrong...");
-
-	char c_dest[5];
-	if (read(req_d, buffer, BUFFER_SIZE))
-	{
-		strcpy(c_dest, buffer);
-	}
-	else
-		printf("Something went terribly wrong...");
-
-	printf("printing msg %s", buffer);
-	printf("printing dest %s", c_dest);
-
-
-
 }
 
 static void req4(int req_d) 

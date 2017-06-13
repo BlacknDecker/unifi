@@ -17,19 +17,35 @@ void printMenu()
 
 static void message(int req_d) 
 {
-	char dest[10];
 	char msg[BUFFER_SIZE];
+	char separator[1] = "_";
+	char end_m[1] = "#";
 	int error;
 
 	printf("Please insert your message:\n");
 	scanf( "%s", msg );
+	strcat(msg, end_m);
+
+	char me[10];
+	sprintf(me, "+%d*", getpid());
+	strcat(msg, me);
+
+	while (1)
+	{
+		char dest[BUFFER_SIZE];
+		printf("Please insert destinatary: [0 for stop]\n");
+		scanf( "%s", dest );
+
+		if (atoi(dest)==0)
+			break;
+		
+		strcat(dest, separator);
+		strcat(dest, msg);
+		strcpy(msg, dest);
+	}
+	
 	error = writeInPipe(req_d, msg);
 	printf("	write in pipe returned code: %d\n", error);
-
-	printf("Please insert destinatary: \n");
-	scanf( "%s", dest );
-	error = writeInPipe(req_d, dest);
-	printf("	write returned code: %d\n", error);
 }
 
 static void readIdList(int req_d)
