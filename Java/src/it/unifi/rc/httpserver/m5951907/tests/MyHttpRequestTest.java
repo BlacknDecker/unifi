@@ -6,6 +6,7 @@ import it.unifi.rc.httpserver.m5951907.MyHttpRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class MyHttpRequestTest {
@@ -21,12 +22,14 @@ public class MyHttpRequestTest {
 		assertEquals("HTTP/1.0", req.getVersion());
 	}
 
+
 	@Test
 	public void getVersionTest2() {
-		// bad end of line
+		// missing space
 		try {
-			new MyHttpRequest("GET /myurl HTTP/1.0\n", null, null);
+			new MyHttpRequest("GET /urlHTTP/1.0\r\n", null, null);
 		} catch (HTTPProtocolException e) {
+			assertTrue(e.getMessage().toUpperCase().contains("MISSING SPACE"));
 			return;
 		}
 		fail();
@@ -34,10 +37,11 @@ public class MyHttpRequestTest {
 
 	@Test
 	public void getVersionTest3() {
-		// missing space
+		// bad end line
 		try {
-			new MyHttpRequest("GET /urlHTTP/1.0\r\n", null, null);
+			new MyHttpRequest("GET /urlHTTP/1.0\r", null, null);
 		} catch (HTTPProtocolException e) {
+			assertTrue(e.getMessage().toUpperCase().contains("END CHAR"));
 			return;
 		}
 		fail();
@@ -50,7 +54,7 @@ public class MyHttpRequestTest {
 		try {
 			req = new MyHttpRequest("GET /4848/banana HTTP/1.0\r\n", null, null);
 		} catch (Exception e) {
-			fail(); // if exception thrown, test should fail
+			fail();
 		}
 		assertEquals("GET", req.getMethod());
 	}
@@ -62,7 +66,7 @@ public class MyHttpRequestTest {
 		try {
 			req = new MyHttpRequest("POST /banana HTTP/1.0\r\n", null, null);
 		} catch (Exception e) {
-			fail(); // if exception thrown, test should fail
+			fail();
 		}
 		assertEquals("POST", req.getMethod());
 	}
@@ -73,13 +77,14 @@ public class MyHttpRequestTest {
 		try {
 			req = new MyHttpRequest("POST /banana HTTP/1.0\r\n", null, null);
 		} catch (Exception e) {
-			fail(); // if exception thrown, test should fail
+			fail();
 		}
 		assertEquals("/banana", req.getPath());
 	}
 
 	@Test
 	public void getPathTest2() {
+		// a long path, unnecessary, but again I never know...
 		HTTPRequest req = null;
 		try {
 			req = new MyHttpRequest("POST /banana/reallyLongPath/reallyReallyLongPath HTTP/1.0\r\n", null, null);
@@ -95,13 +100,13 @@ public class MyHttpRequestTest {
 		try {
 			req = new MyHttpRequest("POST /banana HTTP/1.1\r\n", null, "{ I'm sort of a JSON }");
 		} catch (Exception e) {
-			fail(); // if exception thrown, test should fail
+			fail();
 		}
 		assertEquals("{ I'm sort of a JSON }", req.getEntityBody());
 	}
 
 	@Test
-	public void getParameters() {
+	public void getParametersTest1() {
 		HTTPRequest req = null;
 		try {
 			req = new MyHttpRequest("POST /banana HTTP/1.1\r\n", "Connection: Keep-Alive\r\nUser-Agent: myBrowser", null);
@@ -110,5 +115,27 @@ public class MyHttpRequestTest {
 		}
 		assertEquals("Keep-Alive", req.getParameters().get("Connection"));
 		assertEquals("myBrowser", req.getParameters().get("User-Agent"));
+	}
+
+	@Test
+	public void getParametersTest2() {
+		try {
+			new MyHttpRequest("POST /banana HTTP/1.1\r\n", "Connection: Keep-Alive\n\n User-Agent: myBrowser", null);
+		} catch (Exception e) {
+			assertTrue(e.getMessage().toUpperCase().contains("END CHAR"));
+			return;
+		}
+		fail();
+	}
+
+	@Test
+	public void getParametersTest3() {
+		try {
+			new MyHttpRequest("POST /banana HTTP/1.1\r\n", "Connection Keep-Alive\r\n User-Agent: myBrowser", null);
+		} catch (Exception e) {
+			assertTrue(e.getMessage().toUpperCase().contains("PROPERLY FORMATTED"));
+			return;
+		}
+		fail();
 	}
 }

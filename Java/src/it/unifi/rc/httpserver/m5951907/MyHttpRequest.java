@@ -18,25 +18,30 @@ public class MyHttpRequest implements HTTPRequest {
 		this.body = body;
 	}
 
-	private void createHeaderParMap(String header) {
+	private void createHeaderParMap(String header) throws HTTPProtocolException {
+		if (!header.contains("\r\n"))
+			throw new HTTPProtocolException("Header Lines do not have the proper End Characters");
+
 		headerMap = new HashMap<>();
 		final String[] split = header.split("\r\n");
-		for (String s : split)
+		for (String s : split) {
+			if (!s.contains(":"))
+				throw new HTTPProtocolException("Header Line \"" + s + "\" non properly Formatted: missing char :");
 			headerMap.put(s.substring(0, s.indexOf(':')), s.substring(s.indexOf(' ') + 1));
+		}
+
 	}
 
 	private void splitReqLine(String reqLine) throws HTTPProtocolException {
-		StringBuilder sb = new StringBuilder(reqLine);
+		if (!reqLine.endsWith("\r\n"))
+			throw new HTTPProtocolException("Req Line does not have the proper End Characters");
+		final String[] split = reqLine.split(" ");
 		try {
-			method = sb.substring(0, sb.indexOf(" "));
-			sb.replace(0, sb.indexOf(" ") + 1, "");
-
-			url = sb.substring(0, sb.indexOf(" "));
-			sb.replace(0, sb.indexOf(" ") + 1, "");
-
-			version = sb.substring(0, sb.indexOf("\r\n"));
-		} catch (StringIndexOutOfBoundsException e) {
-			throw new HTTPProtocolException("bad reqLine syntax");
+			method = split[0];
+			url = split[1];
+			version = split[2].replace("\r\n", "");
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new HTTPProtocolException("Bad Syntax on Req Line: missing spaces");
 		}
 	}
 
