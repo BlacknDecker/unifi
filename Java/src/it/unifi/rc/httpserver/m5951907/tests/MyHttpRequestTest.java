@@ -2,7 +2,7 @@ package it.unifi.rc.httpserver.m5951907.tests;
 
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPRequest;
-import it.unifi.rc.httpserver.m5951907.MyHttpRequest;
+import it.unifi.rc.httpserver.m5951907.messages.MyHttpRequest;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -21,7 +21,6 @@ public class MyHttpRequestTest {
 		}
 		assertEquals("HTTP/1.0", req.getVersion());
 	}
-
 
 	@Test
 	public void getVersionTest2() {
@@ -46,7 +45,6 @@ public class MyHttpRequestTest {
 		}
 		fail();
 	}
-
 
 	@Test
 	public void getMethodTest1() {

@@ -10,6 +10,8 @@ import java.net.InetAddress;
 @SuppressWarnings("unused")
 public class MyHTTPFactory implements HTTPFactory {
 
+	//TODO
+
     @Override
     public HTTPInputStream getHTTPInputStream(InputStream is) {
         return null;
