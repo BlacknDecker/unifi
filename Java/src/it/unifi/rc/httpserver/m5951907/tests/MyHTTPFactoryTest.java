@@ -1,4 +1,4 @@
-package it.unifi.rc.httpserver.m5951907;
+package it.unifi.rc.httpserver.m5951907.tests;
 
 import static org.junit.Assert.*;
 
