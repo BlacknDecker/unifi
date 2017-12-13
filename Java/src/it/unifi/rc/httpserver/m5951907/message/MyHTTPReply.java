@@ -2,6 +2,7 @@ package it.unifi.rc.httpserver.m5951907.message;
 
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPReply;
+import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 
 import java.util.Map;
 
@@ -14,8 +15,8 @@ public class MyHTTPReply extends HTTPMessage implements HTTPReply {
 	}
 
 	@Override
-	String getMessageType() {
-		return "Response";
+	protected MyHTTPProtocolException getCustomException(String verboseMsg) {
+		return new MyHTTPProtocolException(500, "Internal Server Error", verboseMsg);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package it.unifi.rc.httpserver.m5951907.message;
 
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPRequest;
+import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 
 import java.util.Map;
 
@@ -14,8 +15,8 @@ public class MyHTTPRequest extends HTTPMessage implements HTTPRequest {
 	}
 
 	@Override
-	String getMessageType() {
-		return "Request";
+	MyHTTPProtocolException getCustomException(String verboseMsg) {
+		return new MyHTTPProtocolException(400, "Bad Request", verboseMsg);
 	}
 
 	@Override

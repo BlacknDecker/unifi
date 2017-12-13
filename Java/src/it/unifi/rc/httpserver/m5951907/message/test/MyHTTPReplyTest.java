@@ -2,10 +2,12 @@ package it.unifi.rc.httpserver.m5951907.message.test;
 
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPReply;
+import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 import it.unifi.rc.httpserver.m5951907.message.MyHTTPReply;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class MyHTTPReplyTest {
 
@@ -25,7 +27,7 @@ public class MyHTTPReplyTest {
 		try {
 			new MyHTTPReply("HTTP/1.1200 OK", null, null);
 		} catch (HTTPProtocolException e) {
-			assertTrue(e.getMessage().toUpperCase().contains("MISSING SPACE"));
+			assertEquals(((MyHTTPProtocolException) e).getCode(), 500);
 			return;
 		}
 		fail();
@@ -80,8 +82,8 @@ public class MyHTTPReplyTest {
 	public void getParametersTest2() {
 		try {
 			new MyHTTPReply("HTTP/1.1 200 OK", "Connection: Keep-Alive\n\n User-Agent: myBrowser", null);
-		} catch (Exception e) {
-			assertTrue(e.getMessage().toUpperCase().contains("END CHAR"));
+		} catch (HTTPProtocolException e) {
+			assertEquals(((MyHTTPProtocolException) e).getCode(), 500);
 			return;
 		}
 		fail();
@@ -91,8 +93,8 @@ public class MyHTTPReplyTest {
 	public void getParametersTest3() {
 		try {
 			new MyHTTPReply("HTTP/1.1 200 OK\r\n", "Connection Keep-Alive\r\n User-Agent: myBrowser", null);
-		} catch (Exception e) {
-			assertTrue(e.getMessage().toUpperCase().contains("PROPERLY FORMATTED"));
+		} catch (HTTPProtocolException e) {
+			assertEquals(((MyHTTPProtocolException) e).getCode(), 500);
 			return;
 		}
 		fail();

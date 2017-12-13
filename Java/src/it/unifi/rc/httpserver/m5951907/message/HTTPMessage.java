@@ -1,6 +1,7 @@
 package it.unifi.rc.httpserver.m5951907.message;
 
 import it.unifi.rc.httpserver.HTTPProtocolException;
+import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -26,24 +27,24 @@ abstract class HTTPMessage {
 			setFirstLineParameter2(split[1]);
 			setFirstLineParameter3(split[2].replace("\r\n", ""));
 		} catch (ArrayIndexOutOfBoundsException e) {
-			throw new HTTPProtocolException("Bad Syntax on " + getMessageType() + " Line: missing spaces");
+			throw getCustomException("BAD SYNTAX ON FIRST LINE: MISSING SPACE");
 		}
 	}
 
 	private void createHeaderParMap(String header) throws HTTPProtocolException {
 		if (!header.contains("\r\n"))
-			throw new HTTPProtocolException("Header Lines do not have the proper End Characters");
+			throw getCustomException("HEADER LINES NOT SEPARATED BY PROPER CHARACTER");
 
 		headerMap = new LinkedHashMap<>(); // has to be linked to preserve order
 		final String[] split = header.split("\r\n");
 		for (String s : split) {
 			if (!s.contains(":"))
-				throw new HTTPProtocolException("Header Line \"" + s + "\" non properly Formatted: missing char :");
+				throw getCustomException("HEADER LINE" + s + " NOT PROPERLY FORMATTED: MISSING CHAR :");
 			headerMap.put(s.substring(0, s.indexOf(':')), s.substring(s.indexOf(' ') + 1));
 		}
 	}
 
-	abstract String getMessageType();
+	abstract MyHTTPProtocolException getCustomException(String verboseMsg);
 
 	abstract void setFirstLineParameter1(String par);
 
