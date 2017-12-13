@@ -1,15 +1,15 @@
-package it.unifi.rc.httpserver.m5951907.messages;
+package it.unifi.rc.httpserver.m5951907.message;
 
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPRequest;
 
 import java.util.Map;
 
-public class MyHttpRequest extends HTTPMessage implements HTTPRequest {
+public class MyHTTPRequest extends HTTPMessage implements HTTPRequest {
 
 	private String method, url, version;
 
-	public MyHttpRequest(String reqLine, String header, String body) throws HTTPProtocolException {
+	public MyHTTPRequest(String reqLine, String header, String body) throws HTTPProtocolException {
 		super(reqLine, header, body);
 	}
 

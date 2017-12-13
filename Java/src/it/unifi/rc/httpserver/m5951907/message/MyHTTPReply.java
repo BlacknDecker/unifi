@@ -1,4 +1,4 @@
-package it.unifi.rc.httpserver.m5951907.messages;
+package it.unifi.rc.httpserver.m5951907.message;
 
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPReply;

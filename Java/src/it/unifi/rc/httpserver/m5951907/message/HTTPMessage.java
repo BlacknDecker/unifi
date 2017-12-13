@@ -1,14 +1,16 @@
-package it.unifi.rc.httpserver.m5951907.messages;
+package it.unifi.rc.httpserver.m5951907.message;
 
 import it.unifi.rc.httpserver.HTTPProtocolException;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 abstract class HTTPMessage {
 
 	private Map<String, String> headerMap;
 	private String body;
+
+	//protected static final String[] PROTOCOL_VERSIONS = {"HTTP/1.0", "HTTP/1.1"};
 
 	HTTPMessage(String firstLine, String header, String body) throws HTTPProtocolException {
 		splitFirstLine(firstLine);
@@ -18,9 +20,6 @@ abstract class HTTPMessage {
 	}
 
 	private void splitFirstLine(String firstLine) throws HTTPProtocolException {
-		if (!firstLine.endsWith("\r\n"))
-			throw new HTTPProtocolException(getMessageType() + " Line does not have the proper End Characters");
-
 		final String[] split = firstLine.split(" ", 3);
 		try {
 			setFirstLineParameter1(split[0]);
@@ -35,7 +34,7 @@ abstract class HTTPMessage {
 		if (!header.contains("\r\n"))
 			throw new HTTPProtocolException("Header Lines do not have the proper End Characters");
 
-		headerMap = new HashMap<>();
+		headerMap = new LinkedHashMap<>(); // has to be linked to preserve order
 		final String[] split = header.split("\r\n");
 		for (String s : split) {
 			if (!s.contains(":"))
