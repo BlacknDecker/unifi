@@ -35,6 +35,11 @@ public class MyHTTPRequest extends HTTPMessage implements HTTPRequest {
 	}
 
 	@Override
+	String recomposeFirstLine() {
+		return method + " " + url + " " + version;
+	}
+
+	@Override
 	public String getVersion() {
 		return version;
 	}

@@ -11,7 +11,9 @@ abstract class HTTPMessage {
 	private Map<String, String> headerMap;
 	private String body;
 
-	//protected static final String[] PROTOCOL_VERSIONS = {"HTTP/1.0", "HTTP/1.1"};
+	HTTPMessage(String body) {
+		this.body = body;
+	}
 
 	HTTPMessage(String firstLine, String header, String body) throws HTTPProtocolException {
 		splitFirstLine(firstLine);
@@ -31,7 +33,7 @@ abstract class HTTPMessage {
 		}
 	}
 
-	private void createHeaderParMap(String header) throws HTTPProtocolException {
+	void createHeaderParMap(String header) throws HTTPProtocolException {
 		if (!header.contains("\r\n"))
 			throw getCustomException("HEADER LINES NOT SEPARATED BY PROPER CHARACTER");
 
@@ -52,11 +54,30 @@ abstract class HTTPMessage {
 
 	abstract void setFirstLineParameter3(String par);
 
+	abstract String recomposeFirstLine();
+
 	Map<String, String> getParameters() {
 		return headerMap;
 	}
 
 	String getBody() {
 		return body;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(recomposeFirstLine());
+		sb.append("\r\n");
+		for (String k : headerMap.keySet()) {
+			sb.append(k);
+			sb.append(": ");
+			sb.append(headerMap.get(k));
+			sb.append("\r\n");
+		}
+		sb.append("\r\n");
+		sb.append(body);
+
+		return sb.toString();
 	}
 }
