@@ -1,5 +1,3 @@
-package it.unifi.rc.httpserver.m5951907.message.test;
-
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPRequest;
 import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
@@ -123,5 +121,16 @@ public class MyHTTPRequestTest {
 			return;
 		}
 		fail();
+	}
+
+	@Test
+	public void toStringTest() {
+		HTTPRequest req = null;
+		try {
+			req = new MyHTTPRequest("POST /banana HTTP/1.1", "Connection: Keep-Alive\r\nUser-Agent: myBrowser", "I'm a banana");
+		} catch (Exception e) {
+			fail(); // if exception thrown, test should fail
+		}
+		assertEquals("POST /banana HTTP/1.1\r\nConnection: Keep-Alive\r\nUser-Agent: myBrowser\r\n\r\nI'm a banana", req.toString());
 	}
 }

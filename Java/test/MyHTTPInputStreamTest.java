@@ -1,5 +1,3 @@
-package it.unifi.rc.httpserver.m5951907.stream.test;
-
 import it.unifi.rc.httpserver.HTTPReply;
 import it.unifi.rc.httpserver.HTTPRequest;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPInputStream;

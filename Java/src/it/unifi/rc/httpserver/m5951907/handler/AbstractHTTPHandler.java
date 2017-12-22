@@ -9,7 +9,7 @@ import it.unifi.rc.httpserver.m5951907.message.MyHTTPReply;
 import java.io.File;
 import java.util.List;
 
-public abstract class AbstractHTTPHandler implements HTTPHandler {
+abstract class AbstractHTTPHandler implements HTTPHandler {
 
 	private final File root;
 

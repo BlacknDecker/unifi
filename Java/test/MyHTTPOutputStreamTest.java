@@ -1,5 +1,3 @@
-package it.unifi.rc.httpserver.m5951907.stream.test;
-
 import it.unifi.rc.httpserver.HTTPOutputStream;
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPReply;

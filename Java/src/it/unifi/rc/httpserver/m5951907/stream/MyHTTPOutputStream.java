@@ -58,10 +58,6 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 		}
 	}
 
-	interface MsgWithHeadParam {
-	Map<String, String> par();
-}
-
 	private void buildHeader(MsgWithHeadParam msg, StringBuilder message) {
 		Set<String> headerKeys = msg.par().keySet();
 		StringBuilder sb = new StringBuilder();
@@ -73,5 +69,9 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 		}
 		message.append(sb.toString());
 		message.append("\r\n");
+	}
+
+	interface MsgWithHeadParam {
+		Map<String, String> par();
 	}
 }

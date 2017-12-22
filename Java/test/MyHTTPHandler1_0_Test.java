@@ -1,5 +1,3 @@
-package it.unifi.rc.httpserver.m5951907.handler.test;
-
 import it.unifi.rc.httpserver.HTTPHandler;
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPReply;

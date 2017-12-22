@@ -1,5 +1,3 @@
-package it.unifi.rc.httpserver.m5951907.stream.test;
-
 import it.unifi.rc.httpserver.*;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPInputStream;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPOutputStream;

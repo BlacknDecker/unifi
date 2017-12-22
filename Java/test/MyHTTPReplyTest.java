@@ -1,5 +1,3 @@
-package it.unifi.rc.httpserver.m5951907.message.test;
-
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPReply;
 import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
@@ -81,7 +79,7 @@ public class MyHTTPReplyTest {
 	@Test
 	public void getParametersTest2() {
 		try {
-			new MyHTTPReply("HTTP/1.1 200 OK", "Connection: Keep-Alive\n\n User-Agent: myBrowser", null);
+			new MyHTTPReply("HTTP/1.1 200 OK", "Connection: Keep-Alive\n\nUser-Agent: myBrowser", null);
 		} catch (HTTPProtocolException e) {
 			assertEquals(((MyHTTPProtocolException) e).getCode(), 500);
 			return;
@@ -92,11 +90,23 @@ public class MyHTTPReplyTest {
 	@Test
 	public void getParametersTest3() {
 		try {
-			new MyHTTPReply("HTTP/1.1 200 OK\r\n", "Connection Keep-Alive\r\n User-Agent: myBrowser", null);
+			new MyHTTPReply("HTTP/1.1 200 OK\r\n", "Connection Keep-Alive\r\nUser-Agent: myBrowser", null);
 		} catch (HTTPProtocolException e) {
 			assertEquals(((MyHTTPProtocolException) e).getCode(), 500);
 			return;
 		}
 		fail();
+	}
+
+	@Test
+	public void toStringTest() {
+		MyHTTPReply res = null;
+		try {
+			res = new MyHTTPReply("HTTP/1.1 200 OK\r\n", "Connection: Keep-Alive\r\nUser-Agent: myBrowser", "I'm a banana");
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(); // if exception thrown, test should fail
+		}
+		assertEquals("HTTP/1.1 200 OK\r\nConnection: Keep-Alive\r\nUser-Agent: myBrowser\r\n\r\nI'm a banana", res.toString());
 	}
 }

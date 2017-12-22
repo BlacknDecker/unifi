@@ -4,9 +4,9 @@ import it.unifi.rc.httpserver.HTTPProtocolException;
 
 public class MyHTTPProtocolException extends HTTPProtocolException {
 
-	private int code;
-	private String msg;
-	private String verboseMsg;
+	private final int code;
+	private final String msg;
+	private final String verboseMsg;
 
 	public MyHTTPProtocolException(int errorCode, String errorMsg, String verboseErrMsg) {
 		super(errorCode + " " + errorMsg);
