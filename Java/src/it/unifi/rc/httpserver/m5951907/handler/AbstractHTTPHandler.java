@@ -11,14 +11,21 @@ import java.util.List;
 
 abstract class AbstractHTTPHandler implements HTTPHandler {
 
-	private final File root;
+	private final File root; //TODO
+	private HTTPHandler next;
 
 	AbstractHTTPHandler(File root) {
-		this.root = root;
+		this(root, null);
 	}
 
-	// TODO
+	AbstractHTTPHandler(File root, HTTPHandler next) {
+		this.root = root;
+		setNextHandler(next);
+	}
 
+	protected void setNextHandler(HTTPHandler handler) {
+		this.next = handler;
+	}
 
 	@Override
 	public HTTPReply handle(HTTPRequest request) {
@@ -29,7 +36,14 @@ abstract class AbstractHTTPHandler implements HTTPHandler {
 			return new MyHTTPReply(e, getProtocolVersion());
 		}
 
-		return null;
+		HTTPReply res = handlingImplementation(request);
+		if (res != null)
+			return res;
+
+		if (next != null)
+			return next.handle(request);
+		else
+			return null;
 	}
 
 	private void testVersion(String version) throws MyHTTPProtocolException {
@@ -45,4 +59,6 @@ abstract class AbstractHTTPHandler implements HTTPHandler {
 	protected abstract List<String> getProtocolSupportedMethods();
 
 	protected abstract String getProtocolVersion();
+
+	protected abstract HTTPReply handlingImplementation(HTTPRequest req);
 }

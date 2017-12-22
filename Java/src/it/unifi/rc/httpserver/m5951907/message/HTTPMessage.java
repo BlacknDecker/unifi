@@ -6,15 +6,34 @@ import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * A class that abstract common characteristics of HTTP messages.
+ *
+ * @author Simone Cipriani, 5951907
+ */
 abstract class HTTPMessage {
 
 	private Map<String, String> headerMap;
 	private String body;
 
+	/**
+	 * Construct an HTTP message without specifying any overhead information.
+	 *
+	 * @param body of the message, the payload
+	 */
 	HTTPMessage(String body) {
 		this.body = body;
 	}
 
+	/**
+	 * Construct an HTTP message which encapsulate all the overhead information,
+	 * depending on the message subtype.
+	 *
+	 * @param firstLine of the full message
+	 * @param header    a string object containing the whole lot of header lines
+	 * @param body      as the payload of the message
+	 * @throws HTTPProtocolException if the first line or the header lines container could not be parsed
+	 */
 	HTTPMessage(String firstLine, String header, String body) throws HTTPProtocolException {
 		splitFirstLine(firstLine);
 		if (header != null)
@@ -22,6 +41,12 @@ abstract class HTTPMessage {
 		this.body = body;
 	}
 
+	/**
+	 * Split the first line of the HTTP message and initialize the fields encapsulating those information.
+	 *
+	 * @param firstLine of the HTTP message
+	 * @throws HTTPProtocolException if bad syntax is found in the first line
+	 */
 	private void splitFirstLine(String firstLine) throws HTTPProtocolException {
 		final String[] split = firstLine.split(" ", 3);
 		try {
@@ -33,6 +58,13 @@ abstract class HTTPMessage {
 		}
 	}
 
+	/**
+	 * Parse the string container of the message header to initialize the map encapsulating
+	 * the header fields.
+	 *
+	 * @param header lines string container
+	 * @throws HTTPProtocolException if poor syntax is found
+	 */
 	void createHeaderParMap(String header) throws HTTPProtocolException {
 		if (!header.contains("\r\n"))
 			throw getCustomException("HEADER LINES NOT SEPARATED BY PROPER CHARACTER");
@@ -46,24 +78,66 @@ abstract class HTTPMessage {
 		}
 	}
 
-	abstract MyHTTPProtocolException getCustomException(String verboseMsg);
-
-	abstract void setFirstLineParameter1(String par);
-
-	abstract void setFirstLineParameter2(String par);
-
-	abstract void setFirstLineParameter3(String par);
-
-	abstract String recomposeFirstLine();
-
+	/**
+	 * Self explanatory.
+	 *
+	 * @return the header map object
+	 */
 	Map<String, String> getParameters() {
 		return headerMap;
 	}
 
+	/**
+	 * Self explanatory.
+	 *
+	 * @return the string body
+	 */
 	String getBody() {
 		return body;
 	}
 
+	/**
+	 * Should be implemented by subclasses to specify the parameters they wants during
+	 * instantiation of MyHTTPProtocolException.
+	 *
+	 * @param verboseMsg as a verbose description of the condition causing the exception
+	 * @return the exception object, ready to be thrown
+	 */
+	abstract MyHTTPProtocolException getCustomException(String verboseMsg);
+
+	/**
+	 * Setter for the first parameter that appears in the first line of the message overhead.
+	 *
+	 * @param par the parameter, I.E. HTTP method
+	 */
+	abstract void setFirstLineParameter1(String par);
+
+	/**
+	 * Setter for the second parameter that appears in the first line of the message overhead.
+	 *
+	 * @param par the parameter, I.E. requested url
+	 */
+	abstract void setFirstLineParameter2(String par);
+
+	/**
+	 * Setter for the third parameter that appears in the first line of the message overhead.
+	 *
+	 * @param par the parameter, I.E. HTTP protocol version
+	 */
+	abstract void setFirstLineParameter3(String par);
+
+	/**
+	 * Merge the first line parameters, recomposing the first line as it originally was.
+	 *
+	 * @return the recomposed first line of the message
+	 */
+	abstract String recomposeFirstLine();
+
+	/**
+	 * Overridden toString method, to get the original message back together.
+	 *
+	 * @return the entire message as a string
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
