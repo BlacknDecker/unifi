@@ -6,6 +6,8 @@ import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler1_0;
 import it.unifi.rc.httpserver.m5951907.message.MyHTTPRequest;
 import org.junit.Test;
 
+import java.io.File;
+
 import static org.junit.Assert.assertEquals;
 
 public class MyHTTPHandler1_0_Test {
@@ -22,10 +24,12 @@ public class MyHTTPHandler1_0_Test {
 	}
 
 	@Test
-	public void handleGoodRequest() {
-		HTTPRequest r = getHttpRequest("GET /url HTTP/1.0");
-		HTTPHandler h = new MyHTTPHandler1_0(null);
-		h.handle(r);
+	public void handleGoodRequest1() {
+		HTTPHandler h = new MyHTTPHandler1_0(new File("res_root"));
+		HTTPRequest r = getHttpRequest("GET /stuff.html HTTP/1.0");
+		HTTPReply res = h.handle(r);
+
+		System.out.println(res.toString());
 		// TODO check reply
 	}
 
@@ -44,4 +48,7 @@ public class MyHTTPHandler1_0_Test {
 		assertEquals("501", rep.getStatusCode());
 		assertEquals("Not Implemented", rep.getStatusMessage());
 	}
+
+	// TODO
+	//add another bad test with unexistent resources (but good root)
 }

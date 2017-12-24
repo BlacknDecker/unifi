@@ -3,6 +3,8 @@ package it.unifi.rc.httpserver.m5951907.message;
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,6 +25,13 @@ abstract class HTTPMessage {
 	 */
 	HTTPMessage(String body) {
 		this.body = body;
+		try {
+			createHeaderParMap("Date: " + DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now()) + "\r\n");
+			// add other standard header fields?
+		} catch (HTTPProtocolException e1) {
+			e1.printStackTrace();
+			// will never happen, proper format is hard-coded
+		}
 	}
 
 	/**
@@ -65,7 +74,7 @@ abstract class HTTPMessage {
 	 * @param header lines string container
 	 * @throws HTTPProtocolException if poor syntax is found
 	 */
-	void createHeaderParMap(String header) throws HTTPProtocolException {
+	private void createHeaderParMap(String header) throws HTTPProtocolException {
 		if (!header.contains("\r\n"))
 			throw getCustomException("HEADER LINES NOT SEPARATED BY PROPER CHARACTER");
 

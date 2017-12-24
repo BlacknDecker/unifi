@@ -4,8 +4,6 @@ import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPReply;
 import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -41,13 +39,19 @@ public class MyHTTPReply extends HTTPMessage implements HTTPReply {
 		this.version = version;
 		this.statusCode = String.valueOf(e.getCode());
 		this.statusMsg = e.getMsg();
-		try {
-			super.createHeaderParMap("Date: " + DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now()) + "\r\n");
-			// add other standard header fields?
-		} catch (HTTPProtocolException e1) {
-			e1.printStackTrace();
-			// will never happen, proper format is hard-coded
-		}
+	}
+
+	/**
+	 * Construct a basic successful HTTP Reply.
+	 *
+	 * @param version of the HTTP protocol in use
+	 * @param body    of the response message
+	 */
+	public MyHTTPReply(String version, String body) {
+		super(body);
+		this.version = version;
+		this.statusCode = "200";
+		this.statusMsg = "OK";
 	}
 
 	/**
