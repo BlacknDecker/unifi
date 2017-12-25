@@ -63,17 +63,19 @@ abstract class AbstractHTTPHandler implements HTTPHandler {
 	 */
 	String fetchResource(String url) throws MyHTTPProtocolException {
 		String content;
+		try {
+			FileReader fr = new FileReader(root.getAbsolutePath() + url);
+			BufferedReader br = new BufferedReader(fr);
 
-		//aaaargh those try with resources are bad: here is the error!
-		try (BufferedReader br = new BufferedReader(new FileReader(root.getCanonicalPath() + url))) {
+			char[] buff = new char[1024]; // just threw in a number, did not try to optimize performances
+			int read;
 			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-			while (line != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
+			while ((read = br.read(buff)) != -1)
+				sb.append(buff, 0, read);
 			content = sb.toString();
+
+			fr.close();
+			br.close();
 		} catch (IOException e) {
 			throw new MyHTTPProtocolException(404, "Not Found", "REQUESTED RESOURCE WAS NOT FOUND: " + url + "\n" + Arrays.toString(e.getStackTrace()));
 		} catch (NullPointerException e) {

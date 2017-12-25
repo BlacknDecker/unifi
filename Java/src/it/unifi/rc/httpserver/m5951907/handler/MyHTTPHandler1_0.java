@@ -11,8 +11,16 @@ import java.util.List;
 
 public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 
+	private final String host;
+
 	public MyHTTPHandler1_0(File root) {
 		super(root);
+		this.host = null;
+	}
+
+	public MyHTTPHandler1_0(String host, File root) {
+		super(root);
+		this.host = host;
 	}
 
 	@Override
@@ -27,6 +35,11 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 
 	@Override
 	protected HTTPReply handlingImplementation(HTTPRequest req) throws MyHTTPProtocolException {
+		if (host != null) {
+			String reqHost = req.getParameters().get("Host");
+			if (!reqHost.equals(this.host))
+				return null; // I am not the one serving you
+		}
 		switch (req.getMethod()) {
 			case "GET":
 				return implementGET(req.getPath());

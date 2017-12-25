@@ -3,6 +3,8 @@ package it.unifi.rc.httpserver.m5951907.message;
 import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
@@ -26,9 +28,10 @@ abstract class HTTPMessage {
 	HTTPMessage(String body) {
 		this.body = body;
 		try {
-			createHeaderParMap("Date: " + DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now()) + "\r\n");
+			String header = "Date: " + DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now()) + "\r\n" + "Host: " + InetAddress.getLocalHost().getHostName();
+			createHeaderParMap(header);
 			// add other standard header fields?
-		} catch (HTTPProtocolException e1) {
+		} catch (HTTPProtocolException | UnknownHostException e1) {
 			e1.printStackTrace();
 			// will never happen, proper format is hard-coded
 		}

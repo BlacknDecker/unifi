@@ -25,13 +25,25 @@ public class MyHTTPHandler1_0_Test {
 
 	@Test
 	public void handleGoodRequest1() {
-		HTTPHandler h = new MyHTTPHandler1_0(new File("res_root"));
+		HTTPHandler h = new MyHTTPHandler1_0(new File("test/res_root"));
 		HTTPRequest r = getHttpRequest("GET /stuff.html HTTP/1.0");
 		HTTPReply res = h.handle(r);
-
-		System.out.println(res.toString());
-		// TODO check reply
+		assertEquals("200", res.getStatusCode());
+		assertEquals("OK", res.getStatusMessage());
+		assertEquals(true, res.getData().contains("too lazy to type actual html"));
 	}
+
+	@Test
+	public void handleGoodRequest2() {
+		HTTPHandler h = new MyHTTPHandler1_0(new File("test/res_root"));
+		HTTPRequest r = getHttpRequest("GET /folder/nested_stuff.html HTTP/1.0");
+		HTTPReply res = h.handle(r);
+		assertEquals("200", res.getStatusCode());
+		assertEquals("OK", res.getStatusMessage());
+		assertEquals(true, res.getData().contains("Lorem Ipsus"));
+	}
+
+	//POST, HEAD
 
 	@Test
 	public void handleBadRequest1() {
@@ -49,6 +61,12 @@ public class MyHTTPHandler1_0_Test {
 		assertEquals("Not Implemented", rep.getStatusMessage());
 	}
 
-	// TODO
-	//add another bad test with unexistent resources (but good root)
+	@Test
+	public void handleBadRequest3() {
+		HTTPHandler h = new MyHTTPHandler1_0(new File("test/res_root"));
+		HTTPRequest r = getHttpRequest("GET /stuff_not_there.html HTTP/1.0");
+		HTTPReply res = h.handle(r);
+		assertEquals("404", res.getStatusCode());
+		assertEquals("Not Found", res.getStatusMessage());
+	}
 }
