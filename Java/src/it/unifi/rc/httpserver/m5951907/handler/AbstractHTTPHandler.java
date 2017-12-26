@@ -4,9 +4,11 @@ import it.unifi.rc.httpserver.HTTPHandler;
 import it.unifi.rc.httpserver.HTTPReply;
 import it.unifi.rc.httpserver.HTTPRequest;
 import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
+import it.unifi.rc.httpserver.m5951907.message.HTTPMessage;
 import it.unifi.rc.httpserver.m5951907.message.MyHTTPReply;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -82,6 +84,14 @@ abstract class AbstractHTTPHandler implements HTTPHandler {
 			throw new MyHTTPProtocolException(500, "Internal Server Error", url + "\n" + Arrays.toString(e.getStackTrace()));
 		}
 		return content;
+	}
+
+	String fetchResourceHeader(String url) {
+		StringBuilder head = HTTPMessage.getStdHeaderFields();
+		head.append("Last-Modified: ");
+		File file = new File(root.getAbsolutePath() + url);
+		head.append(new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").format(file.lastModified()));
+		return head.toString();
 	}
 
 	protected abstract List<String> getProtocolSupportedMethods();

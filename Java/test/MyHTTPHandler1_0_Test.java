@@ -15,7 +15,7 @@ public class MyHTTPHandler1_0_Test {
 	private HTTPRequest getHttpRequest(String s) {
 		HTTPRequest r = null;
 		try {
-			r = new MyHTTPRequest(s, null, null);
+			r = new MyHTTPRequest(s, null, "I am a body!");
 		} catch (HTTPProtocolException e) {
 			e.printStackTrace();
 			// should and will not happen
@@ -43,7 +43,24 @@ public class MyHTTPHandler1_0_Test {
 		assertEquals(true, res.getData().contains("Lorem Ipsus"));
 	}
 
-	//POST, HEAD
+	@Test
+	public void handleGoodRequest3() {
+		HTTPHandler h = new MyHTTPHandler1_0(new File("test/res_root"));
+		HTTPRequest r = getHttpRequest("POST /some/url HTTP/1.0");
+		HTTPReply res = h.handle(r);
+		assertEquals("204", res.getStatusCode());
+		assertEquals("No Content", res.getStatusMessage());
+	}
+
+	@Test
+	public void handleGoodRequest4() {
+		HTTPHandler h = new MyHTTPHandler1_0(new File("test/res_root"));
+		HTTPRequest r = getHttpRequest("HEAD /some/url HTTP/1.0");
+		HTTPReply res = h.handle(r);
+		assertEquals("200", res.getStatusCode());
+		assertEquals("OK", res.getStatusMessage());
+		assertEquals("Thu, 01 Jan 1970 01:00:00 CET", res.getParameters().get("Last-Modified"));
+	}
 
 	@Test
 	public void handleBadRequest1() {

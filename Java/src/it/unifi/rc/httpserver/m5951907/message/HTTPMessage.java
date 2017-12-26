@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * @author Simone Cipriani, 5951907
  */
-abstract class HTTPMessage {
+public abstract class HTTPMessage {
 
 	private Map<String, String> headerMap;
 	private String body;
@@ -26,14 +26,25 @@ abstract class HTTPMessage {
 	 * @param body of the message, the payload
 	 */
 	HTTPMessage(String body) {
+		this(getStdHeaderFields().toString(), body);
+	}
+
+	/**
+	 * Construct an HTTP message specifying the header fields in a string container.
+	 *
+	 * @param body of the message, the payload
+	 */
+	HTTPMessage(String header, String body) {
 		this.body = body;
 		try {
-			String header = "Date: " + DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now()) + "\r\n" + "Host: " + InetAddress.getLocalHost().getHostName();
 			createHeaderParMap(header);
-			// add other standard header fields?
-		} catch (HTTPProtocolException | UnknownHostException e1) {
-			e1.printStackTrace();
-			// will never happen, proper format is hard-coded
+		} catch (HTTPProtocolException e) {
+			e.printStackTrace();
+			try {
+				createHeaderParMap(getStdHeaderFields().toString());
+			} catch (HTTPProtocolException ignored) {
+				// should and will NOT happen, proper format is hard coded
+			}
 		}
 	}
 
@@ -165,5 +176,23 @@ abstract class HTTPMessage {
 		sb.append(body);
 
 		return sb.toString();
+	}
+
+	public static StringBuilder getStdHeaderFields() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Date: ");
+		sb.append(DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now()));
+		sb.append("\r\n");
+
+		sb.append("Host: ");
+		try {
+			sb.append(InetAddress.getLocalHost().getHostName());
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			sb.append("unknown host");
+		}
+		sb.append("\r\n");
+
+		return sb;
 	}
 }

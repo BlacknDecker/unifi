@@ -1,8 +1,10 @@
 package it.unifi.rc.httpserver.m5951907.handler;
 
+import it.unifi.rc.httpserver.HTTPProtocolException;
 import it.unifi.rc.httpserver.HTTPReply;
 import it.unifi.rc.httpserver.HTTPRequest;
 import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
+import it.unifi.rc.httpserver.m5951907.message.HTTPMessage;
 import it.unifi.rc.httpserver.m5951907.message.MyHTTPReply;
 
 import java.io.File;
@@ -40,27 +42,54 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 			if (!reqHost.equals(this.host))
 				return null; // I am not the one serving you
 		}
-		switch (req.getMethod()) {
-			case "GET":
-				return implementGET(req.getPath());
-			case "HEAD":
-				return implementHEAD(req.getPath());
-			case "POST":
-				return implementPOST(req.getPath(), req.getEntityBody());
-			default:
-				throw new MyHTTPProtocolException(404, "Not Found", "REQUESTED RESOURCE WAS NOT FOUND: " + req.getPath());
+		try {
+			switch (req.getMethod()) {
+				case "GET":
+					return implementGET(req.getPath());
+				case "HEAD":
+					return implementHEAD(req.getPath());
+				case "POST":
+					return implementPOST(req.getPath(), req.getEntityBody());
+				default:
+					throw new MyHTTPProtocolException(404, "Not Found", "REQUESTED RESOURCE WAS NOT FOUND: " + req.getPath());
+			}
+		} catch (HTTPProtocolException ex) {
+			if (ex instanceof MyHTTPProtocolException)
+				throw (MyHTTPProtocolException) ex;
+			else
+				throw new MyHTTPProtocolException(500, "Internal Server Error", "SOMETHING REALLY STRANGE HAPPENED: " + Arrays.toString(ex.getStackTrace()));
 		}
 	}
 
-	private HTTPReply implementPOST(String path, String body) throws MyHTTPProtocolException {
-		return null;
+	/**
+	 * A basic (well, almost fake) implementation of the HTTP/1.0 POST method.
+	 *
+	 * @return a reply with no body
+	 */
+	private HTTPReply implementPOST(String path, String body) throws HTTPProtocolException {
+		// do something meaningful with post body
+		System.out.println("PATH TO POST TO:\n" + path);
+		System.out.println("POSTED BODY:\n" + body);
+		return new MyHTTPReply("HTTP/1.0 204 No Content", HTTPMessage.getStdHeaderFields().toString(), "");
 	}
 
-	private HTTPReply implementHEAD(String path) throws MyHTTPProtocolException {
-		return null;
+	/**
+	 * A basic implementation of the HTTP/1.0 HEAD method.
+	 *
+	 * @return a reply with no body
+	 */
+	private HTTPReply implementHEAD(String url) throws HTTPProtocolException {
+		return new MyHTTPReply("HTTP/1.0 200 OK", super.fetchResourceHeader(url), "");
 	}
 
-	private HTTPReply implementGET(String url) throws MyHTTPProtocolException {
-		return new MyHTTPReply("HTTP/1.0", super.fetchResource(url));
+	/**
+	 * A basic implementation of the HTTP/1.0 GET method.
+	 *
+	 * @param url of the requested resource
+	 * @return a reply with the resource fetched as a body
+	 * @throws MyHTTPProtocolException if anything bad with resource fetching (I.E. Not Found)
+	 */
+	private HTTPReply implementGET(String url) throws HTTPProtocolException {
+		return new MyHTTPReply("HTTP/1.0 200 OK", super.fetchResourceHeader(url), super.fetchResource(url));
 	}
 }

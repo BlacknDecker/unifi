@@ -42,19 +42,6 @@ public class MyHTTPReply extends HTTPMessage implements HTTPReply {
 	}
 
 	/**
-	 * Construct a basic successful HTTP Reply.
-	 *
-	 * @param version of the HTTP protocol in use
-	 * @param body    of the response message
-	 */
-	public MyHTTPReply(String version, String body) {
-		super(body);
-		this.version = version;
-		this.statusCode = "200";
-		this.statusMsg = "OK";
-	}
-
-	/**
 	 * Implementation of superclass method: exception generated while generating
 	 * the reply object are Internal Server Error.
 	 *
