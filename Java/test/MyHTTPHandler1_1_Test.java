@@ -7,18 +7,15 @@ import it.unifi.rc.httpserver.m5951907.message.MyHTTPRequest;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 import static org.junit.Assert.assertEquals;
 
-public class MyHTTPHandler1_0_Test {
-
+public class MyHTTPHandler1_1_Test {
+/*
 	private HTTPRequest getHttpRequest(String s) {
 		HTTPRequest r = null;
 		try {
-			r = new MyHTTPRequest(s, null, "I am a body!\n");
+			r = new MyHTTPRequest(s, null, "I am a body!");
 		} catch (HTTPProtocolException e) {
 			e.printStackTrace();
 			// should and will not happen
@@ -48,16 +45,8 @@ public class MyHTTPHandler1_0_Test {
 
 	@Test
 	public void handleGoodRequest3() {
-		// clean post res
-		try {
-			OutputStream os = new FileOutputStream("test/res_root/folder/post_here", false);
-			os.write("".getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		HTTPHandler h = new MyHTTPHandler1_0(new File("test/res_root"));
-		HTTPRequest r = getHttpRequest("POST /folder/post_here HTTP/1.0");
+		HTTPRequest r = getHttpRequest("POST /some/url HTTP/1.0");
 		HTTPReply res = h.handle(r);
 		assertEquals("204", res.getStatusCode());
 		assertEquals("No Content", res.getStatusMessage());
@@ -96,5 +85,5 @@ public class MyHTTPHandler1_0_Test {
 		HTTPReply res = h.handle(r);
 		assertEquals("404", res.getStatusCode());
 		assertEquals("Not Found", res.getStatusMessage());
-	}
+	}*/
 }

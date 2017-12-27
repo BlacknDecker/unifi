@@ -8,18 +8,37 @@ import it.unifi.rc.httpserver.m5951907.message.HTTPMessage;
 import it.unifi.rc.httpserver.m5951907.message.MyHTTPReply;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Implements an handler that serves HTTP/1.0 requests.
+ *
+ * @author Simone Cipriani, 5951907
+ */
 public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 
 	private final String host;
 
+	/**
+	 * Basic constructor, initializes the handler to serve independently of the requesting host.
+	 *
+	 * @param root the {@link File} object abstracting the root path
+	 */
 	public MyHTTPHandler1_0(File root) {
 		super(root);
 		this.host = null;
 	}
 
+	/**
+	 * Construct the handler to serve only a specific host.
+	 *
+	 * @param host the host to serve
+	 * @param root the {@link File} object abstracting the root path
+	 */
 	public MyHTTPHandler1_0(String host, File root) {
 		super(root);
 		this.host = host;
@@ -37,11 +56,8 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 
 	@Override
 	protected HTTPReply handlingImplementation(HTTPRequest req) throws MyHTTPProtocolException {
-		if (host != null) {
-			String reqHost = req.getParameters().get("Host");
-			if (!reqHost.equals(this.host))
-				return null; // I am not the one serving you
-		}
+		if (checkHost(req))
+			return null; // I am not the one serving you
 		try {
 			switch (req.getMethod()) {
 				case "GET":
@@ -62,24 +78,46 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 	}
 
 	/**
-	 * A basic (well, almost fake) implementation of the HTTP/1.0 POST method.
+	 * Check if the host to serve matches the one indicated in the {@link HTTPRequest}.
 	 *
-	 * @return a reply with no body
+	 * @param req the request
+	 * @return true if host should not be served, false otherwise
+	 */
+	private boolean checkHost(HTTPRequest req) {
+		if (host != null) {
+			String reqHost = req.getParameters().get("Host");
+			return reqHost == null || !reqHost.equals(this.host);
+		}
+		return false;
+	}
+
+	/**
+	 * A basic implementation of the HTTP/1.0 POST method.
+	 *
+	 * @param path of the request
+	 * @param body of the request
+	 * @return an {@link HTTPReply} indicating success or failure
+	 * @throws HTTPProtocolException if it is not possible to construct the {@link HTTPReply}
 	 */
 	private HTTPReply implementPOST(String path, String body) throws HTTPProtocolException {
-		// do something meaningful with post body
-		System.out.println("PATH TO POST TO:\n" + path);
-		System.out.println("POSTED BODY:\n" + body);
-		return new MyHTTPReply("HTTP/1.0 204 No Content", HTTPMessage.getStdHeaderFields().toString(), "");
+		try {
+			OutputStream os = new FileOutputStream(fetchResource(path), true);
+			os.write(body.getBytes());
+			return new MyHTTPReply("HTTP/1.0 204 No Content", HTTPMessage.getStdHeaderFields().toString(), "");
+		} catch (IOException e) {
+			return new MyHTTPReply("HTTP/1.0 404 Not Found", HTTPMessage.getStdHeaderFields().toString(), Arrays.toString(e.getStackTrace()));
+		}
 	}
 
 	/**
 	 * A basic implementation of the HTTP/1.0 HEAD method.
 	 *
-	 * @return a reply with no body
+	 * @param url of the request
+	 * @return an {@link HTTPReply} indicating success or failure
+	 * @throws HTTPProtocolException if it is not possible to construct the {@link HTTPReply}
 	 */
 	private HTTPReply implementHEAD(String url) throws HTTPProtocolException {
-		return new MyHTTPReply("HTTP/1.0 200 OK", super.fetchResourceHeader(url), "");
+		return new MyHTTPReply("HTTP/1.0 200 OK", super.readResourceHeader(url), "");
 	}
 
 	/**
@@ -90,6 +128,6 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 	 * @throws MyHTTPProtocolException if anything bad with resource fetching (I.E. Not Found)
 	 */
 	private HTTPReply implementGET(String url) throws HTTPProtocolException {
-		return new MyHTTPReply("HTTP/1.0 200 OK", super.fetchResourceHeader(url), super.fetchResource(url));
+		return new MyHTTPReply("HTTP/1.0 200 OK", super.readResourceHeader(url), super.readResource(url));
 	}
 }
