@@ -2,6 +2,7 @@ package it.unifi.rc.httpserver.m5951907;
 
 import it.unifi.rc.httpserver.*;
 import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler1_0;
+import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler1_1;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPInputStream;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPOutputStream;
 
@@ -41,14 +42,12 @@ public class MyHTTPFactory implements HTTPFactory {
 
 	@Override
 	public HTTPHandler getFileSystemHandler1_1(File root) {
-		//TODO
-		return null;
+		return new MyHTTPHandler1_1(root);
 	}
 
 	@Override
 	public HTTPHandler getFileSystemHandler1_1(String host, File root) {
-		//TODO
-		return null;
+		return new MyHTTPHandler1_1(host, root);
 	}
 
 	@Override

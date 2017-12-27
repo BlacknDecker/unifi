@@ -67,7 +67,7 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 				case "POST":
 					return implementPOST(req.getPath(), req.getEntityBody());
 				default:
-					throw new MyHTTPProtocolException(404, "Not Found", "REQUESTED RESOURCE WAS NOT FOUND: " + req.getPath());
+					throw new MyHTTPProtocolException(501, "Not Implemented", "METHOD " + req.getMethod() + " SPECIFIED IN REQUEST IS NOT IMPLEMENTED");
 			}
 		} catch (HTTPProtocolException ex) {
 			if (ex instanceof MyHTTPProtocolException)
@@ -83,7 +83,7 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 	 * @param req the request
 	 * @return true if host should not be served, false otherwise
 	 */
-	private boolean checkHost(HTTPRequest req) {
+	boolean checkHost(HTTPRequest req) {
 		if (host != null) {
 			String reqHost = req.getParameters().get("Host");
 			return reqHost == null || !reqHost.equals(this.host);
@@ -93,13 +93,15 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 
 	/**
 	 * A basic implementation of the HTTP/1.0 POST method.
+	 * It does not do anything useful, just append to the resource indicated in path the body of the request.
+	 * More "realistic" implementations can be done, but I think it is out of the scope of this project.
 	 *
 	 * @param path of the request
 	 * @param body of the request
 	 * @return an {@link HTTPReply} indicating success or failure
 	 * @throws HTTPProtocolException if it is not possible to construct the {@link HTTPReply}
 	 */
-	private HTTPReply implementPOST(String path, String body) throws HTTPProtocolException {
+	HTTPReply implementPOST(String path, String body) throws HTTPProtocolException {
 		try {
 			OutputStream os = new FileOutputStream(fetchResource(path), true);
 			os.write(body.getBytes());
@@ -116,7 +118,7 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 	 * @return an {@link HTTPReply} indicating success or failure
 	 * @throws HTTPProtocolException if it is not possible to construct the {@link HTTPReply}
 	 */
-	private HTTPReply implementHEAD(String url) throws HTTPProtocolException {
+	HTTPReply implementHEAD(String url) throws HTTPProtocolException {
 		return new MyHTTPReply("HTTP/1.0 200 OK", super.readResourceHeader(url), "");
 	}
 
@@ -127,7 +129,7 @@ public class MyHTTPHandler1_0 extends AbstractHTTPHandler {
 	 * @return a reply with the resource fetched as a body
 	 * @throws MyHTTPProtocolException if anything bad with resource fetching (I.E. Not Found)
 	 */
-	private HTTPReply implementGET(String url) throws HTTPProtocolException {
+	HTTPReply implementGET(String url) throws HTTPProtocolException {
 		return new MyHTTPReply("HTTP/1.0 200 OK", super.readResourceHeader(url), super.readResource(url));
 	}
 }
