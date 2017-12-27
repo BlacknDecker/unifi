@@ -7,7 +7,7 @@ import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 import java.util.Map;
 
 /**
- * A concrete implementation of an HTTP Request Message.
+ * A concrete implementation of an {@link HTTPRequest}.
  *
  * @author Simone Cipriani, 5951907
  */
@@ -16,10 +16,10 @@ public class MyHTTPRequest extends HTTPMessage implements HTTPRequest {
 	private String method, url, version;
 
 	/**
-	 * Construct an HTTP Request object using the superclass constructor.
+	 * Construct an {@link HTTPRequest} object using the superclass constructor.
 	 *
 	 * @param reqLine the first line of the message
-	 * @param header  a string object containing the whole lot of header lines
+	 * @param header  a {@link String} object containing the whole lot of header lines
 	 * @param body    the body of the message
 	 * @throws HTTPProtocolException if input parameters could not be parsed
 	 */
@@ -29,7 +29,7 @@ public class MyHTTPRequest extends HTTPMessage implements HTTPRequest {
 
 	/**
 	 * Implementation of superclass method: exception generated while instantiating
-	 * the request object are due to the string form of the request.
+	 * the request object are due to the syntax of the request.
 	 *
 	 * @param verboseMsg as a verbose description of the condition causing the exception
 	 * @return the constructed exception
@@ -120,9 +120,9 @@ public class MyHTTPRequest extends HTTPMessage implements HTTPRequest {
 	}
 
 	/**
-	 * Implementation of interface method: bounce the superclass method getParameters().
+	 * Implementation of interface method: bounce the superclass method.
 	 *
-	 * @return the header parameters map
+	 * @return the header parameters {@link Map}
 	 */
 	@Override
 	public Map<String, String> getParameters() {

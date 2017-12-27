@@ -30,11 +30,27 @@ public abstract class HTTPMessage {
 	}
 
 	/**
+	 * Construct an HTTP message which encapsulate all the overhead information,
+	 * depending on the message subtype.
+	 *
+	 * @param firstLine of the full message
+	 * @param header    a {@link String} object containing the whole lot of header lines
+	 * @param body      as the payload of the message
+	 * @throws HTTPProtocolException if the first line or the header lines container could not be parsed
+	 */
+	HTTPMessage(String firstLine, String header, String body) throws HTTPProtocolException {
+		splitFirstLine(firstLine);
+		if (header != null)
+			createHeaderParMap(header);
+		this.body = body;
+	}
+
+	/**
 	 * Construct an HTTP message specifying the header fields in a string container.
 	 *
 	 * @param body of the message, the payload
 	 */
-	HTTPMessage(String header, String body) {
+	private HTTPMessage(String header, String body) {
 		this.body = body;
 		try {
 			createHeaderParMap(header);
@@ -49,19 +65,26 @@ public abstract class HTTPMessage {
 	}
 
 	/**
-	 * Construct an HTTP message which encapsulate all the overhead information,
-	 * depending on the message subtype.
+	 * Get a {@link StringBuilder} initialized with some standard header fields.
 	 *
-	 * @param firstLine of the full message
-	 * @param header    a string object containing the whole lot of header lines
-	 * @param body      as the payload of the message
-	 * @throws HTTPProtocolException if the first line or the header lines container could not be parsed
+	 * @return the {@link StringBuilder}
 	 */
-	HTTPMessage(String firstLine, String header, String body) throws HTTPProtocolException {
-		splitFirstLine(firstLine);
-		if (header != null)
-			createHeaderParMap(header);
-		this.body = body;
+	public static StringBuilder getStdHeaderFields() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Date: ");
+		sb.append(DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now()));
+		sb.append("\r\n");
+
+		sb.append("Host: ");
+		try {
+			sb.append(InetAddress.getLocalHost().getHostName());
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			sb.append("unknown host");
+		}
+		sb.append("\r\n");
+
+		return sb;
 	}
 
 	/**
@@ -82,10 +105,10 @@ public abstract class HTTPMessage {
 	}
 
 	/**
-	 * Parse the string container of the message header to initialize the map encapsulating
+	 * Parse the string container of the message header to initialize the {@link Map} encapsulating
 	 * the header fields.
 	 *
-	 * @param header lines string container
+	 * @param header lines {@link String} container
 	 * @throws HTTPProtocolException if poor syntax is found
 	 */
 	private void createHeaderParMap(String header) throws HTTPProtocolException {
@@ -104,7 +127,7 @@ public abstract class HTTPMessage {
 	/**
 	 * Self explanatory.
 	 *
-	 * @return the header map object
+	 * @return the header {@link Map} object
 	 */
 	Map<String, String> getParameters() {
 		return headerMap;
@@ -113,7 +136,7 @@ public abstract class HTTPMessage {
 	/**
 	 * Self explanatory.
 	 *
-	 * @return the string body
+	 * @return the {@link String} body
 	 */
 	String getBody() {
 		return body;
@@ -121,10 +144,10 @@ public abstract class HTTPMessage {
 
 	/**
 	 * Should be implemented by subclasses to specify the parameters they wants during
-	 * instantiation of MyHTTPProtocolException.
+	 * instantiation of {@link MyHTTPProtocolException}.
 	 *
 	 * @param verboseMsg as a verbose description of the condition causing the exception
-	 * @return the exception object, ready to be thrown
+	 * @return the {@link MyHTTPProtocolException} object, ready to be thrown
 	 */
 	abstract MyHTTPProtocolException getCustomException(String verboseMsg);
 
@@ -151,6 +174,7 @@ public abstract class HTTPMessage {
 
 	/**
 	 * Merge the first line parameters, recomposing the first line as it originally was.
+	 * Utility method for the toString override implementation.
 	 *
 	 * @return the recomposed first line of the message
 	 */
@@ -159,7 +183,7 @@ public abstract class HTTPMessage {
 	/**
 	 * Overridden toString method, to get the original message back together.
 	 *
-	 * @return the entire message as a string
+	 * @return the entire message as a {@link String}
 	 */
 	@Override
 	public String toString() {
@@ -176,23 +200,5 @@ public abstract class HTTPMessage {
 		sb.append(body);
 
 		return sb.toString();
-	}
-
-	public static StringBuilder getStdHeaderFields() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Date: ");
-		sb.append(DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now()));
-		sb.append("\r\n");
-
-		sb.append("Host: ");
-		try {
-			sb.append(InetAddress.getLocalHost().getHostName());
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-			sb.append("unknown host");
-		}
-		sb.append("\r\n");
-
-		return sb;
 	}
 }

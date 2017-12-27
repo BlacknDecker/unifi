@@ -12,18 +12,73 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ * A concrete implementation of the given abstract class {@link HTTPInputStream}.
+ *
+ * @author Simone Cipriani, 5951907
+ */
 public class MyHTTPInputStream extends HTTPInputStream {
 
 	private InputStream is;
 	private Scanner scanner;
 
-	@SuppressWarnings("unused")
+	/**
+	 * Construct the HTTP Input Stream wrapping an existent {@link InputStream}.
+	 *
+	 * @param is {@link InputStream}
+	 */
 	public MyHTTPInputStream(InputStream is) {
 		super(is);
 	}
 
+	/**
+	 * Construct the HTTP Input Stream generating an {@link InputStream} from a given string.
+	 * This is an utility constructor, useful to quickly instantiate tests and such.
+	 *
+	 * @param s the string from which to read
+	 */
 	public MyHTTPInputStream(String s) {
-		super(new ByteArrayInputStream(s.getBytes()));
+		this(new ByteArrayInputStream(s.getBytes()));
+	}
+
+	/**
+	 * Extract first line of the HTTP Message from the internal {@link InputStream}.
+	 *
+	 * @return the first line as a String
+	 */
+	private String readFirstLine() {
+		String limit = "\r\n", line = "";
+		scanner.useDelimiter(limit);
+		if (scanner.hasNext())
+			line = scanner.next();
+		scanner.skip(limit);
+		return line;
+	}
+
+	/**
+	 * Extract the header lines of the HTTP Message from the internal {@link InputStream}.
+	 *
+	 * @return the header lines as a String
+	 */
+	private String readHeader() {
+		String limit = "\r\n\r\n", header = null;
+		scanner.useDelimiter(limit);
+		if (scanner.hasNext())
+			header = scanner.next();
+		scanner.skip(limit);
+		return header;
+	}
+
+	/**
+	 * Extract the body lines of the HTTP Message from the internal {@link InputStream}.
+	 *
+	 * @return the body as a String
+	 */
+	private String readBody() {
+		StringBuilder body = new StringBuilder();
+		while (scanner.hasNextLine())
+			body.append(scanner.nextLine());
+		return body.toString();
 	}
 
 	@Override
@@ -40,31 +95,6 @@ public class MyHTTPInputStream extends HTTPInputStream {
 	@Override
 	public HTTPReply readHttpReply() throws HTTPProtocolException {
 		return new MyHTTPReply(readFirstLine(), readHeader(), readBody());
-	}
-
-	private String readFirstLine() {
-		String limit = "\r\n", line = "";
-		scanner.useDelimiter(limit);
-		if (scanner.hasNext())
-			line = scanner.next();
-		scanner.skip(limit);
-		return line;
-	}
-
-	private String readHeader() {
-		String limit = "\r\n\r\n", header = null;
-		scanner.useDelimiter(limit);
-		if (scanner.hasNext())
-			header = scanner.next();
-		scanner.skip(limit);
-		return header;
-	}
-
-	private String readBody() {
-		StringBuilder body = new StringBuilder();
-		while (scanner.hasNextLine())
-			body.append(scanner.nextLine());
-		return body.toString();
 	}
 
 	@Override

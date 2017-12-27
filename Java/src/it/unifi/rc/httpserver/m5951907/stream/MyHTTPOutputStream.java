@@ -9,14 +9,52 @@ import java.io.OutputStream;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * A concrete implementation of the given abstract class {@link HTTPOutputStream}.
+ *
+ * @author Simone Cipriani, 5951907
+ */
 public class MyHTTPOutputStream extends HTTPOutputStream {
 
 	private final OutputStream os;
 
+	/**
+	 * Construct the HTTP Output Stream wrapping an existent {@link OutputStream}.
+	 *
+	 * @param os {@link OutputStream}
+	 */
 	public MyHTTPOutputStream(OutputStream os) {
 		super(os); // why is this private in superclass? I need reference to it
 		this.os = os;
 	}
+
+	/**
+	 * Utility interface to do fancy lambda/methods reference tricks in the {@link #buildHeader(MsgWithHeadParam, StringBuilder)},
+	 * {@link #writeHttpReply(HTTPReply)} and {@link #writeHttpRequest(HTTPRequest)} methods.
+	 */
+	private interface MsgWithHeadParam {
+		Map<String, String> par();
+	}
+
+	/**
+	 * Build the header lines extracting keys and values from a {@link Map}.
+	 *
+	 * @param msg     the interface abstracting an object with a {@link Map} that can be get
+	 * @param message as the StringBuilder in which append the generated lines
+	 */
+	private void buildHeader(MsgWithHeadParam msg, StringBuilder message) {
+		Set<String> headerKeys = msg.par().keySet();
+		StringBuilder sb = new StringBuilder();
+		for (String key : headerKeys) {
+			sb.append(key);
+			sb.append(": ");
+			sb.append(msg.par().get(key));
+			sb.append("\r\n");
+		}
+		message.append(sb.toString());
+		message.append("\r\n");
+	}
+
 
 	@Override
 	public void writeHttpReply(HTTPReply reply) {
@@ -56,22 +94,5 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void buildHeader(MsgWithHeadParam msg, StringBuilder message) {
-		Set<String> headerKeys = msg.par().keySet();
-		StringBuilder sb = new StringBuilder();
-		for (String key : headerKeys) {
-			sb.append(key);
-			sb.append(": ");
-			sb.append(msg.par().get(key));
-			sb.append("\r\n");
-		}
-		message.append(sb.toString());
-		message.append("\r\n");
-	}
-
-	interface MsgWithHeadParam {
-		Map<String, String> par();
 	}
 }

@@ -7,7 +7,7 @@ import it.unifi.rc.httpserver.m5951907.MyHTTPProtocolException;
 import java.util.Map;
 
 /**
- * A concrete implementation of an HTTP Response Message.
+ * A concrete implementation of an {@link HTTPReply}.
  *
  * @author Simone Cipriani, 5951907
  */
@@ -16,10 +16,10 @@ public class MyHTTPReply extends HTTPMessage implements HTTPReply {
 	private String version, statusCode, statusMsg;
 
 	/**
-	 * Construct an HTTP Reply object using the superclass constructor.
+	 * Construct an {@link HTTPReply} object bouncing parameters to the superclass constructor.
 	 *
 	 * @param statusLine of the response
-	 * @param header     a string object containing the whole lot of header lines
+	 * @param header     a {@link String} object containing the whole lot of header lines
 	 * @param data       the body of the message
 	 * @throws HTTPProtocolException if input parameters could not be parsed
 	 */
@@ -28,10 +28,10 @@ public class MyHTTPReply extends HTTPMessage implements HTTPReply {
 	}
 
 	/**
-	 * Construct a basic HTTP Reply based on an exception generated
+	 * Construct a basic {@link HTTPReply} based on an exception generated
 	 * by an incoming request (I.E. bad syntax).
 	 *
-	 * @param e       the exception that was thrown
+	 * @param e       the {@link MyHTTPProtocolException} object that was thrown
 	 * @param version of the HTTP protocol in use
 	 */
 	public MyHTTPReply(MyHTTPProtocolException e, String version) {
