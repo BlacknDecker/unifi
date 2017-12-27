@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Simone Cipriani, 5951907
  */
-abstract class AbstractHTTPHandler implements HTTPHandler {
+abstract class AbstractHTTPHandler implements MyHTTPHandler {
 
 	private final File root;
 	private HTTPHandler next;

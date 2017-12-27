@@ -13,13 +13,32 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * Implements an handler that serves HTTP/1.1 requests.
+ * N.B. not all methods specified by the 1.1 protocol has been implemented:
+ * TRACE and CONNECT returns a 501 Not Implemented response.
+ *
+ * @author Simone Cipriani, 5951907
+ */
 public class MyHTTPHandler1_1 extends MyHTTPHandler1_0 {
 
+	/**
+	 * Basic constructor, initializes the handler to serve independently of the requesting host.
+	 *
+	 * @param root the {@link File} object abstracting the root path
+	 */
 	public MyHTTPHandler1_1(File root) {
 		super(root);
 	}
 
+	/**
+	 * Construct the handler to serve only a specific host.
+	 *
+	 * @param host the host to serve
+	 * @param root the {@link File} object abstracting the root path
+	 */
 	public MyHTTPHandler1_1(String host, File root) {
 		super(host, root);
 	}
@@ -39,7 +58,7 @@ public class MyHTTPHandler1_1 extends MyHTTPHandler1_0 {
 				case "PUT":
 					return implementPUT(req.getPath(), req.getEntityBody());
 				case "DELETE":
-					return implementDELETE(req.getPath());
+					return implementDELETE(req.getPath(), req.getParameters());
 				default:
 					throw new MyHTTPProtocolException(501, "Not Implemented", "METHOD " + req.getMethod() + " SPECIFIED IN REQUEST IS NOT IMPLEMENTED");
 			}
@@ -51,6 +70,14 @@ public class MyHTTPHandler1_1 extends MyHTTPHandler1_0 {
 		}
 	}
 
+	/**
+	 * Basic implementation of the PUT method.
+	 *
+	 * @param path       in which the entity will be created
+	 * @param entityBody to be written in the entity
+	 * @return a {@link HTTPReply}, as specified by the protocol
+	 * @throws HTTPProtocolException if something goes nuts
+	 */
 	private HTTPReply implementPUT(String path, String entityBody) throws HTTPProtocolException {
 		StringBuilder head = HTTPMessage.getStdHeaderFields();
 		head.append("Content-Location");
@@ -69,16 +96,27 @@ public class MyHTTPHandler1_1 extends MyHTTPHandler1_0 {
 			return res;
 		} catch (IOException e) {
 			throw new MyHTTPProtocolException(500, "Internal Server Error", "SOMETHING REALLY STRANGE HAPPENED: " + Arrays.toString(e.getStackTrace()));
-
 		}
 	}
 
-	private HTTPReply implementDELETE(String path) throws HTTPProtocolException {
+	/**
+	 * Basic implementation of the DELETE method.
+	 * It mimics an authentication system by checking a certain header parameter.
+	 * Nothing really usable in the real world, but it serves to show the concept.
+	 *
+	 * @param path of resource to be deleted
+	 * @return a {@link HTTPReply}
+	 * @throws HTTPProtocolException if something does not work
+	 */
+	private HTTPReply implementDELETE(String path, Map<String, String> pars) throws HTTPProtocolException {
+		String password = pars.get("Authentication");
+		if (password == null || !password.equals("slowpoke_tail"))
+			return new MyHTTPReply("HTTP/1.1 401 Unauthorized", HTTPMessage.getStdHeaderFields().toString(), "");
+
 		if (fetchResource(path).delete())
 			return new MyHTTPReply("HTTP/1.1 202 Accepted", HTTPMessage.getStdHeaderFields().toString(), "");
 		else
 			return new MyHTTPReply("HTTP/1.1 204 No Content", HTTPMessage.getStdHeaderFields().toString(), "");
-
 	}
 
 	@Override

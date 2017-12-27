@@ -29,14 +29,6 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 	}
 
 	/**
-	 * Utility interface to do fancy lambda/methods reference tricks in the {@link #buildHeader(MsgWithHeadParam, StringBuilder)},
-	 * {@link #writeHttpReply(HTTPReply)} and {@link #writeHttpRequest(HTTPRequest)} methods.
-	 */
-	private interface MsgWithHeadParam {
-		Map<String, String> par();
-	}
-
-	/**
 	 * Build the header lines extracting keys and values from a {@link Map}.
 	 *
 	 * @param msg     the interface abstracting an object with a {@link Map} that can be get
@@ -54,7 +46,6 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 		message.append(sb.toString());
 		message.append("\r\n");
 	}
-
 
 	@Override
 	public void writeHttpReply(HTTPReply reply) {
@@ -94,5 +85,13 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Utility interface to do fancy lambda/methods reference tricks in the {@link #buildHeader(MsgWithHeadParam, StringBuilder)},
+	 * {@link #writeHttpReply(HTTPReply)} and {@link #writeHttpRequest(HTTPRequest)} methods.
+	 */
+	private interface MsgWithHeadParam {
+		Map<String, String> par();
 	}
 }
