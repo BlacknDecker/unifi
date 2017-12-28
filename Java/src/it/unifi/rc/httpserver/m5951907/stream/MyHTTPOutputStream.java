@@ -4,6 +4,7 @@ import it.unifi.rc.httpserver.HTTPOutputStream;
 import it.unifi.rc.httpserver.HTTPReply;
 import it.unifi.rc.httpserver.HTTPRequest;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.Set;
  */
 public class MyHTTPOutputStream extends HTTPOutputStream {
 
-	private final OutputStream os;
+	private final BufferedOutputStream os;
 
 	/**
 	 * Construct the HTTP Output Stream wrapping an existent {@link OutputStream}.
@@ -25,7 +26,7 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 	 */
 	public MyHTTPOutputStream(OutputStream os) {
 		super(os); // why is this private in superclass? I need reference to it
-		this.os = os;
+		this.os = new BufferedOutputStream(os);
 	}
 
 	/**
@@ -61,7 +62,7 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 		message.append(reply.getData());
 
 		try {
-			os.write(message.toString().getBytes());
+			os.write(message.toString().getBytes(), 0, message.toString().length());
 			os.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -82,7 +83,7 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 		message.append(request.getEntityBody());
 
 		try {
-			os.write(message.toString().getBytes());
+			os.write(message.toString().getBytes(), 0, message.toString().length());
 			os.flush();
 		} catch (IOException e) {
 			e.printStackTrace();

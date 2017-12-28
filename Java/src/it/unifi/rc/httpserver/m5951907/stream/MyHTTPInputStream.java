@@ -7,6 +7,7 @@ import it.unifi.rc.httpserver.HTTPRequest;
 import it.unifi.rc.httpserver.m5951907.message.MyHTTPReply;
 import it.unifi.rc.httpserver.m5951907.message.MyHTTPRequest;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +21,7 @@ import java.util.Scanner;
  */
 public class MyHTTPInputStream extends HTTPInputStream {
 
-	private InputStream is;
+	private BufferedInputStream is;
 	private Scanner scanner;
 
 	/**
@@ -30,6 +31,7 @@ public class MyHTTPInputStream extends HTTPInputStream {
 	 */
 	public MyHTTPInputStream(InputStream is) {
 		super(is);
+		this.is = new BufferedInputStream(is);
 	}
 
 	/**
@@ -88,20 +90,40 @@ public class MyHTTPInputStream extends HTTPInputStream {
 		return body.toString();
 	}
 
+	/**
+	 * Extract all data from {@link InputStream} into a string used later to feed the {@link Scanner} for parsing.
+	 * Not really a need for this, but for useful for differentiate connection bugs from parsing bugs.
+	 *
+	 * @return a {@link String} that buffers data coming from the {@link InputStream}
+	 */
+	private String getBufferString() {
+		byte[] buffer = new byte[1024];
+		String string = "";
+		int read;
+		try {
+			while ((read = is.read(buffer)) != -1)
+				string = new String(buffer, 0, read);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return string;
+	}
+
 	@Override
 	protected void setInputStream(InputStream is) {
-		this.is = is;
-		this.scanner = new Scanner(is);
+		this.is = new BufferedInputStream(is);
 	}
 
 	@Override
 	public HTTPRequest readHttpRequest() throws HTTPProtocolException {
+		this.scanner = new Scanner(getBufferString());
 		return new MyHTTPRequest(readFirstLine(), readHeader(), readBody());
 	}
 
 	@Override
 	public HTTPReply readHttpReply() throws HTTPProtocolException {
-			return new MyHTTPReply(readFirstLine(), readHeader(), readBody());
+		this.scanner = new Scanner(getBufferString());
+		return new MyHTTPReply(readFirstLine(), readHeader(), readBody());
 	}
 
 	@Override
