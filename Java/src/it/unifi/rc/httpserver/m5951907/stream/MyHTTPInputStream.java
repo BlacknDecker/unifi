@@ -10,6 +10,7 @@ import it.unifi.rc.httpserver.m5951907.message.MyHTTPRequest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -51,7 +52,10 @@ public class MyHTTPInputStream extends HTTPInputStream {
 		scanner.useDelimiter(limit);
 		if (scanner.hasNext())
 			line = scanner.next();
-		scanner.skip(limit);
+		try {
+			scanner.skip(limit);
+		} catch (NoSuchElementException ignored) {
+		}
 		return line;
 	}
 
@@ -65,7 +69,10 @@ public class MyHTTPInputStream extends HTTPInputStream {
 		scanner.useDelimiter(limit);
 		if (scanner.hasNext())
 			header = scanner.next();
-		scanner.skip(limit);
+		try {
+			scanner.skip(limit);
+		} catch (NoSuchElementException ignored) {
+		}
 		return header;
 	}
 
@@ -94,7 +101,7 @@ public class MyHTTPInputStream extends HTTPInputStream {
 
 	@Override
 	public HTTPReply readHttpReply() throws HTTPProtocolException {
-		return new MyHTTPReply(readFirstLine(), readHeader(), readBody());
+			return new MyHTTPReply(readFirstLine(), readHeader(), readBody());
 	}
 
 	@Override

@@ -62,6 +62,7 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 
 		try {
 			os.write(message.toString().getBytes());
+			os.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -82,6 +83,7 @@ public class MyHTTPOutputStream extends HTTPOutputStream {
 
 		try {
 			os.write(message.toString().getBytes());
+			os.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -100,7 +100,7 @@ public abstract class HTTPMessage {
 			setFirstLineParameter2(split[1]);
 			setFirstLineParameter3(split[2].replace("\r\n", ""));
 		} catch (ArrayIndexOutOfBoundsException e) {
-			throw getCustomException("BAD SYNTAX ON FIRST LINE: MISSING SPACE");
+			throw getCustomException("BAD SYNTAX ON FIRST LINE: MISSING SPACE " + firstLine);
 		}
 	}
 
