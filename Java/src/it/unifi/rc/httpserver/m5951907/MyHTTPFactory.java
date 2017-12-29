@@ -3,6 +3,7 @@ package it.unifi.rc.httpserver.m5951907;
 import it.unifi.rc.httpserver.*;
 import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler1_0;
 import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler1_1;
+import it.unifi.rc.httpserver.m5951907.server.MyHTTPServer;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPInputStream;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPOutputStream;
 
@@ -26,8 +27,10 @@ public class MyHTTPFactory implements HTTPFactory {
 
 	@Override
 	public HTTPServer getHTTPServer(int port, int backlog, InetAddress address, HTTPHandler... handlers) {
-		//TODO
-		return null;
+		HTTPServer server = new MyHTTPServer(port, backlog, address);
+		for (HTTPHandler h : handlers)
+			server.addHandler(h);
+		return server;
 	}
 
 	@Override

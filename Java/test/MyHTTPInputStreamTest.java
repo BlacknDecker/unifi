@@ -42,7 +42,7 @@ public class MyHTTPInputStreamTest {
 
 	@Test
 	public void readHttpRequestTest2() {
-		String httpReq = "POST /wiki/Pagina_principale HTTP/1.1\r\nConnection: Keep-Alive\r\nAccept-Language: it\r\n\r\n{here's a JSON}";
+		String httpReq = "POST /wiki/Pagina_principale HTTP/1.1\r\nContent-Length: 15\r\nAccept-Language: it\r\n\r\n{here's a JSON}";
 		httpIS = new MyHTTPInputStream(httpReq);
 		try {
 			req = httpIS.readHttpRequest();
@@ -57,7 +57,7 @@ public class MyHTTPInputStreamTest {
 
 	@Test
 	public void readHttpReplyTest1() {
-		String httpRes = "HTTP/1.1 200 OK\r\nDate: Wed, 19 Apr 2017 16:34:20 GMT\r\nServer: mw1215.eqiad.wmnet\r\n\r\n<div> some html </div>";
+		String httpRes = "HTTP/1.1 200 OK\r\nDate: Wed, 19 Apr 2017 16:34:20 GMT\r\nContent-Length: 22\r\n\r\n<div> some html </div>";
 		httpIS = new MyHTTPInputStream(httpRes);
 		try {
 			res = httpIS.readHttpReply();
@@ -67,7 +67,7 @@ public class MyHTTPInputStreamTest {
 		}
 		assertEquals("HTTP/1.1", res.getVersion());
 		Map<String, String> head = new HashMap<>();
-		head.put("Server", "mw1215.eqiad.wmnet");
+		head.put("Content-Length", "22");
 		head.put("Date", "Wed, 19 Apr 2017 16:34:20 GMT");
 		assertEquals(head, res.getParameters());
 		assertEquals("<div> some html </div>", res.getData());
@@ -75,7 +75,7 @@ public class MyHTTPInputStreamTest {
 
 	@Test
 	public void readHttpReplyTest2() {
-		String httpRes = "HTTP/1.1 200 OK\r\nDate: Wed, 19 Apr 2017 16:34:20 GMT\r\nServer: mw1215.eqiad.wmnet\r\n\r\n<div> some html </div>";
+		String httpRes = "HTTP/1.1 200 OK\r\nDate: Wed, 19 Apr 2017 16:34:20 GMT\r\nContent-Length: 22\r\n\r\n<div> some html </div>";
 		httpIS = new MyHTTPInputStream(httpRes);
 
 		try {

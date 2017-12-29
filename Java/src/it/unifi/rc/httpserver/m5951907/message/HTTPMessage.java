@@ -188,17 +188,20 @@ public abstract class HTTPMessage {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(recomposeFirstLine());
-		sb.append("\r\n");
-		for (String k : headerMap.keySet()) {
-			sb.append(k);
-			sb.append(": ");
-			sb.append(headerMap.get(k));
+		try {
+			sb.append(recomposeFirstLine());
 			sb.append("\r\n");
+			for (String k : headerMap.keySet()) {
+				sb.append(k);
+				sb.append(": ");
+				sb.append(headerMap.get(k));
+				sb.append("\r\n");
+			}
+			sb.append("\r\n");
+			sb.append(body);
+		} catch (NullPointerException e) {
+			return null;
 		}
-		sb.append("\r\n");
-		sb.append(body);
-
 		return sb.toString();
 	}
 }

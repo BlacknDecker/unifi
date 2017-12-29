@@ -23,6 +23,7 @@ public class MyHTTPInputStream extends HTTPInputStream {
 
 	private BufferedInputStream is;
 	private Scanner scanner;
+	private String bufferInputString;
 
 	/**
 	 * Construct the HTTP Input Stream wrapping an existent {@link InputStream}.
@@ -97,16 +98,17 @@ public class MyHTTPInputStream extends HTTPInputStream {
 	 * @return a {@link String} that buffers data coming from the {@link InputStream}
 	 */
 	private String getBufferString() {
-		byte[] buffer = new byte[1024];
-		String string = "";
+		byte[] buffer = new byte[1024 * 1024];
+		// 1 MB max - ok, this is NOT smart and totally useless in real world
+		// however, it does the trick in this scope and I'm happy about it
 		int read;
 		try {
-			while ((read = is.read(buffer)) != -1)
-				string = new String(buffer, 0, read);
+			read = is.read(buffer);
+			return new String(buffer, 0, read);
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "";
 		}
-		return string;
 	}
 
 	@Override
@@ -116,13 +118,15 @@ public class MyHTTPInputStream extends HTTPInputStream {
 
 	@Override
 	public HTTPRequest readHttpRequest() throws HTTPProtocolException {
-		this.scanner = new Scanner(getBufferString());
+		this.bufferInputString = getBufferString();
+		this.scanner = new Scanner(bufferInputString);
 		return new MyHTTPRequest(readFirstLine(), readHeader(), readBody());
 	}
 
 	@Override
 	public HTTPReply readHttpReply() throws HTTPProtocolException {
-		this.scanner = new Scanner(getBufferString());
+		this.bufferInputString = getBufferString();
+		this.scanner = new Scanner(bufferInputString);
 		return new MyHTTPReply(readFirstLine(), readHeader(), readBody());
 	}
 

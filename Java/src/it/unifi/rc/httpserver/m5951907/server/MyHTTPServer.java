@@ -1,18 +1,13 @@
 package it.unifi.rc.httpserver.m5951907.server;
 
-import it.unifi.rc.httpserver.HTTPHandler;
-import it.unifi.rc.httpserver.HTTPReply;
-import it.unifi.rc.httpserver.HTTPRequest;
-import it.unifi.rc.httpserver.HTTPServer;
+import it.unifi.rc.httpserver.*;
 import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler;
+import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler1_0;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPInputStream;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPOutputStream;
 
 import java.io.*;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketTimeoutException;
+import java.net.*;
 import java.util.List;
 import java.util.Vector;
 
@@ -31,7 +26,6 @@ public class MyHTTPServer implements HTTPServer {
 	private MyHTTPHandler cmdChainHead;
 
 	private ServerSocket socket;
-	private Socket client;
 
 	private int port, backlog;
 	private InetAddress address;
@@ -40,6 +34,8 @@ public class MyHTTPServer implements HTTPServer {
 		this.address = address;
 		this.port = port;
 		this.backlog = backlog;
+
+		enableLogging(false, null);
 	}
 
 	@Override
@@ -58,43 +54,49 @@ public class MyHTTPServer implements HTTPServer {
 		socket.setSoTimeout(50);
 
 		if (log)
-			logPs.println("SERVER: I am this one: " + socket);
+			logPs.println("--- SERVER: I am this one: " + socket);
 
 		running = true;
-		while (running) {
-			accept();
-			serve();
-		}
+		while (running)
+			serve(accept());
 	}
 
-	private void accept() throws IOException {
+	private Socket accept() throws IOException {
+		Socket client = null;
 		try {
 			client = this.socket.accept();
 		} catch (SocketTimeoutException ignored) {
 			// respawn
 		}
-		if (log)
-			logPs.println("SERVER: Accepted this client: " + client);
+		if (log && client != null)
+			logPs.println("--- SERVER: Accepted this client: " + client);
+		return client;
 	}
 
-	private void serve() {
+	private void serve(Socket client) {
 		if (client == null)
-			return;
+			return; //no one to serve
 
+		HTTPRequest req = getHttpRequest(client);
+		HTTPReply res = forwardToHandlers(req);
+		writeResponse(client, res);
+	}
+
+	private HTTPRequest getHttpRequest(Socket client) {
 		HTTPRequest req;
-		HTTPReply res = null;
-
-		// read the request
 		try {
-			req = new MyHTTPInputStream(client.getInputStream()).readHttpRequest();
+			HTTPInputStream in = new MyHTTPInputStream(client.getInputStream());
+			req = in.readHttpRequest();
 		} catch (IOException e) {
-			e.printStackTrace();
 			req = null;
 		}
-		if (log)
-			logPs.println("SERVER: read request: " + req);
+		if (log && req != null)
+			logPs.println("--- SERVER: read request: " + req);
+		return req;
+	}
 
-		// forward req to handlers
+	private HTTPReply forwardToHandlers(HTTPRequest req) {
+		HTTPReply res = null;
 		if (req != null) {
 			res = cmdChainHead.handle(req);
 			if (res == null)
@@ -104,15 +106,22 @@ public class MyHTTPServer implements HTTPServer {
 						break;
 				}
 		}
+		if (log)
+			logPs.println("--- SERVER: produced response: " + res);
+		return res;
+	}
 
-		// write reply into client stream and close it
+	private void writeResponse(Socket client, HTTPReply res) {
 		if (res != null) {
 			try {
-				new MyHTTPOutputStream(client.getOutputStream()).writeHttpReply(res);
+				HTTPOutputStream os = new MyHTTPOutputStream(client.getOutputStream());
+				os.writeHttpReply(res);
 				client.shutdownOutput();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			if (log)
+				logPs.println("--- SERVER: wrote response into client stream");
 		}
 	}
 
@@ -121,15 +130,10 @@ public class MyHTTPServer implements HTTPServer {
 		running = false;
 		try {
 			socket.close();
-			if (client != null && !client.isClosed())
-				client.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		client = null;
-		socket = null;
 	}
-
 
 	/**
 	 * Enable log prints about server activities.
@@ -137,11 +141,23 @@ public class MyHTTPServer implements HTTPServer {
 	 * @param enable self-explanatory
 	 * @param f      the {@link OutputStream} in which to print the logs (if null, System.out will be used)
 	 */
-	public void enableLogging(boolean enable, FileOutputStream f) {
+	private void enableLogging(boolean enable, FileOutputStream f) {
 		this.log = enable;
 		if (f != null) {
 			logPs = new PrintStream(new BufferedOutputStream(f), true);
 		} else
 			logPs = System.out;
+	}
+
+	public static void main(String[] args) throws IOException {
+		HTTPServer server = null;
+		try {
+			server = new MyHTTPServer(8080, 10, InetAddress.getLocalHost());
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		assert server != null;
+		server.addHandler(new MyHTTPHandler1_0(new File("test/res_root")));
+		server.start();
 	}
 }

@@ -21,7 +21,7 @@ public class StreamIntegrationTest {
 	public void streamIntegrationReq() {
 		HTTPRequest req = null;
 		try {
-			req = new MyHTTPRequest("GET /something.html HTTP/1.0", "Connection: Keep-Alive\r\nUser-Agent: myBrowser", "body body body");
+			req = new MyHTTPRequest("GET /something.html HTTP/1.0", "Content-Length: 14\r\nUser-Agent: myBrowser", "body body body");
 		} catch (HTTPProtocolException e) {
 			e.printStackTrace();
 			fail();
@@ -52,7 +52,7 @@ public class StreamIntegrationTest {
 	public void streamIntegrationRes() {
 		HTTPReply res = null;
 		try {
-			res = new MyHTTPReply("HTTP/1.0 200 OK", "Connection: Keep-Alive\r\nUser-Agent: myBrowser", "body body body");
+			res = new MyHTTPReply("HTTP/1.0 200 OK", "Content-Length: 14\r\nUser-Agent: myBrowser", "body body body");
 		} catch (HTTPProtocolException e) {
 			e.printStackTrace();
 			fail();
