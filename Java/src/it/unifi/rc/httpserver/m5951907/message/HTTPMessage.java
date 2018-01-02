@@ -48,7 +48,8 @@ public abstract class HTTPMessage {
 	/**
 	 * Construct an HTTP message specifying the header fields in a string container.
 	 *
-	 * @param body of the message, the payload
+	 * @param header ensemble of header fields in message
+	 * @param body   of the message, the payload
 	 */
 	private HTTPMessage(String header, String body) {
 		this.body = body;

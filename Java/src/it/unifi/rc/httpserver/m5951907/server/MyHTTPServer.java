@@ -19,17 +19,15 @@ import java.util.Vector;
  */
 public class MyHTTPServer implements HTTPServer {
 
+	private final List<HTTPHandler> otherHandlers = new Vector<>();
+	private final int port;
+	private final int backlog;
+	private final InetAddress address;
 	private boolean running = false;
 	private boolean log = false;
 	private PrintStream logPs;
-
-	private List<HTTPHandler> otherHandlers = new Vector<>();
 	private MyHTTPHandler cmdChainHead;
-
 	private ServerSocket socket;
-
-	private int port, backlog;
-	private InetAddress address;
 
 	/**
 	 * Instantiate an object of this class by storing information needed for binding the associated {@link ServerSocket}.
@@ -43,6 +41,19 @@ public class MyHTTPServer implements HTTPServer {
 		this.address = address;
 		this.port = port;
 		this.backlog = backlog;
+	}
+
+	public static void main(String[] args) throws IOException {
+		HTTPServer server = null;
+		try {
+			server = new MyHTTPServer(8080, 10, InetAddress.getLocalHost());
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		assert server != null;
+		((MyHTTPServer) server).enableLogging(true, null);
+		server.addHandler(new MyHTTPHandler1_0(new File("test/res_root")));
+		server.start();
 	}
 
 	@Override
@@ -189,18 +200,5 @@ public class MyHTTPServer implements HTTPServer {
 			logPs = new PrintStream(new BufferedOutputStream(f), true);
 		} else
 			logPs = System.out;
-	}
-
-	public static void main(String[] args) throws IOException {
-		HTTPServer server = null;
-		try {
-			server = new MyHTTPServer(8080, 10, InetAddress.getLocalHost());
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		assert server != null;
-		((MyHTTPServer) server).enableLogging(true, null);
-		server.addHandler(new MyHTTPHandler1_0(new File("test/res_root")));
-		server.start();
 	}
 }
