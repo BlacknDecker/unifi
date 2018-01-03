@@ -3,6 +3,7 @@ package it.unifi.rc.httpserver.m5951907.server;
 import it.unifi.rc.httpserver.*;
 import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler;
 import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler1_0;
+import it.unifi.rc.httpserver.m5951907.handler.MyHTTPHandler1_1;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPInputStream;
 import it.unifi.rc.httpserver.m5951907.stream.MyHTTPOutputStream;
 
@@ -52,6 +53,7 @@ public class MyHTTPServer implements HTTPServer {
 		}
 		assert server != null;
 		((MyHTTPServer) server).enableLogging(true, null);
+		server.addHandler(new MyHTTPHandler1_1(new File("test/res_root")));
 		server.addHandler(new MyHTTPHandler1_0(new File("test/res_root")));
 		server.start();
 	}
