@@ -1,15 +1,12 @@
 # set the repo root path before importing data!!!
-
 setwd("C:/simone_robamia/unifi/datamining-class-homework/")
 students <- read.csv("res/TRE ANNI IMMATRICOLATI 2010-2013 PER STUDENTI.csv")
 
 # gather some info about the imported dataset
-
 str(students)
 
 # ADJUST DATA ATTRIBUTES 
 # convert "coorte" to nominal by making it a factor 
-
 students[, c(1)] <- sapply(students[, c(1)], factor)
 
 # ok, let's take a look at it now
@@ -67,6 +64,12 @@ ade <- students[,8]
 plot(jitter(ade), jitter(cfu), col = coorte_colors, pch=19, cex = 1, xlab="Computers Architecture Exam Score", ylab="Total Marked CFUs")
 legend(x="bottomright", legend = levels(students[,1]), col=colors, pch=19)
 
+# detail on A.D.E. and date
+arc <- students[students$ARC>0, 8]
+mydates <- as.Date(students[students$ARC>0, 9])
+plot(mydates , jitter(arc), col = coorte_colors, pch=20, cex = 1, xlab="Date", ylab = "voto")
+legend(x="bottomright", legend = levels(students[,1]), col=colors, pch=19)
+
 # computer science exams performances
 students_subset3 <- students[,c(6,8,10,22,24,26,32,36,42)]
 pairs(students_subset3, col = coorte_colors,lower.panel = NULL,cex.labelsiris=2, pch=19, cex = 0.8)
@@ -94,4 +97,3 @@ pimage(students_scaled,ylab="Students",main="Standard Deviations from Mean Mark"
 matrix <- as.matrix(students_scaled)
 cm <- cor(t(matrix), method="pearson")
 pimage(cm,main="Correlation Matrix considering mathy exams", xlab="Students", ylab="Students",zlim = c(-1,1),col = bluered(50))
-
