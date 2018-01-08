@@ -17,11 +17,12 @@ str(students)
 summary(students)
 
 #################
-# SCATTER PLOTS #
+# VISUALIZATION #
 #################
 colors <- c("blue","red", "green", "orange")
 coorte_labels <- students[,1]
 coorte_colors <- colors[as.numeric(coorte_labels)]
+library(seriation)
 
 # general attributes
 students_subset1 <- students[,-c(1, 6 : 45)]
@@ -29,6 +30,9 @@ pairs(students_subset1, col = coorte_colors,lower.panel = NULL,cex.labelsiris=2,
 par(xpd = TRUE)
 legend(x = 0.05, y = 0.4, cex = 1,legend = as.character(levels(coorte_labels)),fill = unique(coorte_colors))
 par(xpd = NA)
+
+boxplot(students[,4]~students[,1],data = students,xlab="Total Marked CFU",col=colors)
+boxplot(students[,5]~students[,1],data = students,xlab="Avg. Exam Score",col=colors)
 
 # test / avg mark detail
 test_score <- students[,2]
@@ -48,6 +52,13 @@ par(xpd = TRUE)
 legend(x = 0.05, y = 0.4, cex = 1,legend = as.character(levels(coorte_labels)),fill = unique(coorte_colors))
 par(xpd = NA)
 
+students_scaled <- scale(students_subset2)
+pimage(students_scaled,ylab="Students",main="Standard Deviations from Mean Mark")
+
+matrix <- as.matrix(students_scaled)
+cm <- cor(t(matrix), method="pearson")
+pimage(cm,main="Correlation Matrix considering 1st Year exams", xlab="Students", ylab="Students",zlim = c(-1,1),col = bluered(50))
+
 # first year "difficult" exams / total cfu detail
 mdl <- students[,14]
 plot(jitter(mdl), jitter(cfu), col = coorte_colors, pch=19, cex = 1, xlab="M.D.L. Exam Score", ylab="Total Marked CFUs")
@@ -63,6 +74,13 @@ par(xpd = TRUE)
 legend(x = 0.05, y = 0.4, cex = 1,legend = as.character(levels(coorte_labels)),fill = unique(coorte_colors))
 par(xpd = NA)
 
+students_scaled <- scale(students_subset3)
+pimage(students_scaled,ylab="Students",main="Standard Deviations from Mean Mark")
+
+matrix <- as.matrix(students_scaled)
+cm <- cor(t(matrix), method="pearson")
+pimage(cm,main="Correlation Matrix considering C.S. exams", xlab="Students", ylab="Students",zlim = c(-1,1),col = bluered(50))
+
 # general mathy exams performances
 students_subset4 <- students[,c(12,14,18,20,28,30,34)]
 pairs(students_subset4, col = coorte_colors,lower.panel = NULL,cex.labelsiris=2, pch=19, cex = 0.8)
@@ -70,9 +88,10 @@ par(xpd = TRUE)
 legend(x = 0.05, y = 0.4, cex = 1,legend = as.character(levels(coorte_labels)),fill = unique(coorte_colors))
 par(xpd = NA)
 
-#################
-### BOX PLOTS ###
-#################
+students_scaled <- scale(students_subset4)
+pimage(students_scaled,ylab="Students",main="Standard Deviations from Mean Mark")
 
-boxplot(students[,4]~students[,1],data = students,xlab="Total Marked CFU",col=colors)
-boxplot(students[,5]~students[,1],data = students,xlab="Avg. Exam Score",col=colors)
+matrix <- as.matrix(students_scaled)
+cm <- cor(t(matrix), method="pearson")
+pimage(cm,main="Correlation Matrix considering mathy exams", xlab="Students", ylab="Students",zlim = c(-1,1),col = bluered(50))
+
