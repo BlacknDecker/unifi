@@ -1,0 +1,62 @@
+=== Run information ===
+
+Scheme:       weka.clusterers.SimpleKMeans -init 0 -max-candidates 100 -periodic-pruning 10000 -min-density 2.0 -t1 -1.25 -t2 -1.0 -V -M -N 3 -A "weka.core.EuclideanDistance -R first-last" -I 500 -num-slots 1 -S 7
+Relation:     TRE ANNI IMMATRICOLATI 2010-2013 PER STUDENTI-weka.filters.unsupervised.attribute.Remove-R6-45-weka.filters.unsupervised.attribute.Normalize-S100.0-T0.0-weka.filters.unsupervised.attribute.NumericToNominal-Rfirst
+Instances:    212
+Attributes:   5
+              test
+              crediti_totali
+              crediti_con_voto
+              voto_medio
+Ignored:
+              coorte
+Test mode:    evaluate on training data
+
+
+=== Clustering model (full training set) ===
+
+
+kMeans
+======
+
+Number of iterations: 20
+Within cluster sum of squared errors: 16.061359541603178
+
+Initial starting points (random):
+
+Cluster 0: 72,98.333333,100,76.923077
+Cluster 1: 68,98.333333,100,46.153846
+Cluster 2: 52,51.666667,55.102041,46.153846
+
+
+Final cluster centroids:
+                                Cluster#
+Attribute           Full Data          0          1          2
+                      (212.0)    (109.0)     (37.0)     (66.0)
+==============================================================
+test                  57.5849    62.1284    56.8649    50.4848
+                   +/-15.9495 +/-13.8197 +/-17.2597 +/-16.0425
+
+crediti_totali        58.5404     91.208    47.8979    10.5556
+                   +/-37.2117  +/-9.4386 +/-10.7281  +/-9.5512
+
+crediti_con_voto      60.0982    95.3941    50.3034     7.2975
+                   +/-40.1568  +/-7.2122 +/-13.1235  +/-8.8492
+
+voto_medio            46.4078    56.3162    47.6091    29.3706
+                   +/-22.3971 +/-15.0199 +/-13.4264 +/-26.3345
+
+
+
+
+
+Time taken to build model (full training data) : 0 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0      109 ( 51%)
+1       37 ( 17%)
+2       66 ( 31%)
+
