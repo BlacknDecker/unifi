@@ -1,0 +1,75 @@
+=== Run information ===
+
+Scheme:       weka.clusterers.SimpleKMeans -init 0 -max-candidates 100 -periodic-pruning 10000 -min-density 2.0 -t1 -1.25 -t2 -1.0 -N 4 -A "weka.core.EuclideanDistance -R first-last" -I 10000 -num-slots 1 -S 115
+Relation:     TRE ANNI IMMATRICOLATI 2010-2013 PER STUDENTI-weka.filters.unsupervised.attribute.NumericToNominal-Rfirst-weka.filters.unsupervised.attribute.Remove-R2-5,16-45-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C2-Lfirst-last-M-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C4-Lfirst-last-M-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C6-Lfirst-last-M-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C8-Lfirst-last-M-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C10-Lfirst-last-M-weka.filters.unsupervised.attribute.Remove-R3,5,7,9,11
+Instances:    116
+Attributes:   6
+              ASD
+              ARC
+              PRG
+              ANI
+              MDL
+Ignored:
+              coorte
+Test mode:    Classes to clusters evaluation on training data
+
+=== Clustering model (full training set) ===
+
+
+kMeans
+======
+
+Number of iterations: 11
+Within cluster sum of squared errors: 21.816736314540037
+
+Initial starting points (random):
+
+Cluster 0: 30,31,30,23,25
+Cluster 1: 25,25,21,30,20
+Cluster 2: 26,20,28,25,23
+Cluster 3: 26,24,23,30,30
+
+Missing values globally replaced with mean/mode
+
+Final cluster centroids:
+                         Cluster#
+Attribute    Full Data          0          1          2          3
+               (116.0)     (36.0)     (22.0)     (29.0)     (29.0)
+==================================================================
+ASD            27.1034         30    24.7727    25.1724    27.2069
+ARC            24.9741    27.8333    23.9091    20.5172    26.6897
+PRG            25.9483      28.75    21.8636     27.069    24.4483
+ANI            27.6638       29.5    25.1818    27.5172    27.4138
+MDL            23.3534    25.4167    19.6818    22.1034    24.8276
+
+
+
+
+Time taken to build model (full training data) : 0.01 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0       36 ( 31%)
+1       22 ( 19%)
+2       29 ( 25%)
+3       29 ( 25%)
+
+
+Class attribute: coorte
+Classes to Clusters:
+
+  0  1  2  3  <-- assigned to cluster
+  6  2  0  6 | 2010
+  4 10  2  3 | 2011
+ 13  7 10  7 | 2012
+ 13  3 17 13 | 2013
+
+Cluster 0 <-- 2012
+Cluster 1 <-- 2011
+Cluster 2 <-- 2013
+Cluster 3 <-- 2010
+
+Incorrectly clustered instances :	70.0	 60.3448 %
+
