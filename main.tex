@@ -1,0 +1,84 @@
+\documentclass[a4paper]{article}
+
+%\usepackage[utf8]{inputenc}
+
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{import}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{tabu}
+\usepackage{mathtools}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{listings}
+\usepackage{titling}
+\usepackage[utf8x]{inputenc}
+\usepackage[numbered,framed]{matlab-prettifier}
+
+\let\ph\mlplaceholder % shorter macro
+\lstMakeShortInline"
+
+\newcommand{\bnb}{\begin{nobreak}}
+\newcommand{\enb}{\end{nobreak}}
+
+\lstset{
+  style              = Matlab-editor,
+  basicstyle         = \mlttfamily,
+  escapechar         = ",
+  mlshowsectionrules = true,
+}
+
+\pretitle{%
+  \begin{center}
+  \LARGE
+  \includegraphics[width=\textwidth/4]{logo_unifi.png}\\[\bigskipamount]
+}
+\posttitle{\end{center}}
+\date{}
+
+\begin{document}
+
+
+
+\title{\vspace{2cm}Elaborato di\\ \textbf{Calcolo Numerico}\\ Anno Accademico 2016/2017\vspace{3cm}}
+
+\author{Simone \emph{Cipriani} - \texttt{5951907} - \href{mailto:sim.cipr@gmail.com}{\textit{giovanni.bindi@stud.unifi.it}}
+}
+
+\maketitle
+\newpage
+\tableofcontents
+
+
+\newpage
+\section{\textbf{Capitolo 1}}
+%\input{cap_1/cap_1.tex}
+
+\newpage
+\section{\textbf{Capitolo 2}}
+%\input{cap_2/cap_2.tex}
+
+\newpage
+\section{\textbf{Capitolo 3}}
+%\input{cap_3/cap_3.tex}
+
+\newpage
+\section{\textbf{Capitolo 4}}
+%\input{cap_4/cap_4.tex}
+
+\newpage
+\section{\textbf{Capitoli 5/6}}
+%\input{cap_5_6/cap5.tex}
+\newpage
+\pagenumbering{roman}
+\section{\textbf{Figure}}
+%\input{figure.tex}
+
+
+\end{document}
