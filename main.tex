@@ -1,7 +1,5 @@
 \documentclass[a4paper]{article}
 
-%\usepackage[utf8]{inputenc}
-
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{graphicx}
@@ -21,7 +19,7 @@
 \usepackage[utf8x]{inputenc}
 \usepackage[numbered,framed]{matlab-prettifier}
 
-\let\ph\mlplaceholder % shorter macro
+\let\ph\mlplaceholder% shorter macro
 \lstMakeShortInline"
 
 \newcommand{\bnb}{\begin{nobreak}}
@@ -36,7 +34,7 @@
 
 \pretitle{%
   \begin{center}
-  \LARGE
+  \huge
   \includegraphics[width=\textwidth/4]{logo_unifi.png}\\[\bigskipamount]
 }
 \posttitle{\end{center}}
@@ -44,11 +42,21 @@
 
 \begin{document}
 
+\title{
+	\vspace{3cm}
+	\textbf{Calcolo Numerico}
+	\\
+	a.a. 2017/2018
+	\vspace{1.5cm}
+}
 
-
-\title{\vspace{2cm}Elaborato di\\ \textbf{Calcolo Numerico}\\ Anno Accademico 2016/2017\vspace{3cm}}
-
-\author{Simone \emph{Cipriani} - \texttt{5951907} - \href{mailto:sim.cipr@gmail.com}{\textit{giovanni.bindi@stud.unifi.it}}
+\author{
+	Simone \textbf{Cipriani}, \texttt{5951907} --- \href{mailto:sim.cipr@gmail.com}{\textit{sim.cipr@gmail.com}}
+	\vspace{1cm}
+	\\
+	Repository git del progetto hostata su GitHub:
+	\\
+	\url{https://github.com/gesucca/cn-class-project.git}
 }
 
 \maketitle

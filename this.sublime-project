@@ -14,7 +14,7 @@
 		{
 			"file_exclude_patterns":
 			[
-				"*.log", "*.toc", "*.aux", "*.aux", "*.sty", "*.def", "*.gif", "*.png", "*.sublime-workspace"
+				"*.pdf", "*.log", "*.toc", "*.aux", "*.aux", "*.sty", "*.def", "*.gif", "*.png", "*.sublime-workspace"
 			],
 			"path": "."
 		}
