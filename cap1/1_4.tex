@@ -1,0 +1,12 @@
+Il comportamento dell'errore relativo nel caso in cui l'algoritmo usato per sommare tre interi sia \((x \oplus y) \oplus z\) si descrive in questo modo:
+\[
+\epsilon_{somma} = \frac{(x \epsilon_x + y \epsilon_y) + z \epsilon_z}{(x+y)+z} = \frac{|(x+y)| + |z|}{|(x+y)+z|} \max(\epsilon_x, \epsilon_y, \epsilon_z)
+\]
+
+TODO: e ora la maggiorazione come la calcolo?
+
+Analogamente, nel caso in cui la somma si effettui in questo modo: \((y \oplus z) \oplus x\)
+
+\[
+\epsilon_{somma} = \frac{ |(y+z)| + |x| }{|(y+z) + x|}\max(\epsilon_x, \epsilon_y, \epsilon_z)
+\]
