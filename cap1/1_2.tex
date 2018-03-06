@@ -1,0 +1,44 @@
+Sia \(f \in C^3\) e sia \(f_T(x)\) l'approssimazione al secondo ordine di \(f\) mediante il polinomio di Taylor con resto di Lagrange centrato nel punto \(x_0\).
+\\
+\\
+\noindent Ricordando che:
+\[
+P_n(x) = \sum_{k=0}^n{ \frac{f^{(k)} (x_0)}{k!}(x-x_0)^k}
+\]
+\[
+R_{n,x_0}(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}
+\]
+\noindent Abbiamo:
+\[
+f_T(x) = P_2(x) + R_{2, x_0}(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2 + \frac{f'''(c)}{6}(x-x_0)^3
+\]
+
+\noindent Si noti che tutte derivate che compaiono in \(f_T(x)\) esistono dato che \(f \in C^3\).
+\\
+\\
+\noindent Si procede a mostrare che \(f'(x) = \frac{f(x+h)-f(x-h)}{2h} + O(h^2)\) sostituendo \(f\) con \(f_T\) nel rapporto incrementale.
+
+\[
+f_T(x + h) = f(x) + f'(x)h + \frac{1}{2} f''h^2 + \frac{f'''(c)}{6}h^3
+\]
+\[
+f_T(x - h) = f(x) - f'(x)h + \frac{1}{2} f''h^2 + \frac{f'''(c)}{6}h^3
+\]
+\[
+f'(x) = \frac{f_T(x + h) - f_T(x - h)}{2h}
+\]
+\[
+= \frac{
+	f(x) + f'(x)h + \frac{1}{2} f''(x)h^2 + \frac{f'''(c)}{6}h^3
+	-
+	f(x) + f'(x)h - \frac{1}{2} f''(x)h^2 + \frac{f'''(c)}{6}h^3
+}{2h} = \frac{2hf'(x) + \frac{f'''(c)}{3}h^3}{2h}
+\]
+\noindent Semplificando ulteriormente si ottiene:
+\[
+\frac{2hf'(x) + \frac{f'''(c)}{3}h^3}{2h} = f'(x) + \frac{\frac{f'''(c)}{3}h^3}{2h}= f'(x) + \frac{f'''(c)}{6}h^2
+\]
+\noindent Esprimiamo il termine che rappresenta il resto di Lagrange \(\frac{f'''(c)}{6}h^2\) tramite la notazione \(O(h^2)\) ed otteniamo la tesi.
+\[
+\frac{f(x+h)-f(x-h)}{2h} = f'(x) + O(h^2)
+\]
