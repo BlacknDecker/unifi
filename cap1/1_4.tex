@@ -1,12 +1,21 @@
-Il comportamento dell'errore relativo nel caso in cui l'algoritmo usato per sommare tre interi sia \((x \oplus y) \oplus z\) si descrive in questo modo:
+
+Si consideri le seguenti operazioni di macchina (senza consierare eventuali condizioni di overflow ed underflow):
+
+\begin{itemize}
+
+\item \((x \oplus y) \oplus z = fl\{ fl[ fl(x) + fl(y) ] + fl(z)\}\)
+\item \((y \oplus z) \oplus x = fl\{ fl[ fl(y) + fl(z) ] + fl(x)\}\)
+
+\end{itemize}
+
+\noindent Ricordando che \(fl(a) = a + a\epsilon_a\) con \(\epsilon_a\) l'errore relativo commesso nella rappresentazione di \(a\) nel calcolatore, abbiamo che:
+
 \[
-\epsilon_{somma} = \frac{(x \epsilon_x + y \epsilon_y) + z \epsilon_z}{(x+y)+z} = \frac{|(x+y)| + |z|}{|(x+y)+z|} \max(\epsilon_x, \epsilon_y, \epsilon_z)
+\epsilon_{(x \oplus y) \oplus z } = \frac{(x \epsilon_x + y \epsilon_y) + z \epsilon_z}{(x+y)+z} \leq \frac{|(x+y)| + |z|}{|(x+y)+z|} \max\{\epsilon_x, \epsilon_y, \epsilon_z\}
 \]
 
-TODO: e ora la maggiorazione come la calcolo?
-
-Analogamente, nel caso in cui la somma si effettui in questo modo: \((y \oplus z) \oplus x\)
+\noindent Analogamente, abbiamo:
 
 \[
-\epsilon_{somma} = \frac{ |(y+z)| + |x| }{|(y+z) + x|}\max(\epsilon_x, \epsilon_y, \epsilon_z)
+\epsilon_{(y \oplus z) \oplus x } \leq \frac{ |(y+z)| + |x| }{|(y+z) + x|}\max\{\epsilon_x, \epsilon_y, \epsilon_z\}
 \]
