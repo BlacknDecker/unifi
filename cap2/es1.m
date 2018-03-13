@@ -2,6 +2,8 @@ fun = @(x) (x)^3 - 4*(x)^2 + 5*x -2;
 tolx = 1/10; % valori sempre minori
 [zero, i] = bisezione(fun, 0, 3, tolx);
 
+% input: funzione, intervallo di confidenza [a,b] e tolleranza
+% n.b.: nessun escape su numero max iterazioni!
 function [radice,iterazioni]=bisezione(f,a,b,tolx)
     iterazioni=0;
     if(subs(f,a)*subs(f,b)>0)
