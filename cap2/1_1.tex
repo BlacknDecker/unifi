@@ -1,0 +1,28 @@
+Dato \(P(x) = x^3 - 4x^2 + 5x - 2\), si determinano anzitutto le sue radici analiticamente:
+
+\[
+P(x) = x^3 - 4x^2 + 5x - 2\ = (x-2)(x-1)^2
+\]
+
+\noindent Gli zeri di \(P(x)\) sono quindi \(x=1\) con molteplicit\'a \(2\) e \(x=2\) con molteplicit\'a \(1\).\\
+
+\noindent Il metodo di bisezione \'e utilizzabile in quanto le ipotesi necessarie per il suo impiego sono soddisfatte:
+
+\begin{itemize}
+
+\item \(f(x)\) associata a \(P(x)\) \'e definita e continua nell'intervallo \([0,3]\)
+\item \(f(0)f(3) = (-2)(4) = -8 < 0\)
+
+\end{itemize}
+
+\noindent Per conoscere a quale zero di \(P(x)\) tender\'a la successione generata dal metodo di bisezione, basta eseguire manualmente la prima iterazione:
+
+\begin{itemize}
+\item \(f(\frac{0+3}{2}) = -\frac{1}{8}\)
+\item \(f(0)f(\frac{3}{2}) = \frac{1}{4}\)
+\item \(f(\frac{3}{2})f(3) = -\frac{1}{2}\)
+\end{itemize}
+
+\noindent Si prosegue quindi la bisezione nell'intervallo \([\frac{3}{2}, 3]\), perci\'o si tender\'a allo zero in \(x=2\).
+
+\noindent Si applica adesso il metodo di bisezione con il seguente nella sua interezza e si mostra il numero di iterazioni necessarie al variare della soglia di tolleranza.
