@@ -25,4 +25,24 @@ P(x) = x^3 - 4x^2 + 5x - 2\ = (x-2)(x-1)^2
 
 \noindent Si prosegue quindi la bisezione nell'intervallo \([\frac{3}{2}, 3]\), perci\'o si tender\'a allo zero in \(x=2\).
 
-\noindent Si applica adesso il metodo di bisezione con il seguente nella sua interezza e si mostra il numero di iterazioni necessarie al variare della soglia di tolleranza.
+\noindent Si applica adesso il metodo di bisezione con il seguente nella sua interezza e si mostra il numero di iterazioni necessarie al variare della soglia di tolleranza \(tolx\).\\
+
+\begin{tabular}{l*{6}{c}}
+ tolx & x & iterazioni \\
+\hline
+ 1/10 & 1.8750 & 3 \\
+ 1/20 & 1.9688 & 5 \\
+ 1/50 & 2.0156 & 6  \\
+ 1/100 & 1.9922 & 7 \\
+ 1/500 & 1.9980 & 9 \\
+ \(1 \times 10^{-3}\) & 2.0010 & 10 \\
+ \(2 \times 10^{-3}\) & 1.9995 & 11 \\
+ \(5 \times 10^{-3}\) & 1.9999 & 13 \\
+ \(1 \times 10^{-4}\) & 2.0001 & 14 \\
+ \(1 \times 10^{-5}\) & 2.0000 & 17 \\
+ \(1 \times 10^{-6}\) & 2.0000 & 20 \\
+\end{tabular} \\
+
+\noindent Per realizzare la precedente tabella \'e stato usato il seguente codice Matlab:\\
+
+\lstinputlisting[language=Matlab]{cap2/es1.m}
