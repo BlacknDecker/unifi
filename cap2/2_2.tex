@@ -1,0 +1,26 @@
+Si faccia ancora riferimento ad \(f(x)\) relativa a \(P(x)=x^3 - 4x^2 + 5x - 2\) e la sua derivata prima \(f'(x) = 3x^2 - 8x + 5\). Si estende di seguito la tabella dell'esercizio precedente, aggiungendo i risultati ottenuti lanciando delle implementazioni dei metodi di Newton, delle corde e delle secanti a partire dal punto \(x_0 = 3\).
+
+\begin{tabular}{l*{12}{c}}
+ & \vline& \textbf{Bisez.} & & \vline& \textbf{Newton} & & \vline& \textbf{Corde} & & \vline& \textbf{Secanti} \\
+ \(tolx\) & \vline& appr. \(x_2\) & it. & \vline& appr. \(x_2\) & it.& \vline& appr. \(x_2\) & it.& \vline& appr. \(x_2\) & it.\\
+\hline
+ 1/10 & \vline& 1.8750 & 3 & \vline& 2.0043 & 3 & \vline& 2.3594 & 1 & \vline& 2.0502 & 3\\
+ 1/20 & \vline& 1.9688 & 5 & \vline& '' & ''& \vline& 2.2201 & 3 & \vline& 2.0108 & 4\\
+ 1/50 & \vline& 2.0156 & 6 & \vline& 2.0000 & 4 & \vline& 2.1236 & 6 & \vline& 2.0010 & 5\\
+ 1/100 & \vline& 1.9922 & 7 & \vline& '' &'' & \vline& 2.0643 & 10 & \vline& '' & ''\\
+ 1/500 & \vline& 1.9980 & 9 & \vline& '' & 5 & \vline& 2.0152 & 20 & \vline& 2.0000 & 6\\
+ \(1 \times 10^{-3}\) & \vline& 2.0010 & 10 & \vline& '' & '' & \vline& 2.0077 & 25 & \vline& '' & ''\\
+ \(2 \times 10^{-3}\) & \vline& 1.9995 & 11 & \vline& '' & '' & \vline& 2.0039 & 30 & \vline& '' & 7\\
+ \(5 \times 10^{-3}\) & \vline& 1.9999 & 13 & \vline& '' & '' & \vline& 2.0015 & 37 & \vline& '' & ''\\
+ \(1 \times 10^{-4}\) & \vline& 2.0001 & 14 & \vline& '' & '' & \vline& 2.0008 & 42 & \vline& '' & ''\\
+ \(1 \times 10^{-5}\) & \vline& 2.0000 & 17 & \vline& '' & 6  & \vline& 2.0001 & 60 & \vline& '' & 8\\
+ \(1 \times 10^{-6}\) & \vline& 2.0000 & 20 & \vline& '' & 6  & \vline& 2.0000 & 77 & \vline& '' & 8\\
+\end{tabular} \\
+
+\noindent QUALCHE COMMENTO SULLA CONVERGENZA\\
+
+\noindent Nel merito della domanda finale posta nel testo dell'esercizio, non \'e possibile utilizzare come punto di innesco \(x_0=\frac{5}{3}\) in quanto \(\frac{5}{3}\) \'e uno zero della derivata prima, la cui valutazione in \(x_0\) sta al denominatore nel primo passo di tutti i metodi impiegati.\\
+
+\noindent Di seguito le implementazioni Matlab dei metodi utilizzati.
+
+\lstinputlisting[language=Matlab]{cap2/es2_functions.m}
