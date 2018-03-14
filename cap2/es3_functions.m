@@ -1,56 +1,36 @@
+% Funzioni che imlementano metodi di newton modificato e di accelerazione di Aitken
 
-function [y, i] = NewtonMod(f, df, m, x0, imax, tol, output)
-	format long;
-	i = 0;
-	x = x0;
-	vai=1;
-	while((i < imax) && vai)
-		i = i+1;
+% n.b.: nessun escape su numero max iterazioni!
+
+% input: f(x), f'(x), molteplicita radice, punto di innesco, tolleranza
+function [radice,iterazioni]=newton_mod(f,f1,m,x0,tolx)
+	fx = feval(f, x0);
+	f1x = feval(f1, x0);
+	radice = x0 - fx/f1x;
+	iterazioni = 0;
+	while ( abs(radice-x0)>tolx )
+		iterazioni = iterazioni+1;
+		x0 = radice;
 		fx = feval(f, x0);
-		dfx = feval(df, x0);
-		if(dfx ~= 0)
-			x = x0 - m * fx / dfx;
-		else
-			break;
-		end
-		if(abs(x-x0)<tol)
-			vai = 0;
-		end
-		x0 = x;
+		f1x = feval(f1, x0);
+		radice = x0 - m*(fx/f1x);
 	end
-	if(output)
-		if(vai)
-			disp('Impossibile calcolare la tolleranza richiesta nel numero di iter');
-		else
-		   disp(i);
-		end
-	end
-	y = x;
 end
 
-function y = Aitken( f, df, x0, imax, tol )
-	format long;
-	i = 0;
-	vai=1;
-
-	while((i < imax) && vai)
-		x1 = NewtonMod(f, df, 1, x0, 1, tol, 0);
-		x2 = NewtonMod(f, df, 1, x1, 1, tol, 0);
-		i = i+1;
-		if((x0 - 2*x1 +x2) == 0)
-			disp('Errore, impossibile dividere per 0');
-			vai = 0;
-			break;
-		end
-		x = (x2*x0 - x1^2)/(x0 - 2*x1 +x2);
-		if(abs(x-x0)<tol)
-			vai = 0;
-		end
-		x0 = x;
-	end
-	if(vai)
-		disp('Impossibile calcolare la tolleranza richiesta nel numero di iter');
-		disp(i);
-	end
-	y = x;
+function [radice, iterazioni] = aitken( f, f1, x0, tolx )
+	fx = feval(f, x0);
+	f1x = feval(f1, x0);
+	radice = x0 - fx/f1x;
+	iterazioni = 0;
+	while abs(radice-x0)>tolx
+        iterazioni = iterazioni+1;
+        x0 = radice;
+        fx = feval(f, x0);
+        f1x = feval(f1, x0);
+        x1 = x0 -fx/f1x;
+        fx = feval(f, x1);
+        f1x = feval(f1, x1);
+        radice = x1 -fx/f1x;
+        radice = (radice*x0 - x1^2)/(radice-2*x1+x0);
+    end
 end

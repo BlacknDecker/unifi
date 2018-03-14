@@ -4,15 +4,21 @@ Si faccia ancora una volta riferimento ad \(f(x)\) relativa a \(P(x)=x^3 - 4x^2 
  & \vline& \textbf{Newton} & & \vline& \textbf{N. Mod.} & & \vline& \textbf{Aitken} \\
  \(tolx\) & \vline& appr. \(x_1\) & it. & \vline& appr. \(x_1\) & it.& \vline& appr. \(x_1\) & it.\\
 \hline
- 1/10 & \vline& 0.8960 & 3\\
- 1/20 & \vline& 0.9457 & 4\\
- 1/50 & \vline& 0.9859 & 6\\
- 1/100 & \vline& 0.9929& 7\\
- 1/500 & \vline& 0.9982& 9\\
- \(1 \times 10^{-3}\) & \vline& 0.9991 & 10\\
- \(2 \times 10^{-3}\) & \vline& 0.9996 & 11\\
- \(5 \times 10^{-3}\) & \vline& 0.9999 & 13\\
- \(1 \times 10^{-4}\) & \vline& '' & 14\\
- \(1 \times 10^{-5}\) & \vline& 1.000 & 17\\
- \(1 \times 10^{-6}\) & \vline& '' & 20\\
+ 1/10 & \vline& 0.8960 & 3						& \vline& 0.9961 & 2 & \vline& 1.0006 & 2 \\
+ 1/20 & \vline& 0.9457 & 4						& \vline& 0.1000 & 3 & \vline& ''     & ''\\
+ 1/50 & \vline& 0.9859 & 6						& \vline& ''     & 3 & \vline& 1.0000 & 3 \\
+ 1/100 & \vline& 0.9929& 7						& \vline& ''     & 3 & \vline& ''     & ''\\
+ 1/500 & \vline& 0.9982& 9						& \vline& ''     & 4 & \vline& ''     & ''\\
+ \(1 \times 10^{-3}\) & \vline& 0.9991 & 10		& \vline& ''     & 4 & \vline& ''     & ''\\
+ \(2 \times 10^{-3}\) & \vline& 0.9996 & 11		& \vline& ''     & 4 & \vline& ''     & 4\\
+ \(5 \times 10^{-3}\) & \vline& 0.9999 & 13		& \vline& ''     & 4 & \vline& ''     & ''\\
+ \(1 \times 10^{-4}\) & \vline& '' & 14			& \vline& ''     & 4 & \vline& ''     & ''\\
+ \(1 \times 10^{-5}\) & \vline& 1.000 & 17		& \vline& ''     & 4 & \vline& ''     & ''\\
+ \(1 \times 10^{-6}\) & \vline& '' & 20 		& \vline& ''     & 5 & \vline& ''     & ''\\
 \end{tabular} \\
+
+\noindent Come era prevedibile, il metodo di Newton standard converge linearmente invece che quadraticamente verso la soluzione a causa della molteplicit\'a della radice verso la quale si converge; il metodo di Newton modificato ha invece ripristinato la convergenza quadratica. DUE PAROLE SU AITKIN
+
+\noindent Di seguito le implementazioni Matlab dei metodi numerici utilizzati. Per il metodo di Newton \'e stato sfruttata l'implementazione usata nell'esercizio precedente.
+
+\lstinputlisting[language=Matlab]{cap2/es3_functions.m}
