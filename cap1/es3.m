@@ -2,7 +2,6 @@ Table = cell2table(cell(0,4)); % modo veloce per iniz tab vuota
 Table.Properties.VariableNames = {'x' 'j' 'h' 'phi_h'};
 
 x = 1;
-
 for j = 1:10
    h = 10^(-j);
    iteration = {x, j, h, phi_h(x, h)};

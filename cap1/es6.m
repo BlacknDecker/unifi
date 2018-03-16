@@ -1,13 +1,13 @@
 Table = cell2table(cell(0,5));
 Table.Properties.VariableNames = {'k' 'prima_succ' 'err_ass_prima_succ' 'seconda_succ' 'err_ass_seconda_succ' };
 
-conergence = 1.732050807568877293527446;
+convergenza = sqrt(3); % uso l'approssimazione di Matlab per il calcolo dell'errore
 
 for x = 0:8
     prima = first(x);
     seconda = second(x);
-    e_a_prima = abs(prima - conergence);
-    e_a_seconda = abs(seconda - conergence);
+    e_a_prima = abs(prima - convergenza);
+    e_a_seconda = abs(seconda - convergenza);
     iteration = {x, prima, e_a_prima, seconda, e_a_seconda};
     Table = [Table; iteration];
 end
