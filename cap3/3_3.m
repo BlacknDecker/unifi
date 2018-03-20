@@ -1,3 +1,4 @@
+% input: matrice preparata per essere scomposta LDL^T, vettore b dei termini noti
 function [b] = sol_es_3(A, b)
 	b = sist_triang_inf(tril(A,-1)+eye(length(A)), b);
 	b = diagonale(diag(A), b);
@@ -11,6 +12,7 @@ function [d] = diagonale(d,b)
     end
 end
 
+% accesso per colonna
 function [b] = sist_triang_sup(A, b)
 	for j=length(A):-1:1
 		b(j)=b(j)/A(j,j);
