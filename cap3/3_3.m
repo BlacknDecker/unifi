@@ -1,7 +1,7 @@
-function [b] = soluzione_eserczio_3(A, b)
-	b = sistemaTriangolareInferiore(tril(A,-1)+eye(length(A)), b);
+function [b] = sol_es_3(A, b)
+	b = sist_triang_inf(tril(A,-1)+eye(length(A)), b);
 	b = diagonale(diag(A), b);
-	b = sistemaTriangolareSuperiore((tril(A,-1)+eye(length(A)))',b);
+	b = sist_triang_sup((tril(A,-1)+eye(length(A)))',b);
 end
 
 function [d] = diagonale(d,b)
@@ -11,17 +11,7 @@ function [d] = diagonale(d,b)
     end
 end
 
-% per colonne
-function [b] = sistemaTriangolareInferiore(A, b)
-    for j=1:length(A)
-        b(j)=b(j)/A(j,j);
-        for i=j+1:length(A)
-            b(i)=b(i)-A(i,j)*b(j);
-        end
-    end
-end
-
-function [b] = sistemaTriangolareSuperiore(A, b)
+function [b] = sist_triang_sup(A, b)
 	for j=length(A):-1:1
 		b(j)=b(j)/A(j,j);
 		for i=1:j-1

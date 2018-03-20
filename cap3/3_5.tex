@@ -1,0 +1,38 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+	Inserire alcuni esempi di utilizzo delle due function implementate per i punti 3 e 4, scegliendo per ciascuno di essi un vettore \(\overline{x}\) e ponendo \(b = A\overline{x}\). Riportare \(\overline{x}\) e la soluzione \(x\) da essi prodotta. Costruire anche una tabella in cui, per ogni esempio considerato, si riportano il numero di condizionamento di A in norma 2 (usare \lstinline[language=Matlab]{cond} di Matlab) e le quantit\'a \(||r||/||b||\) e \(||x-\overline{x}||/||\overline{x}||\).
+	}
+}\end{center}
+
+\noindent La matrice scelta \'e la seguente:
+\[
+A = \begin{pmatrix} 1 & -1 & 2 & 2 \\ -1 & 5 & -14 & 2\\ 2 & -14 & 42 & 2\\ 2 & 2 & 2 & 65 \end{pmatrix}
+\]
+
+\noindent I vettori scelti per dare un'esempio delle function implementate per gli Esercizi 3 e 4 sono rispettivamente:
+
+\[
+\overline{x}_3 = \begin{bmatrix} 3.1416 \\ 2.7183 \\ 1.4142 \\ 1.7320 \end{bmatrix},
+\overline{x}_4 = \begin{bmatrix} 2.2360 \\ 2.6457 \\ 3.1416 \\ 3.3166 \end{bmatrix}
+\]
+
+\noindent Ponendo \(b=A\overline{x}\) abbiamo quindi:
+
+\[
+b_3 = \begin{bmatrix} 6.7157 \\ -5.8849 \\ 31.0874 \\ 127.1282 \end{bmatrix},
+b_4 = \begin{bmatrix} 12.5067 \\ -26.3567 \\ 106.0126 \\ 231.6256 \end{bmatrix}
+\]
+
+\noindent
+
+\begin{tabular}{l*{20}{c}}
+function & \vline& tipo algoritmo & \vline& \(\overline{x}\) & \vline& \(cond(A, 2)\) & \vline& \(||r||/||b||\) & \vline& \(||x-\overline{x}||/||\overline{x}||\) \\
+\hline
+sol\_es\_3 & \vline& \(LDL^T\)    & \vline& \(\overline{x}_3\) & \vline& aaa      & \vline& aaa	 \\
+sol\_es\_4 & \vline& \(LU\) pivot & \vline& \(\overline{x}_4\) & \vline& aaa      & \vline& aaa	 \\
+
+\end{tabular} \\
+
+\noindent Il codice Matlab usato per realizzare i precedenti esempi \'e il seguente:
+\lstinputlisting[language=Matlab]{cap3/3_5.m}

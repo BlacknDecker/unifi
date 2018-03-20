@@ -5,7 +5,14 @@
 	}
 }\end{center}
 
-\noindent Il seguente codice Matlab soddisfa la richiesta:
-COMMETI SULL'EFFICIENZA
+\noindent Il seguente codice Matlab soddisfa la richiesta. Riguardo alla function \lstinline[language=Matlab]{sist_triang_inf}, la sua implementazione \'e quella dell'Esercizio 1.
 
 \lstinputlisting[language=Matlab]{cap3/3_3.m}
+
+\noindent La soluzione proposta \'e efficiente in quanto:
+\begin{itemize}
+
+\item il vettore delle soluzioni dei sottosistemi viene memorizzato nelle stesse locazioni di memoria del vettore dei termini noti avuto in input;
+\item la scomposizione della matrice A in L e D non viene memorizzata fisicamente ma avviene logicamente.
+
+\end{itemize}
