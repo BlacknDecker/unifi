@@ -5,7 +5,7 @@ sdp_A1 = algoritmo_3_6(A1);
 sdp_A2 = algoritmo_3_6(A2);
 
 % fattorizzazione LDL^T
-function [A, sdp] = algoritmo_3_6(A)
+function [A] = algoritmo_3_6(A)
     [m,n]=size(A);
     if A(1,1)<=0
        error("matrice non sdp");
@@ -17,6 +17,6 @@ function [A, sdp] = algoritmo_3_6(A)
         if A(j,j)<=0
             error("matrice non sdp");
         end
-        A((j+1):n,j) = (A((j+1):n,j)-A((j+1):n,1:(j-1))*v)/A(j,j);
+        A((j+1):n,j)=(A((j+1):n,j)-A((j+1):n,1:(j-1))*v)/A(j,j);
     end
 end

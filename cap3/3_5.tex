@@ -1,3 +1,5 @@
+%%%% scrivere vettori soluzione e riempire tabella
+
 \begin{center}
 \footnotesize\noindent\fbox{
 	\parbox{\textwidth}{
@@ -5,27 +7,35 @@
 	}
 }\end{center}
 
-\noindent La matrice scelta \'e la seguente:
+\noindent Si presenta di seguito un esempio per la function dell'Esercizio 3 (risoluzione di sistemi con scomposizione \(LDL^T\)) ed un esempio per la function dell'Esercizio 4 (scomposizione LU con pivoting parziale). La matrice scelta per entrambi gli esempi \'e la seguente:
 \[
 A = \begin{pmatrix} 1 & -1 & 2 & 2 \\ -1 & 5 & -14 & 2\\ 2 & -14 & 42 & 2\\ 2 & 2 & 2 & 65 \end{pmatrix}
 \]
 
-\noindent I vettori scelti per dare un'esempio delle function implementate per gli Esercizi 3 e 4 sono rispettivamente:
+\noindent I vettori scelti sono, rispettivamente per gli Esercizi 3 e 4:
 
 \[
 \overline{x}_3 = \begin{bmatrix} 3.1416 \\ 2.7183 \\ 1.4142 \\ 1.7320 \end{bmatrix},
 \overline{x}_4 = \begin{bmatrix} 2.2360 \\ 2.6457 \\ 3.1416 \\ 3.3166 \end{bmatrix}
 \]
 
-\noindent Ponendo \(b=A\overline{x}\) abbiamo quindi:
-
+\noindent Ponendo \(b=A\overline{x}\) si ha quindi:
+\\
 \[
 b_3 = \begin{bmatrix} 6.7157 \\ -5.8849 \\ 31.0874 \\ 127.1282 \end{bmatrix},
 b_4 = \begin{bmatrix} 12.5067 \\ -26.3567 \\ 106.0126 \\ 231.6256 \end{bmatrix}
 \]
 
-\noindent Lanciando le function
-\\
+\noindent Lanciando le opportune function per la preparazione delle matrici e per la risoluzione del sistema (come mostrato nel dettaglio nel codice Matlab in coda a questa spiegazione), vengono prodotti i seguenti vettori soluzione:
+
+\[ %METTICELI
+x_3 = \begin{bmatrix}  \\  \\ 1.4142 \\ 1.7320 \end{bmatrix},
+x_4 = \begin{bmatrix} 2.2360 \\ 2.6457 \\ 3.1416 \\ 3.3166 \end{bmatrix}
+\]
+
+\noindent A seguire la tabella richiesta, che mostra il condizionamento della matrice e delle quantit\'a analoghe ad errori relativi sui dati di ingresso (\(||r||/||b||\)) e sul risultato (\(||x-\overline{x}||/||\overline{x}||\)).
+
+
 \begin{tabular}{l*{20}{c}}
 function & \vline& tipo algoritmo & \vline& \(\overline{x}\) & \vline& \(cond(A, 2)\) & \vline& \(||r||/||b||\) & \vline& \(||x-\overline{x}||/||\overline{x}||\) \\
 \hline
@@ -34,5 +44,5 @@ sol\_es\_4 & \vline& \(LU\) pivot & \vline& \(\overline{x}_4\) & \vline& aaa    
 
 \end{tabular} \\
 
-\noindent Il codice Matlab usato per realizzare i precedenti esempi \'e il seguente. Le function riferite nel codice sono quelle implementate per risolvere gli esercizi precedenti, a parte l'algoritmo 3.7 del libro la cui implementazione \'e mostrata sotto.
+\noindent Il codice Matlab usato per realizzare i precedenti esempi \'e il seguente. Le function riferite nel codice per le quali non \'e riportata l'implementazione sono quelle impiegate per risolvere gli esercizi precedenti.
 \lstinputlisting[language=Matlab]{cap3/3_5.m}
