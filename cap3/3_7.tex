@@ -1,0 +1,8 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+Scrivere una function Marlab specifica per la risoluzione di un sistema lineare con matrice dei coefficienti \(A \in R^{n \times n}\) bidiagonale inferiore a diagonale unitaria di Toeplitz, specificabile con uno scalare \(\alpha\). Sperimentarne e commentarne le prestazioni (considerare il numero di condizionamento della matrice) nel caso in cui \(n=12\) e \(\alpha=100\) ponendo dapprima \(b=(1, 101, \ldots, 101)^T\) (soluzione esatta \(\overline{x}=(1,\ldots ,1)^T\)) e quindi \(b=0.1 * (1, 101, \ldots, 101)^T\) (soluzione esatta \(\overline{x}=(0.1,\ldots ,0.1)^T\)).
+	}
+}\end{center}
+
+\noindent Ricordando che le matrici bidiagonali inferiori a diagonale unitaria di Toeplitz sono le matrici \(A \in R^{n \times n}\) del tipo \[\begin{pmatrix} 1 & 0 & 0 & \cdots & 0 \\ \alpha & 1 & 0 & \cdots & 0 \\ 0 & \alpha & 1 & \cdots & 0 \\ \vdots & \vdots & \vdots & \vdots & \vdots \\ 0 & \cdots & 0 & \alpha & 1\end{pmatrix}\]
