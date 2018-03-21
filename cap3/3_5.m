@@ -13,16 +13,16 @@ b4 = A4 * x4;
 x3_sol = sol_es_3(algoritmo_3_6(A3), b3);
 cond_A_3_2 = cond(A3, 2);
 r3 = A*x3_sol - b3;
-r_b_3 = (r3'*r3) / (b3'*b3);
-err_3 = ((x3_sol - x3)'*(x3_sol - x3))/(x3_sol'*x3_sol);
+r_b_3 = norm(r3) / norm(b3);
+err_3 = norm(x3_sol - x3)/norm(x3_sol);
 
 % esmpio es 4, fatt. LU con pivoting parziale
 [A4, p4] = algoritmo_3_7(A4);
 x4_sol = sol_es_4(A4, p4, b4);
 cond_A_4_2 = cond(A4, 2);
 r4 = A*x4_sol - b4;
-r_b_4 = (r4'*r4) / (b4'*b4);
-err_4 = ((x4_sol - x4)'*(x4_sol - x4))/(x4_sol'*x4_sol);
+r_b_4 = norm(r4) / norm(b4);
+err_4 = norm(x4_sol - x4)/norm(x4_sol);
 
 function [A, p] =  algoritmo_3_7(A)
     [m,n]=size(A);

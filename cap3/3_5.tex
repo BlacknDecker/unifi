@@ -31,14 +31,14 @@ x_3 = \begin{bmatrix} 3.141600000000039 \\ 2.718300000000078 \\ 1.41420000000002
 x_4 = \begin{bmatrix} 2.23599999999992 \\ 2.64569999999982 \\ 3.14159999999994 \\ 3.31660000000001 \end{bmatrix}
 \]
 \\
-\noindent A seguire la tabella richiesta, che mostra il condizionamento della matrice restituita dagli algoritmi di fattorizzazione e le quantit\'a richieste, analoghe ad errori relativi sui dati di ingresso (\(||r||/||b||\)) e sul risultato (\(||x-\overline{x}||/||\overline{x}||\)).
+\noindent A seguire la tabella richiesta, che mostra il condizionamento della matrice restituita dagli algoritmi di fattorizzazione ed i confronti fra le quantit\'a richieste, analoghe ad errori relativi sui dati di ingresso (\(||r||/||b||\)) e sul risultato (\(||x-\overline{x}||/||\overline{x}||\)).
 \\
 
 \noindent\begin{tabular}{l*{20}{c}}
 function & \vline& tipo & \vline& \(\overline{x}\) & \vline& \(cond(A, 2)\) & \vline& \(||r||/||b||\) & \vline& \(||x-\overline{x}||/||\overline{x}||\) \\
 \hline
-sol\_es\_3 & \vline& \(LDL^T\)    & \vline& \(\overline{x}_3\) & \vline& \(3.6158 \times 10^3\)    & \vline& \(1.1782 \times 10^{-32}\)	& \vline& \(3.6725 \times 10^{-28}\)   \\
-sol\_es\_4 & \vline& \(LU\) pivot & \vline& \(\overline{x}_4\) & \vline& 319.10                    & \vline& \(1.4448 \times 10^{-32}\)	& \vline& \(1.2850 \times 10^{-27}\) 	 \\
+sol\_es\_3 & \vline& \(LDL^T\)    & \vline& \(\overline{x}_3\) & \vline& \(3.6158 \times 10^3\)    & \vline& \(1.0854 \times 10^{-16}\)	& \vline& \(1.9164 \times 10^{-14}\)   \\
+sol\_es\_4 & \vline& \(LU\) pivot & \vline& \(\overline{x}_4\) & \vline& 319.10                    & \vline& \(1.2020 \times 10^{-16}\)	& \vline& \(3.5848 \times 10^{-14}\) 	 \\
 
 \end{tabular}
 \\
