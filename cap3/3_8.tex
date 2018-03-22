@@ -1,18 +1,9 @@
-algoritmo 3.8
-fattorizzazione QR di householder
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+Scrivere una function che, dato un sistema lineare sovradeterminato Ax = b, con \(A \in R^{m \times n}\), \(m > n\), \(rank(A)=n\) e \(b \in R^m\), preso come input b e l'output dell'Algoritmo 3.8 del libro (matrice A riscritta con la parte significativa dei vettori di Householder normalizzati con prima componente unitaria), ne calcoli efficientemente la soluzione nel senso dei minimi quadrati.	}
+}\end{center}
 
-for i=1:n
-	alpha=norm(A(i:m,i));
-	if alpha==0
-		error(matrice non ha rango massimo);
-	end
-	if A(i,i)>=0
-		alpha = -alpha;
-	end
-	v1=A(i,i)-alpha
-	A(i,i) = alpha;
-	A(i+1:m,i) = A(i+1:m,i)/v1;
-	beta = -v1/alpha;
-	A(i:m,i+1:n) = A(i:m,i+1:n) - (beta*[1; A(i+1:m,i)])*([1 A(i+1:m,i)']*A(i:m,i+1:n));
-	% forse dopo l'uno manca un puno e virgola
-end
+
+
+\lstinputlisting[language=Matlab]{cap3/3_8.m}
