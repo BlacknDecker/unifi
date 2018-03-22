@@ -1,18 +1,8 @@
-algoritmo 3.8
-fattorizzazione QR di householder
-
-for i=1:n
-	alpha=norm(A(i:m,i));
-	if alpha==0
-		error(matrice non ha rango massimo);
-	end
-	if A(i,i)>=0
-		alpha = -alpha;
-	end
-	v1=A(i,i)-alpha
-	A(i,i) = alpha;
-	A(i+1:m,i) = A(i+1:m,i)/v1;
-	beta = -v1/alpha;
-	A(i:m,i+1:n) = A(i:m,i+1:n) - (beta*[1; A(i+1:m,i)])*([1 A(i+1:m,i)']*A(i:m,i+1:n));
-	% forse dopo l'uno manca un puno e virgola
+function [b] = sol_es_8(A, b)
+    [m,n] = size(A);
+    Qt = eye(m);
+    for i=1:n
+        Qt= [eye(i-1) zeros(i-1,m-i+1); zeros(i-1, m-i+1)' (eye(m-i+1)-(2/norm([1; A(i+1:m, i)], 2)^2)*([1; A(i+1:m, i)]*[1 A(i+1:m, i)']))]*Qt;
+    end
+    b = sist_triang_sup(triu(A(1:n, :)), Qt(1:n, :)*b);
 end
