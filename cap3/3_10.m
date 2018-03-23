@@ -1,4 +1,4 @@
-function [x] = non_lin_newton(F,J, x, imax, tolx, out)
+function [x] = non_lin_newton(F,J, x, imax, tolx)
     i=0;
     xold=x+1;
     while (i< imax) && (norm(x-xold) > tolx)

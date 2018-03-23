@@ -5,17 +5,19 @@ Verificato che la funzione \(f(x_1,x_2) = x_1^2+x_2^3-x_1x_2\) ha un punto di mi
 	}
 }\end{center}
 
-\noindent Si verifica innanzitutto l'esistenza di un punto di minimo relativo in (1/12, 1/6). Si rinominano le variabili in x ed y per convenienza nella notazione.
+\noindent Si verifica innanzitutto analiticamente l'esistenza di un punto di minimo relativo in (1/12, 1/6). Si rinominano le variabili in x ed y per convenienza nella notazione.
 \[
 \frac{\partial}{\partial x}f(x,y) = 2x -y \quad \frac{\partial}{\partial y}f(x,y) = 3y^2 - x
 \]
+\noindent Si ottiene il sistema non lineare:
 \[
 \begin{cases}
 2x -y = 0 \\
 3y^2 - x = 0
 \end{cases}
-\quad \text{ha come soluzioni} \quad x=0, y=0 \quad \text{e} \quad x=\frac{1}{12}, y=\frac{1}{6}
+\quad \text{che ha come soluzioni} \quad x=0, y=0 \quad \text{e} \quad x=\frac{1}{12}, y=\frac{1}{6}
 \]
+\noindent I punti trovati sono quindi punti stazionari della funzione data.
 \[
 H =
 \begin{bmatrix} f_{xx} & f_{xy} \\ f_{yx} & f_{yy} \end{bmatrix}
@@ -25,26 +27,26 @@ H =
 \det(H) = 12y -2
 \]
 
-\noindent Il determinante della matrice Hessiana \'e nullo per \(y=\frac{1}{6}\).
+\noindent Il determinante della matrice Hessiana \'e nullo per \(y=\frac{1}{6}\), non si pu\'o concludere ancora niente.
+
 \[
 f(\frac{1}{12}, \frac{1}{6}) = -\frac{1}{432} \quad \overline{f}(x,y) = f(x,y) + \frac{1}{432} \quad \overline{f}(\frac{1}{12}, \frac{1}{6}) = 0
 \]
+\\
 
-Matlab inequality plot per \(\overline{f}(x,y) \geq 0 \quad \)
+\noindent Si studia il segno di \(\overline{f} \) con il seguente codice Matlab:
+\\
+\lstinputlisting[language=Matlab]{cap3/3_11_sign.m}
 
-%L'esistenza del punto di minimo relativo si pu\'o verificare facilmente plottando la funzione su Matlab lanciando il seguente codice:
+\begin{center}
+	\includegraphics[scale=0.7]{cap3/3_11_sign.png}
+\end{center}
 
-% metticelo
-%[x1,x2] = meshgrid(-2:.2:2);
-%y =  x1^2 + x2^3 - x1*x2;
-%surf(x1,x2,y);
+\noindent Poich\'e \(\overline{f}\) \'e tutta positiva in un intorno di \((\frac{1}{12}, \frac{1}{6})\), possiamo concludere che quel punto \'e sicuramente un minimo relativo di \(f\).
 
-% derivate parziali: d/dx 2x-y
-% d/dy 3y^2 -x
-%
-% si cerca i punti stazionari col sistema delle derivate parziali uguali a zero
-%
-% matrice hessiana delle derivate parziali seconde
-%
-% si valuta l'hessiana nei punti stazionari e si fa deerminante
-% determinante positivo, primo elemento positivo -> punto di min relativo
+\noindent Per quanto riguarda l'utilizzo del metodo di Newton, \'e stata scritta una versione modificata della function dell'Esercizio precedente per restituire i dati da mostrare nella tabella richiesta.
+\\
+\lstinputlisting[language=Matlab]{cap3/3_11.m}
+
+\noindent Come si pu\'o notare, la norma dell'errore
+
