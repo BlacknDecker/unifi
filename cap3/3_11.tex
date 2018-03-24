@@ -5,36 +5,43 @@ Verificato che la funzione \(f(x_1,x_2) = x_1^2+x_2^3-x_1x_2\) ha un punto di mi
 	}
 }\end{center}
 
-\noindent Si verifica innanzitutto analiticamente l'esistenza di un punto di minimo relativo in \((\frac{1}{12}, \frac{1}{6})\). Si rinominano le variabili in x ed y per convenienza nella notazione.
+\noindent Si verifica innanzitutto analiticamente l'esistenza di un punto di minimo relativo in \((\frac{1}{12}, \frac{1}{6})\) considerando il sistema non lineare:
 \[
-\frac{\partial}{\partial x}f(x,y) = 2x -y \quad \frac{\partial}{\partial y}f(x,y) = 3y^2 - x
+F(\vec{x}) = \vec{0} \quad \text{con} \quad F = \begin{bmatrix}\frac{\partial}{\partial x_1}f(x_1,x_2) \\ \frac{\partial}{\partial x_2}f(x_1,x_2)  \end{bmatrix}
 \]
-\noindent Si ottiene il sistema non lineare:
+\[
+\frac{\partial}{\partial x_1}f(x_1,x_2) = 2x_1 -x_2 \quad \frac{\partial}{\partial x_2}f(x_1,x_2) = 3x_2^2 - x_1
+\]
 \[
 \begin{cases}
-2x -y = 0 \\
-3y^2 - x = 0
+2x_1 -x_2 = 0 \\
+3y^2 - x_1 = 0
 \end{cases}
-\quad \text{che ha come soluzioni} \quad x=0, y=0 \quad \text{e} \quad x=\frac{1}{12}, y=\frac{1}{6}
+\quad \text{ha come soluzioni} \quad \begin{bmatrix}0 & 0 \end{bmatrix} \quad \text{e} \quad \begin{bmatrix}\frac{1}{12} & \frac{1}{6}\end{bmatrix}
 \]
-\noindent I punti trovati sono quindi punti stazionari della funzione data. Si considera ora la matrice Hessiana della funzione \(f(x,y)\):
+\\
+\noindent I punti trovati sono quindi punti stazionari della funzione data. Si consideri ora la matrice Hessiana della funzione \(f(x,x_2)\), che coincide con la matrice Jacobiana della funzione \(F\):
 \[
 H =
-\begin{bmatrix} f_{xx} & f_{xy} \\ f_{yx} & f_{yy} \end{bmatrix}
+\begin{bmatrix} f_{x_1x_1} & f_{x_1x_2} \\ f_{x_2x_1} & f_{x_2x_2} \end{bmatrix}
 =
-\begin{bmatrix} 2 & -1 \\ -1 & 6y \end{bmatrix}
+\begin{bmatrix} 2 & -1 \\ -1 & 6x_2 \end{bmatrix}
+= J_F
 \quad
-\det(H) = 12y -2
+\det(H) = 12x_2 - 1
 \]
 
-\noindent L'Hessiano \'e nullo per \(y=\frac{1}{6}\), non si pu\'o concludere ancora niente.
+\noindent Il determinante dell'Hessiana \'e positivo per \(x_2=\frac{1}{6}\), ed il primo elemento \'e positivo: abbiamo un punto di minimo relativo in \((\frac{1}{12}, \frac{1}{6})\).
+\\
+\\
+\noindent Per avere una ulteriore conferma visiva, \'e stata definita la seguente funzione \(\overline{f}(x_1,x_2)\):
 
 \[
-f(\frac{1}{12}, \frac{1}{6}) = -\frac{1}{432} \quad \overline{f}(x,y) = f(x,y) + \frac{1}{432} \quad \overline{f}(\frac{1}{12}, \frac{1}{6}) = 0
+f(\frac{1}{12}, \frac{1}{6}) = -\frac{1}{432} \quad \overline{f}(x_1,x_2) = f(x_1,x_2) + \frac{1}{432} \quad \text{in modo che} \quad \overline{f}(\frac{1}{12}, \frac{1}{6}) = 0
 \]
 \\
 
-\noindent Si studia il segno di \(\overline{f} \) con il seguente codice Matlab:
+\noindent Si \'e quindi studiato il segno di \(\overline{f} \) con il seguente codice Matlab con cui \'e stato prodotto il plot 3D mostrante il comportamento di \(\overline{f} \) in un intorno di \((\frac{1}{12}, \frac{1}{6})\):
 \\
 \lstinputlisting[language=Matlab]{cap3/3_11_sign.m}
 
@@ -42,10 +49,12 @@ f(\frac{1}{12}, \frac{1}{6}) = -\frac{1}{432} \quad \overline{f}(x,y) = f(x,y) +
 	\includegraphics[scale=0.7]{cap3/3_11_sign.png}
 \end{center}
 
-\noindent Poich\'e \(\overline{f}\) \'e tutta positiva in un intorno di \((\frac{1}{12}, \frac{1}{6})\), possiamo concludere che quel punto \'e sicuramente un minimo relativo di \(f\).
+\noindent Poich\'e \(\overline{f}\) \'e tutta positiva in un intorno di \((\frac{1}{12}, \frac{1}{6})\) e pari a zero solo in quel punto, possiamo concludere che \((\frac{1}{12}, \frac{1}{6})\) \'e sicuramente un minimo relativo di \(f\).
 \\
 \\
 \noindent Per quanto riguarda l'utilizzo del metodo di Newton, \'e stata scritta una versione modificata della function dell'Esercizio precedente per restituire i dati da mostrare nella tabella richiesta.
+\\
+\\ RIFARE I CONTI
 \\
 \lstinputlisting[language=Matlab]{cap3/3_11.m}
 
