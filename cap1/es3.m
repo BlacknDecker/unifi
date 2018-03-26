@@ -12,6 +12,8 @@ end
 uitable('Data',Table{:,:},'ColumnName',Table.Properties.VariableNames,...
     'RowName',Table.Properties.RowNames,'Units', 'Normalized', 'Position',[0, 0, 1, 1]);
 
+
+
 % definizioni funzioni
 function y = f(x)
     y = x^4;
