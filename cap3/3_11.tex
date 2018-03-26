@@ -53,19 +53,17 @@ f(\frac{1}{12}, \frac{1}{6}) = -\frac{1}{432} \quad \overline{f}(x_1,x_2) = f(x_
 \\
 \\
 \noindent Per quanto riguarda l'utilizzo del metodo di Newton, \'e stata scritta una versione modificata della function dell'Esercizio precedente per restituire i dati da mostrare nella tabella richiesta.
-\\
-\\ RIFARE I CONTI
-\\
+
 \lstinputlisting[language=Matlab]{cap3/3_11.m}
 
-\begin{tabular}{l*{15}{c}}
- toll. & \vline& it. & \vline& \(x_1\) &\vline& \(x_2\) & \vline& norma ultimo incr. & \vline& norma errore\\
-\hline
- \(10^{-3}\) & \vline& 10 & \vline& 0.083577& \vline& 0.16715 &\vline& 0.77204 \(\times 10^{-3}\) & \vline& 0,54128 \(\times 10^{-3}\) \\
- \(10^{-4}\) & \vline& 13 & \vline& 0.083364& \vline& 0.16673 &\vline& 9.6505 \(\times 10^{-5}\) & \vline& 7,03673 \(\times 10^{-5}\) \\
- \(10^{-5}\) & \vline& 17 & \vline& 0.083335& \vline& 0.16667 &\vline& 6.0316 \(\times 10^{-6}\) & \vline& 3,72678 \(\times 10^{-6}\) \\
- \(10^{-6}\) & \vline& 20 & \vline& 0.083335& \vline& 0.16667 &\vline& 6.0316 \(\times 10^{-6}\) & \vline& 3,72678 \(\times 10^{-6}\) \\
-\end{tabular} \\
+\noindent I seguenti dati sono stati ottenuti considerando come soluzione esatta \(\overline{x} = [\frac{1}{12}, \frac{1}{6}]\) e come ultimo incremento la quantit\'a \(||x^{(i)} - x^{(i-1)}||\) data dall'espressione \lstinline[language=Matlab]{norm(x-xold)} nella sua ultima iterazione all'interno del ciclo \lstinline[language=Matlab]{while}.
 \\
-\noindent Come si pu\'o notare, la norma dell'errore (ovvero \(||x - \overline{x}||\) con \(\overline{x} = [\frac{1}{12}, \frac{1}{6}]^T\)) \'e pi\'u piccola di quella dell'ultimo incremento.
 
+\noindent\begin{tabular}{l*{15}{c}}
+ toll. & \vline& it. & \vline& \(x_1\) &\vline& \(x_2\) & \vline& \(||x^{(i)} - x^{(i-1)}||\) & \vline& \(||x - \overline{x}||\) \\
+\hline
+ \(10^{-3}\) & \vline& 10 & \vline& \scriptsize{0.083577473958333}& \vline& \scriptsize{0.167154947916667} &\vline& 5.4592 \(\times 10^{-4}\) & \vline& 5.4592 \(\times 10^{-4}\) \\
+ \(10^{-4}\) & \vline& 13 & \vline& \scriptsize{0.083363850911458}& \vline& \scriptsize{0.166727701822917} &\vline& 6.8239 \(\times 10^{-5}\) & \vline& 6.8239 \(\times 10^{-5}\) \\
+ \(10^{-5}\) & \vline& 16 & \vline& \scriptsize{0.083337148030599}& \vline& \scriptsize{0.166674296061198} &\vline& 8.5299 \(\times 10^{-6}\) & \vline& 8.5299 \(\times 10^{-6}\) \\
+ \(10^{-6}\) & \vline& 20 & \vline& \scriptsize{0.083333571751912}& \vline& \scriptsize{0.166667143503825} &\vline& 5.3312 \(\times 10^{-7}\) & \vline& 5.3312 \(\times 10^{-7}\) \\
+\end{tabular} \\

@@ -1,29 +1,23 @@
-x(1)=1/2;
-x(2)=1/2;
+x = [1/2, 1/2]';
 
-tolx=10^-3; % testato da 10^-3 a 10^-6
+tolx = 10^-6; % testato da 10^-3 a 10^-6
 
-F= @(x) [2*x(1) - x(2); 3*x(2)^2 - x(1)];
+F = @(x) [2*x(1) - x(2); 3*x(2)^2 - x(1)];
 J = @(x) [2, -1; -1, 6*x(2)];
 
-[x] = NewtonNL(F, J, x, 500, tolx, 1);
+[x, i, incr, err] = non_lin_newton_mod(F, J, x, 500, tolx);
 
-disp ('Minimo : '), disp (x)
-disp ('F(x): '), disp (x(1)^4+ x(1)*( x(1)+ x(2))+(1-x(2))^2)
-
-function [x] = NewtonNL(F,J, x, imax, tolx, out)
-    i=0;
-    xold = x+1;
-    while (i< imax )&&( norm (x-xold )> tolx )
-        i=i+1;
-        xold =x;
+function [x, i, incr, err]  = non_lin_newton_mod(F, J, x, imax, tolx)
+    i = 0;
+    xold = x+100;
+    while (i < imax) && (norm(x-xold) > tolx)
+        i = i+1;
+        xold = x;
         [L,U,P] = LUP(feval(J,x));
-        x=x+solveLinearLUP(L,U, P, -feval(F,x));
-        if out
-            disp("incr "+norm(x-xold));
-            disp("x "+x);
-        end
+        x = x + solveLinearLUP(L, U, P, -feval(F,x));
     end
+    err = norm(x-[1/12, 1/6]');
+    incr = norm(x-xold);
 end
 
 function [L,U,P]=LUP(A)
