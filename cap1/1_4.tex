@@ -29,16 +29,16 @@
 \leq \frac{\left|\splitfrac{\max \{\epsilon_x, \epsilon_y, \epsilon_z\}(2x+2y+z) }{  \splitfrac{+ \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} ^2 (3x+3y+z) }{+  \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} ^3 (x+y)}}\right|}{|x+y+z|}
 \]
 
-\noindent Data la natura dell'errore relativo, possiamo trascurare tutti i termini di gradi superiore al primo in quanto sicuramente pi\'u piccoli di \(\max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} \). Avremo quindi:
+\noindent Data la natura dell'errore relativo, possiamo trascurare tutti i termini di gradi superiore al primo in quanto sensibilmente pi\'u piccoli di \(\max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} \). Avremo quindi:
 \[
-|\epsilon_{(x \oplus y) \oplus z }| \leq \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} \frac{|6x + 6y + 2z|}{|x+y+z|}
+|\epsilon_{(x \oplus y) \oplus z }| \leq \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} \frac{|2x + 2y + z|}{|x+y+z|}
 \]
 \[
-\leq u \frac{|6x + 6y + 2z|}{|x+y+z|}
+\leq u \frac{|2x + 2y + z|}{|x+y+z|}
 \]
 \\
 \noindent Svolgendo un procedimento del tutto analogo al precedente, nel caso di \((y \oplus z) \oplus x \) avremo:
 
 \[
-\epsilon_{(y \oplus z) \oplus x } \leq u \frac{|6y + 6z + 2x|}{|x+y+z|}
+\epsilon_{(y \oplus z) \oplus x } \leq u \frac{|2y + 2z + x|}{|x+y+z|}
 \]
