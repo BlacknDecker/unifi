@@ -9,24 +9,24 @@
 
 \begin{itemize}
 
-\item \((x \oplus y) \oplus z = fl\{ fl[ fl(x) + fl(y) ] + fl(z)\} \)
-\item \((y \oplus z) \oplus x = fl\{ fl[ fl(y) + fl(z) ] + fl(x)\} \)
+\item \((x \oplus y) \oplus z = fl( fl( fl(x) + fl(y) ) + fl(z)) \)
+\item \((y \oplus z) \oplus x = fl( fl( fl(y) + fl(z) ) + fl(x)) \)
 
 \end{itemize}
 
 \noindent Ricordando che \(fl(a) = a + a\epsilon_a = a (1 + \epsilon_a)\) e che \(|\epsilon_a| \leq u\) con \(u\) precisione di macchina, possiamo ricavare:
 
 \[
-|\epsilon_{(x \oplus y) \oplus z }| = \frac{|fl\{ fl[ fl(x) + fl(y) ] + fl(z)\} - (x + y + z)|}{|x+y+z|}
+|\epsilon_{(x \oplus y) \oplus z }| = \frac{|fl( fl( fl(x) + fl(y) ) + fl(z)) - (x + y + z)|}{|x+y+z|}
 \]
 \[=
-\frac{|[(x + x\epsilon_x + y + y\epsilon_y)(1+\epsilon_{x \oplus y}) + z + z\epsilon_z](1 +\epsilon_{(x \oplus y) \oplus z }) - (x+y+z)|}{|x+y+z|}
+\frac{|((x + x\epsilon_x + y + y\epsilon_y)(1+\epsilon_{x \oplus y}) + z + z\epsilon_z)(1 +\epsilon_{(x \oplus y) \oplus z }) - (x+y+z)|}{|x+y+z|}
 \]
 \[
-=\frac{|\splitfrac{x\epsilon_x + y\epsilon_y + x\epsilon_{x \oplus y} + x\epsilon_x\epsilon_{x \oplus y} + y\epsilon_{x \oplus y} + y\epsilon_y\epsilon_{x \oplus y} + z\epsilon_z + x\epsilon_x\epsilon_{(x \oplus y) \oplus z} + y\epsilon_y\epsilon_{(x \oplus y) \oplus z}    }{     + x\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + x\epsilon_x\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + y\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + y\epsilon_y\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + z\epsilon_z\epsilon_{(x \oplus y) \oplus z}}|}{|x+y+z|}
+=\frac{\left|\splitfrac{x\epsilon_x + y\epsilon_y + x\epsilon_{x \oplus y} + x\epsilon_x\epsilon_{x \oplus y} + y\epsilon_{x \oplus y} + y\epsilon_y\epsilon_{x \oplus y} + z\epsilon_z + x\epsilon_x\epsilon_{(x \oplus y) \oplus z} + y\epsilon_y\epsilon_{(x \oplus y) \oplus z}    }{     + x\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + x\epsilon_x\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + y\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + y\epsilon_y\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + z\epsilon_z\epsilon_{(x \oplus y) \oplus z}}\right|}{|x+y+z|}
 \]
 \[
-\leq \frac{|\splitfrac{\max \{\epsilon_x, \epsilon_y, \epsilon_z\}(2x+2y+z) }{  \splitfrac{+ \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} ^2 (3x+3y+z) }{+  \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} ^3 (x+y)}}|}{|x+y+z|}
+\leq \frac{\left|\splitfrac{\max \{\epsilon_x, \epsilon_y, \epsilon_z\}(2x+2y+z) }{  \splitfrac{+ \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} ^2 (3x+3y+z) }{+  \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} ^3 (x+y)}}\right|}{|x+y+z|}
 \]
 \[
 \leq \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} ^ 3 \frac{|6x + 6y + 2z|}{|x+y+z|}
@@ -34,10 +34,9 @@
 \[
 \leq u^3 \frac{|6x + 6y + 2z|}{|x+y+z|}
 \]
-
-% continua da qui...
-\noindent Analogamente, abbiamo:
+\\
+\noindent Svolgendo un procedimento del tutto analogo al precedente, nel caso di \((y \oplus z) \oplus x \) avremo:
 
 \[
-\epsilon_{(y \oplus z) \oplus x } \leq \frac{ |(y+z)| + |x| }{|(y+z) + x|}\max\{\epsilon_x, \epsilon_y, \epsilon_z\}
+\epsilon_{(y \oplus z) \oplus x } \leq u^3 \frac{|6y + 6z + 2x|}{|x+y+z|}
 \]

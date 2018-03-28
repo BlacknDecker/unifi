@@ -11,6 +11,7 @@
 }\end{center}
 
 \noindent \'E stato eseguito questo codice Matlab, che ha prodotto i risutlati illustrati in tabella:
+\\
 
 \lstinputlisting[language=Matlab]{cap1/es5_1-16.m}
 
@@ -35,7 +36,7 @@
       1 & 16 \\
 \end{tabular} \\
 
-\noindent Il ciclo \(while\) esegue esattamente 16 iterazioni prima di fermarsi sulla condizione \(x \neq 1\), che viene meno nell'ultimo passo. Questo avviene ovviamente in accordo all'incremento di \(x\) pari a \(\frac{1}{16}\) ad ogni iterazione, dato che la rappresentazione binaria di del numero decimale \(\frac{1}{16} = 0.0625\) risulta esatta.
+\noindent Il ciclo \(while\) esegue esattamente 16 iterazioni prima di fermarsi sulla condizione \(x \neq 1\), che viene meno nell'ultimo passo. Questo avviene ovviamente in accordo all'incremento di \(x\) pari a \(\frac{1}{16}\) ad ogni iterazione, dato che la rappresentazione binaria di del numero decimale \(\frac{1}{16} = 0.0625\) risulta esatta (\( \frac{1}{16} = 2^{-4}\), rappresentabile facilmente in una variabile \lstinline[language=Matlab]{float} o \lstinline[language=Matlab]{double})
 \\
 \\
 \noindent Eseguendo invece il seguente codice Matlab, il ciclo non termina.
@@ -57,4 +58,4 @@
  \ldots & \ldots \\
 \end{tabular} \\
 
-Dato che il valore di \(delta\) questa volta risulta uguale a \(\frac{1}{20} = 0.05\), la sua rappresentazione nel calcolatore non risulta esatta, quindi deve essere approssimato. L'errore di approssimazione della variabile \(delta\) si accumula ad ogni iterazione nella variabile \(x\). Essendo la condizione del ciclo \(while\) vincolata al raggiungimento del numero esatto \(1\), non viene mai verificata ed il ciclo continua indefinitamente.
+Dato che il valore di \(delta\) questa volta risulta uguale a \(\frac{1}{20} = 0.05\), la sua rappresentazione nel calcolatore non risulta esatta. L'errore di approssimazione della variabile \(delta\) si accumula ad ogni iterazione nella variabile \(x\). Essendo la condizione del ciclo \(while\) vincolata al raggiungimento del numero esatto \(1\), non viene mai verificata ed il ciclo continua indefinitamente.
