@@ -29,9 +29,9 @@ P(x) = x^3 - 4x^2 + 5x - 2\ = (x-2)(x-1)^2
 \noindent Per conoscere a quale zero di \(P(x)\) tender\'a la successione generata dal metodo di bisezione, basta eseguire manualmente la prima iterazione:
 
 \begin{itemize}
-\item \(f(\frac{3-0}{2}) = -\frac{1}{8}\): la soluzione del problema non \'e \(\frac{3}{2}\)
+\item \(f(\frac{3-0}{2}) = -\frac{1}{8}\)
 \item \(f(0)f(\frac{3}{2}) = \frac{1}{4}\)
-\item \(f(\frac{3}{2})f(3) = -\frac{1}{2} \rightarrow \) si prosegue ad iterare sull'intervallo \((\frac{3}{2}, 3)\)
+\item \(f(\frac{3}{2})f(3) = -\frac{1}{2}\)
 \end{itemize}
 
 \noindent Dato che si prosegue la bisezione nell'intervallo \([\frac{3}{2}, 3]\), si tender\'a allo zero in \(x_2=2\).
@@ -39,19 +39,18 @@ P(x) = x^3 - 4x^2 + 5x - 2\ = (x-2)(x-1)^2
 \noindent Si applica adesso il metodo di bisezione con il seguente nella sua interezza e si mostra il numero di iterazioni necessarie al variare della soglia di tolleranza \(tolx\).\\
 
 \begin{tabular}{l*{6}{c}}
- \(tolx\) & appross. \(x_2\) & iterazioni \\
+ \(tolx\) &\vline& appross. \(x_2\) &\vline& iterazioni &\vline& valutazioni di P\\
 \hline
- 1/10 & 1.8750 & 3\\
- 1/20 & 1.9688 & 5\\
- 1/50 & 2.0156 & 6\\
- 1/100 & 1.9922 & 7\\
- 1/500 & 1.9980 & 9\\
- \(1 \times 10^{-3}\) & 2.0010 & 10\\
- \(2 \times 10^{-3}\) & 1.9995 & 11\\
- \(5 \times 10^{-3}\) & 1.9999 & 13\\
- \(1 \times 10^{-4}\) & 2.0001 & 14\\
- \(1 \times 10^{-5}\) & 2.0000 & 17\\
- \(1 \times 10^{-6}\) & 2.0000 & 20\\
+ 1/10 &\vline& 1.8750 &\vline& 3 &\vline& 3\\
+ 1/50 &\vline& 2.0156 &\vline& 6 &\vline& 8\\
+ 1/100 &\vline& 1.9922 &\vline& 7 &\vline& 9\\
+ 1/500 &\vline& 1.9980 &\vline& 9 &\vline& 11\\
+ \(1 \times 10^{-3}\) &\vline& 2.0010 &\vline& 10 &\vline& 12\\
+ \(2 \times 10^{-3}\) &\vline& 1.9995 &\vline& 11 &\vline& 13\\
+ \(5 \times 10^{-3}\) &\vline& 1.9999 &\vline& 13 &\vline& 15\\
+ \(1 \times 10^{-4}\) &\vline& 2.0001 &\vline& 14 &\vline& 16\\
+ \(1 \times 10^{-5}\) &\vline& 2.0000 &\vline& 17 &\vline& 19\\
+ \(1 \times 10^{-6}\) &\vline& 2.0000 &\vline& 20 &\vline& 22\\
 \end{tabular} \\
 
 \noindent La precedente tabella \'e stata riempita in riferimento alla seguente implementazione del metodi di bisezione, descritta in codice Matlab.\\
