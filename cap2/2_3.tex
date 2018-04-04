@@ -5,27 +5,31 @@ Costruire una seconda tabella analoga alla precedente relativa ai metodi di Newt
 	}
 }\end{center}
 
-Si faccia ancora una volta riferimento ad \(f(x)\) relativa a \(P(x)=x^3 - 4x^2 + 5x - 2\) con radici in \(x_1=1\) e \(x_2=2\). Si presenta di seguito una tabella analoga, alla precedente, riferita ai metodi di Newton, di Newton modificato e di Aitken, lanciati con punto di innesco \(x_0 = 0\).\\
+\noindent Si faccia ancora una volta riferimento ad \(f(x)\) relativa a \(P(x)=x^3 - 4x^2 + 5x - 2\) con radici in \(x_1=1\) e \(x_2=2\). Si presenta di seguito una tabella analoga, alla precedente, riferita ai metodi di Newton, di Newton modificato e di Aitken, lanciati con punto di innesco \(x_0 = 0\). Riguardo al metodo di Newton modificato, \'e stato lanciato con coefficiente del termine di correzione pari alla molteplicit\'a della radice verso la quale si converge, ovvero \(m = 2\).\\
 
-\begin{tabular}{l*{12}{c}}
- & \vline& \textbf{Newton} & & \vline& \textbf{N. Mod.} & & \vline& \textbf{Aitken} \\
- \(tolx\) & \vline& appr. \(x_1\) & it. & \vline& appr. \(x_1\) & it.& \vline& appr. \(x_1\) & it.\\
+\small\begin{tabular}{l*{20}{c}}
+ & \vline& \textbf{Newton} & & & \vline& \textbf{N. Mod.} & & & \vline& \textbf{Aitken} \\
+ \(tolx\) & \vline& \(x_1\)   & it. & val. & \vline& \(x_1\)   & it. & val.  &\vline& \(x_1\)  & it.& val. \\
 \hline
- 1/10 & \vline& 0.8960 & 3						& \vline& 0.9961 & 2 & \vline& 1.0006 & 2 \\
- 1/20 & \vline& 0.9457 & 4						& \vline& 0.1000 & 3 & \vline& ''     & ''\\
- 1/50 & \vline& 0.9859 & 6						& \vline& ''     & 3 & \vline& 1.0000 & 3 \\
- 1/100 & \vline& 0.9929& 7						& \vline& ''     & 3 & \vline& ''     & ''\\
- 1/500 & \vline& 0.9982& 9						& \vline& ''     & 4 & \vline& ''     & ''\\
- \(1 \times 10^{-3}\) & \vline& 0.9991 & 10		& \vline& ''     & 4 & \vline& ''     & ''\\
- \(2 \times 10^{-3}\) & \vline& 0.9996 & 11		& \vline& ''     & 4 & \vline& ''     & 4\\
- \(5 \times 10^{-3}\) & \vline& 0.9999 & 13		& \vline& ''     & 4 & \vline& ''     & ''\\
- \(1 \times 10^{-4}\) & \vline& '' & 14			& \vline& ''     & 4 & \vline& ''     & ''\\
- \(1 \times 10^{-5}\) & \vline& 1.000 & 17		& \vline& ''     & 4 & \vline& ''     & ''\\
- \(1 \times 10^{-6}\) & \vline& '' & 20 		& \vline& ''     & 5 & \vline& ''     & ''\\
+ 1/10                   & \vline&  0.8960 & 3	& 4+4  & \vline& 0.9961 & 2 & 3+3 & \vline& 1.0006 & 2  & 5+5\\
+ 1/50                   & \vline&  0.9859 & 6	& 7+7  & \vline& 1.0000 & 3 & 4+4 & \vline& 1.0000 & 3  & 7+7\\
+ 1/100                   & \vline& 0.9929 & 7	& 8+8  & \vline& 1.0000 & 3 & 4+4 & \vline& 1.0000 & 3  & 7+7\\
+ 1/500                   & \vline& 0.9982 & 9	& 10+10& \vline& 1.0000 & 4 & 5+5 & \vline& 1.0000 & 3  & 7+7\\
+ \(1 \times 10^{-3}\) & \vline&    0.9991 & 10	& 11+11& \vline& 1.0000 & 4 & 5+5 & \vline& 1.0000 & 3  & 7+7\\
+ \(2 \times 10^{-3}\) & \vline&    0.9996 & 11	& 12+12& \vline& 1.0000 & 4 & 5+5 & \vline& 1.0000 & 4  & 9+9\\
+ \(5 \times 10^{-3}\) & \vline&    0.9999 & 13	& 14+14& \vline& 1.0000 & 4 & 5+5 & \vline& 1.0000 & 4  & 9+9\\
+ \(1 \times 10^{-4}\) & \vline&    0.9999 & 14	& 15+15& \vline& 1.0000 & 4 & 5+5 & \vline& 1.0000 & 4  & 9+9\\
+ \(1 \times 10^{-5}\) & \vline&    1.0000 & 17	& 17+17& \vline& 1.0000 & 4 & 5+5 & \vline& 1.0000 & 4  & 9+9\\
+ \(1 \times 10^{-6}\) & \vline&    1.0000 & 20 	& 21+21& \vline& 1.0000 & 5 & 5+5 & \vline& 1.0000 & 4  & 9+9\\
 \end{tabular} \\
+\\
 
-\noindent Come era prevedibile, il metodo di Newton standard converge linearmente invece che quadraticamente verso la soluzione a causa della molteplicit\'a della radice verso la quale si converge; il metodo di Newton modificato ha invece ripristinato la convergenza quadratica. DUE PAROLE SU AITKIN
-
-\noindent Di seguito le implementazioni Matlab dei metodi numerici utilizzati. Per il metodo di Newton \'e stato sfruttata l'implementazione usata nell'esercizio precedente.
-
+\normalsize\noindent Come era prevedibile, il metodo di Newton standard converge linearmente invece che quadraticamente verso la soluzione a causa della molteplicit\'a della radice in \(x_1=1\); il metodo di Newton modificato ha invece ripristinato la convergenza quadratica.
+\\
+\\
+\noindent Anche il metodo di accelerazione di Aitken ha performato in modo simile al metodo di Newton modificato, ma la natura \textit{a due livelli} della sua funzione di iterazione ha imposto un costo maggiore riguardo al numero di valutazioni di \(f(x)\) ed \(f'(x)\) necessarie.
+\\
+\\
+\noindent Di seguito le implementazioni Matlab dei metodi numerici utilizzati. Per il metodo di Newton semplice \'e stata ovviamente sfruttata l'implementazione usata nell'esercizio precedente.
+\\
 \lstinputlisting[language=Matlab]{cap2/es3_functions.m}
