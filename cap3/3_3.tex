@@ -6,13 +6,15 @@
 }\end{center}
 
 \noindent Il seguente codice Matlab soddisfa la richiesta. Riguardo alla function \lstinline[language=Matlab]{sist_triang_inf}, la sua implementazione \'e quella dell'Esercizio 1.
-
+\\
 \lstinputlisting[language=Matlab]{cap3/3_3.m}
 
-\noindent La soluzione proposta \'e efficiente in quanto:
+\noindent Si notino i seguenti aspetti del codice mostrato:
 \begin{itemize}
 
 \item il vettore delle soluzioni dei sottosistemi viene memorizzato nelle stesse locazioni di memoria del vettore dei termini noti avuto in input;
-\item la scomposizione della matrice A in L e D non viene memorizzata fisicamente ma avviene logicamente.
-
+\item la scomposizione della matrice A nei suoi fattori L e D non viene memorizzata fisicamente in due matrici diverse, ma avviene nella stessa porzione di memoria occupata dalla sola matrice A.
+\item gli algoritmi scelti per la risoluzione dei sistemi triangolari accedono entrambi agli elementi della matrice \textit{per colonne}, in accordo con il tipo di memorizzazione delle matrici prevista da Matlab.
 \end{itemize}
+
+\noindent Quindi, la soluzione proposta \'e efficiente sia per quanto riguarda l'occupazione di memoria che per la minimizzazione del tempo di input/output.
