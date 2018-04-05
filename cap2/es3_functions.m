@@ -3,14 +3,14 @@
 % il parametro di imput m, che rappresenta il
 % coefficiente del termine di correzione
 %
-function [radice, it, valf, valf1] = newton_m(f, f1, x0, m, tolx, itmax)
+function [radice, it, valf, valf1] = newton_m(f, f1, x0, m, tlx, itmax)
     fx = feval(f, x0);
     f1x = feval(f1, x0);
     radice = x0 - fx/f1x;
     it = 0;
     valf = 1;
     valf1 = 1;
-    while (it < itmax) && (abs(radice-x0)>tolx)
+    while (it < itmax) && (abs(radice-x0)>tlx)
         it = it + 1;
         x0 = radice;
         fx = feval(f, x0);
@@ -20,19 +20,19 @@ function [radice, it, valf, valf1] = newton_m(f, f1, x0, m, tolx, itmax)
         radice = x0 - m*(fx/f1x);
     end
 
-    if abs(radice-x0) > tolx
+    if abs(radice-x0) > tlx
         error('non converge')
     end
 end
 
-function [radice, it, valf, val1] = aitken(f, f1, x0, tolx, imax)
+function [radice, it, valf, val1] = aitken(f, f1, x0, tolx, imx)
 	fx = feval(f, x0);
 	f1x = feval(f1, x0);
 	radice = x0 - fx/f1x;
 	it = 0;
     valf = 1;
     val1 = 1;
-	while (abs(radice-x0) > tolx) && (it < imax)
+	while (abs(radice-x0) > tolx) && (it < imx)
         it = it+1;
         x0 = radice;
         fx = feval(f, x0);

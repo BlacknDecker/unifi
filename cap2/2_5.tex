@@ -5,6 +5,11 @@ Definire una procedura iterativa basata sul metodo delle secanti sempre per appr
 	}
 }\end{center}
 
+\noindent In modo analogo all'esercizio precedente, \'e stato scritto il seguente codice Matlab per creare la tabella richeista.
+\\
+
+\lstinputlisting[language=Matlab]{cap2/es5_function.m}
+
 \begin{tabular}{l*{6}{c}}
  & \vline& \textbf{Newton} & & \vline& \textbf{Secanti}\\
  it. & \vline& appr. \(\sqrt\alpha \) & \(\Delta\sqrt\alpha \) & \vline& appr. \(\sqrt\alpha \) & \(\Delta\sqrt\alpha \) \\
@@ -16,4 +21,6 @@ Definire una procedura iterativa basata sul metodo delle secanti sempre per appr
  5 & \vline& ''     & 1.8829 \(\times10^{-13}\)	& \vline& ''     & 7.4651 \(\times10^{-9}\) \\
 
 \end{tabular} \\
+\\
 
+\noindent Nel merito dei risultati riportati in tabella, il metodo delle Secanti risulta approssimare \(\sqrt\alpha \) con maggior precisione nelle prime tre iterazioni, ma --- come era prevedibile, dato il suo ordine di convergenza minore --- converge pi\'u lentamente del metodo di Nreton verso la soluzione esatta.
