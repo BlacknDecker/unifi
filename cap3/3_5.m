@@ -1,5 +1,5 @@
 A = [1 -1 2 2; -1  5  -14 2; 2 -14 42 2; 2 2 2 65];
-%spreco memoria ma evito di imbrogliarmi, tanto sono solo esempi
+% spreco memoria ma evito di imbrogliarmi
 A3 = A;
 A4 = A;
 
