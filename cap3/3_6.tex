@@ -5,7 +5,7 @@
 	}
 }\end{center}
 
-\noindent La rappresentazione in una sola matrice della fattorizzazione LU di A \'e la seguente:
+\noindent La rappresentazione in una sola matrice della fattorizzazione LU di A, ottenuta mediante l'applicazione dell'algoritmo 3.5 del libro, \'e la seguente:
 \[
 A_{LU} = \begin{pmatrix} 10^{-13} & 1 \\ 10^{13} & -10^{13}\end{pmatrix}
 \]
@@ -17,18 +17,9 @@ L = \begin{pmatrix} 1 & 0 \\ 10^{13} & 1\end{pmatrix}\]
 \[
 U = \begin{pmatrix} 10^{-13} & 1 \\ 0 & -10^{13}\end{pmatrix}
 \]
-
-\noindent Ed ovviamente abbiamo che:
-\[
-LU = A
-\]
 \\
-
 \noindent Riguardo l'altra richiesta, si sono verificati i seguenti fatti:
 
-\[
-e = \begin{bmatrix} 1 \\ 1\end{bmatrix}
-\]
 \[
 b = Ae = \begin{pmatrix} \epsilon & 1 \\ 1 & 1 \end{pmatrix} \begin{bmatrix} 1 \\ 1\end{bmatrix} = \begin{bmatrix} \approx 1 \\ 2 \end{bmatrix}
 \]
@@ -44,7 +35,6 @@ A \textbackslash b = \begin{bmatrix} 1 \\ 1\end{bmatrix}
 
 \noindent Proprio riguardo a questo aspetto, anche Matlab restituisce un'avvertimento:
 \lstinputlisting[language=Matlab]{cap3/warning.m}
-
 \noindent L'intero codice Matlab usato per svolgere questo Esercizio \'e quello che segue.
 
 \lstinputlisting[language=Matlab]{cap3/3_5.m}
