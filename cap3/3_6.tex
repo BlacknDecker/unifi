@@ -30,12 +30,24 @@ U \textbackslash (L \textbackslash b) = \begin{bmatrix} 0.992 \\ 1\end{bmatrix}
 A \textbackslash b = \begin{bmatrix} 1 \\ 1\end{bmatrix}
 \]
 
-\noindent Si pu\'o notare come il vettore \(b\) calcolato col metodo di Gauss senza pivoting abbia un'accuratezza minore rispetto alla sua versione calcolata col metodo di Gauss con pivoting. Questo perch\'e essendo \(\epsilon\) un numero molto piccolo, la matrice \'e molto vicina all'essere singolare, quindi... APPROFONDIRE
+\noindent Si pu\'o notare come il vettore \(b\) calcolato col metodo di Gauss senza pivoting abbia un'accuratezza minore rispetto alla sua versione calcolata col metodo di Gauss con pivoting.
+\\
+\\In generale, i problemi che sorgono in quel caso sono dati tutti dal fatto che \(\epsilon \) \'e un numero molto piccolo. La condizione necessaria per l'esistenza dell procedimento di \textit{eliminazione di Gauss} senza \textit{pivoting} (cio\'e, al passo \textit{i}-esimo, \(a_{i,i} \neq 0\)) \'e molto vicina al venire meno gi\'a alla prima ed unica iterazione, per la quale abbiamo \(a_{1,1} = \epsilon \approx 0\).
 \\
 
-\noindent Proprio riguardo a questo aspetto, anche Matlab restituisce un'avvertimento:
+\noindent A causa di questo, succede che la matrice \(L_1A\), con \(L_1\) la prima --- ed unica --- \textit{matrice elementare di Gauss}, \'e molto vicina all'essere singolare.
+
+\[
+L_1 = \begin{pmatrix} 1 & 0 \\ -\frac{1}{\epsilon} & 1 \end{pmatrix} \quad L_1A = \begin{pmatrix} \epsilon & 1 \\ 0 & 1\end{pmatrix} \quad \det(L_1A) \approx 0
+\]
+\\
+Persino Matlab restituisce un'avvertimento:
 \lstinputlisting[language=Matlab]{cap3/warning.m}
+
+\noindent Il metodo di Gauss con pivoting invece \'e studiato appositamente per funzionare senza bisogno di avere come ipotesi la condizione \(a_{i,i} \neq 0\) al passo \textit{i}-esimo, pertanto approssima in maniera soddisfacente il risultato.
+\\
+\\
 \noindent L'intero codice Matlab usato per svolgere questo Esercizio \'e quello che segue.
 
-\lstinputlisting[language=Matlab]{cap3/3_5.m}
+\lstinputlisting[language=Matlab]{cap3/3_6.m}
 
