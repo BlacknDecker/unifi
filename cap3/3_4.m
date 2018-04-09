@@ -2,7 +2,7 @@
 
 function [b] = sol_es_4(A, p, b)
 
-    % costruisco matrice permutazioni
+    % espando la memorizzazione della matrice delle permutazioni 'compressa' nel vettore
     P = zeros(length(A));
     for i=1:length(A)
         P(i, p(i)) = 1;

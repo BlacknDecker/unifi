@@ -1,7 +1,7 @@
 \begin{center}
 \footnotesize\noindent\fbox{
 	\parbox{\textwidth}{
-	Scrivere una function Matlab che, avendo in ingresso un vettore \textbf{b} contenente i termini noti del sistema lineare \(Ax = b\)  e l'output dell'Algoritmo 3.7 del libro (matrice \(A\) riscritta con la fattorizzazione LU con pivoting parziale e il vettore \textbf{p} delle permutazioni), ne calcoli efficientemente la soluzione.
+	Scrivere una function Matlab che, avendo in ingresso un vettore b contenente i termini noti del sistema lineare \(Ax = b\)  e l'output dell'Algoritmo 3.7 del libro (matrice \(A\) riscritta con la fattorizzazione LU con pivoting parziale e il vettore p delle permutazioni), ne calcoli efficientemente la soluzione.
 	}
 }\end{center}
 
@@ -11,3 +11,6 @@
 \lstinputlisting[language=Matlab]{cap3/3_4.m}
 
 \noindent Riguardo all'efficienza della soluzione proposta, valgono le stesse considerazioni espresse nell'Esercizio 3.
+\\
+\\
+\noindent  A livello di memoria occupata, si sarebbe potuto ottenere un risultato migliore se si fosse evitato di espandere il vettore delle permutazioni nella sua corrispondente matrice, ma il costo imposto dall'avere un codice pi\u' complicato \e' stato ritenuto pi\u' gravoso.
