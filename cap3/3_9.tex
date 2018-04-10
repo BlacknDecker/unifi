@@ -1,7 +1,7 @@
 \begin{center}
 \footnotesize\noindent\fbox{
 	\parbox{\textwidth}{
-Inserire due esempi diutilizzo della function implementata per il punto 8 e confrontarela soluzione ottenuta con quella fornita dal comando \(A \textbackslash b\).
+Inserire due esempi diutilizzo della function implementata per il punto 8 e confrontare la soluzione ottenuta con quella fornita dal comando \(A \textbackslash b\).
 	}
 }\end{center}
 
@@ -13,6 +13,8 @@ A_1 = \begin{pmatrix} 3 & 1 & 2 \\ 1 & 1& 3 \\ 1 & 3 & 4 \\ 2 & 1 & 2 \end{pmatr
 \noindent La funzione implementata restituisce questa soluzione: \(x_1 = \begin{bmatrix} 0.128491620111731 \\ -2.229050279329608 \\ 2.603351955307263 \end{bmatrix}^T\), inoltre abbiamo \(A_1 \textbackslash b_1 = \begin{bmatrix} 0.128491620111731 \\ -2.229050279329610 \\ 2.603351955307263 \end{bmatrix}^T\), per cui possiamo dire che \(A_1 \textbackslash b_1 \approx x_1\)
 \\
 \\
+\\
+\\
 
 \noindent Per il secondo esempio invece sono stati scelti i seguenti parametri di ingresso:
 \[
@@ -20,3 +22,10 @@ A_2 = \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{pmatrix} \quad b_2 = \begin{b
 \]
 
 \noindent La funzione implementata restituisce questa soluzione: \(x_2=\begin{bmatrix} 2.666666666666669 \\ 3.166666666666670 \end{bmatrix}^T\), inoltre abbiamo \(A_2 \textbackslash b_2 = \begin{bmatrix} 2.666666666666673 \\ 3.166666666666672 \end{bmatrix}^T\), quindi anche in questo caso possiamo dire che \(A_1 \textbackslash b_2 \approx x_2\).
+\\
+\\
+\\
+\noindent Il codice Matlab usato per realizzare quanto sopra \'e il seguente.
+\\
+
+\lstinputlisting[language=Matlab]{cap3/3_9.m}

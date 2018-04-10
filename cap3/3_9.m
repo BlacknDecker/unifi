@@ -1,11 +1,11 @@
-%primo esempio
+% primo esempio
 A1 = [4 1 2; 1 1 3; 1 3 4; 2 1 2];
 b1= [4 6 4 2]';
 
 x1_fun = sol_es_8(algoritmo_3_8(A1), b1);
 x1_Ab = A1\b1;
 
-%secondo esempio
+% secondo esempio
 A2 = [1 2; 3 4; 5 6];
 b2 = [4 4 6]';
 x2_fun = sol_es_8(algoritmo_3_8(A2), b2);
@@ -20,8 +20,8 @@ function [b] = sol_es_8(A, b)
     b = sist_triang_sup(triu(A(1:n, :)), Qt(1:n, :)*b);
 end
 
-%algoritmo 3.8 del libro
-%fattorizzazione QR di householder
+% algoritmo 3.8 del libro
+% fattorizzazione QR di householder
 function A = algoritmo_3_8(A)
     [m,n] = size(A);
     for i=1:n

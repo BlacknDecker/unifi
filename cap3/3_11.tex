@@ -62,8 +62,11 @@ f(\frac{1}{12}, \frac{1}{6}) = -\frac{1}{432} \quad \overline{f}(x_1,x_2) = f(x_
 \noindent\begin{tabular}{l*{15}{c}}
  toll. & \vline& it. & \vline& \(x_1\) &\vline& \(x_2\) & \vline& \(||x^{(i)} - x^{(i-1)}||\) & \vline& \(||x - \overline{x}||\) \\
 \hline
- \(10^{-3}\) & \vline& 10 & \vline& \scriptsize{0.083577473958333}& \vline& \scriptsize{0.167154947916667} &\vline& 5.4592 \(\times 10^{-4}\) & \vline& 5.4592 \(\times 10^{-4}\) \\
- \(10^{-4}\) & \vline& 13 & \vline& \scriptsize{0.083363850911458}& \vline& \scriptsize{0.166727701822917} &\vline& 6.8239 \(\times 10^{-5}\) & \vline& 6.8239 \(\times 10^{-5}\) \\
- \(10^{-5}\) & \vline& 16 & \vline& \scriptsize{0.083337148030599}& \vline& \scriptsize{0.166674296061198} &\vline& 8.5299 \(\times 10^{-6}\) & \vline& 8.5299 \(\times 10^{-6}\) \\
- \(10^{-6}\) & \vline& 20 & \vline& \scriptsize{0.083333571751912}& \vline& \scriptsize{0.166667143503825} &\vline& 5.3312 \(\times 10^{-7}\) & \vline& 5.3312 \(\times 10^{-7}\) \\
+ \(10^{-3}\) & \vline& 5 & \vline& \scriptsize{0.083333526485450}& \vline& \scriptsize{0.166667052970899} &\vline& 2.8369 \(\times 10^{-4}\) & \vline& 4.3190 \(\times 10^{-7}\) \\
+ \(10^{-4}\) & \vline& 6 & \vline& \scriptsize{0.083333333333781}& \vline& \scriptsize{0.166666666667562} &\vline& 4.3190 \(\times 10^{-7}\) & \vline& 1.0011 \(\times 10^{-12}\) \\
+ \(10^{-5}\) & \vline& 6 & \vline& \scriptsize{0.083333333333781}& \vline& \scriptsize{0.166666666667562} &\vline& 4.3190 \(\times 10^{-7}\) & \vline& 1.0011 \(\times 10^{-12}\) \\
+ \(10^{-6}\) & \vline& 6 & \vline& \scriptsize{0.083333333333781}& \vline& \scriptsize{0.166666666667562} &\vline& 4.3190 \(\times 10^{-7}\) & \vline& 1.0011 \(\times 10^{-12}\) \\
 \end{tabular} \\
+\\
+\\
+\noindent Come prevedibile, la norma dell'ultimo incremento \'e molto minore della norma dell'errore sull'approssimazione del risutlato. Questo avviene grazie all'ordine di convergenza del metodo di Newton per sistemi nonlineari (che \'e 2, infatti il metodo ha convergenza quadratica), che consente all'approssimazione del risultato di convergere rapidamente verso la soluzione esatta.
