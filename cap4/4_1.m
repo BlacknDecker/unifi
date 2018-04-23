@@ -1,0 +1,33 @@
+% esempio con f(x) = pi^x
+xi = [0,1,2];
+fi = [1, 3.14, 9.87];
+x = 1.5;
+
+y = lagrange(xi, fi, x);
+
+%
+% input:
+%   xi - vettore dei punti di ascissa
+%   fi - vettore dei valori di f(x)
+%   x  - punto in cui calcolare f(x)
+% output:
+%   y  - valore di f(x)
+%
+function y = lagrange(xi, fi, x)
+    if length(xi) ~= length(fi)
+        error('x_i e f(x_i) hanno lunghezza diversa')
+    end
+    y = 0;
+    for i = 1:length(xi)
+        y = y + fi(i)*l_k_n(x, xi, i);
+    end
+end
+
+function lkn = l_k_n(x, xi, k)
+    lkn = 1;
+    for i = 1:length(xi)
+        if i ~= k
+            lkn = lkn * (x-xi(i))/(xi(k)-xi(i));
+        end
+    end
+end
