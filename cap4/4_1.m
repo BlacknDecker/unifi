@@ -1,9 +1,8 @@
 % esempio con f(x) = pi^x
 xi = [0,1,2];
 fi = [1, 3.14, 9.87];
-x = 1.5;
 
-y = lagrange(xi, fi, x);
+y = lagrange(xi, fi, 1.5);
 
 %
 % input:
@@ -15,7 +14,7 @@ y = lagrange(xi, fi, x);
 %
 function y = lagrange(xi, fi, x)
     if length(xi) ~= length(fi)
-        error('x_i e f(x_i) hanno lunghezza diversa')
+        error('xi e fi hanno lunghezza diversa!')
     end
     y = 0;
     for i = 1:length(xi)

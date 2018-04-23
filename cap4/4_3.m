@@ -42,3 +42,53 @@ function fih = diff_div_hermite(xi, fi)
         end
     end
 end
+
+
+
+
+
+
+
+
+
+%%da testare!!! scrivi laroba sopra!
+function y = hermite(xi, fi, f1i, x)
+
+    if length(xi) ~= length(fi) || length(f1i) ~= length(fi)
+        error('xi, fi e f1x hanno lunghezza diversa!')
+    end
+
+    % combino opportunamente i vettori
+    xih = zeros(length(xi)*2+2, 1);
+    fih = zeros(length(fi)*2, 1);
+    for i = 1:length(xi)
+        xih(i+i-1) = xi(i);
+        xih(i+i) = xi(i);
+        fih(i+i-1) = fi(i);
+        fih(i+i) = f1i(i);
+    end
+
+    dd = diff_div_herm(xi, fi);
+    y = dd(length(dd));
+    for k = length(dd)-1:-1:1
+        y = y*(x-xi(k))+dd(k);
+    end
+end
+
+
+
+% input:
+%   fi - vettore con f(x0), f'(x0), ..., f(xn), f'(xn)
+%   xi - vettore delle ascisse
+% output:
+%    fi - vettore riscrito con le differenze divise
+function [fi] = diff_div_herm(xi, fi)
+    for i = (2*n+1):-2:3
+        fi(i) = ( fi(i)-fi(i-2) )/( xi(i)-xi(i-1) )
+    end
+    for j = 2:2*n+1
+        for i = (2*n+2):-1:j+1
+            fi(i) = ( fi(i)-fi(i-1) )/( xi(i)-xi(i-j) )
+        end
+    end
+end
