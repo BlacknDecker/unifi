@@ -9,7 +9,7 @@ fi = [f(0), f(pi), f(2*pi)];
 f1i = [f1(0), f1(pi), f1(2*pi)];
 
 pl = @(x) lagrange(xi, fi, x);
-pn = @(x) newton(xi, fi, x);
+% pn = @(x) newton(xi, fi, x); // il polinomio e' lo stesso, cambia solo il metodo con cui lo calcolo
 ph = @(x) hermite(xi, fi, f1i, x);
 
 % plots
