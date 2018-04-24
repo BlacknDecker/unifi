@@ -2,12 +2,16 @@
 xi =  [0, 1, 2];
 fi =  [1, 2.71, 7.39];
 f1i = [1, 2.71, 7.39];
-
 y = hermite(xi, fi, f1i, 1.5);
 
-%%da testare!!! scrivi laroba sopra!
+% input:
+%   xi  - vettore delle ascisse
+%   fi  - vettore delle valutazioni di f(x)
+%   f1i - vettore delle valutazioni di f'(x)
+%   x   - punto da valutare
+% output:
+%    fi - vettore riscrito con le differenze divise
 function y = hermite(xi, fi, f1i, x)
-
     if length(xi) ~= length(fi) || length(f1i) ~= length(fi)
         error('xi, fi e f1x hanno lunghezza diversa!')
     end
@@ -24,7 +28,6 @@ function y = hermite(xi, fi, f1i, x)
     end
 
     dd = diff_div_herm(xih, fih);
-    disp(dd)
 
     y = dd(1);
     for i = 2 : length(dd)
@@ -34,7 +37,6 @@ function y = hermite(xi, fi, f1i, x)
         end
         y = y + prod;
     end
-  disp(y)
 end
 
 % input:
@@ -54,6 +56,3 @@ function [f] = diff_div_herm(x, f)
         end
     end
 end
-
-
-
