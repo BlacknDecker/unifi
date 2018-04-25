@@ -6,6 +6,12 @@
 			"shell":true,
 			"name": "Build Dat Shit",
 			"working_dir": "${project_path:${folder}}"
+		},
+		{
+			"cmd":  "rm main.out main.toc main.aux; pdflatex main.tex && pdflatex main.tex && firefox-developer-edition main.pdf",
+			"shell":true,
+			"name": "Re-Build Dat Shit",
+			"working_dir": "${project_path:${folder}}"
 		}
 	],
 
@@ -14,7 +20,7 @@
 		{
 			"file_exclude_patterns":
 			[
-				"*.pdf", "*.log", "*.toc", "*.aux", "*.aux", "*.sty", "*.def", "*.gif", "*.png", "*.sublime-workspace"
+				"*.out", "*.log", "*.toc", "*.aux", "*.aux", "*.sty", "*.def", "*.gif", "*.png", "*.sublime-workspace"
 			],
 			"path": "."
 		}
