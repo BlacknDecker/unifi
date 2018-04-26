@@ -5,65 +5,52 @@
 	}
 }\end{center}
 
-\noindent Di seguito i grafici che mostrano i polinomi interpolanti di
-grado \textit{n} calcolati usando come punti di interpolazione quelli
-corrispondenti alle \textit{n} ascisse di Chebyshev.
+\noindent Di seguito i grafici che mostrano i polinomi interpolanti di grado \textit{n} calcolati usando come punti di interpolazione quelli corrispondenti alle \textit{n} ascisse di Chebyshev. \\
 
-% brutto brutto brutto
+\noindent\small\begin{tabular}{l*{5}{c}}
+\hspace{3.5cm}\(n=2\) & \(n=4\) \\
+\includegraphics[scale=0.5]{cap4/4_7/2.png} &  \includegraphics[scale=0.5]{cap4/4_7/4.png} \\
 
-\begin{center}
-	\(n=2\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/2.png}
-\end{center}
+\hspace{3.5cm}\(n=6\)& \(n=8\) \\
+\includegraphics[scale=0.5]{cap4/4_7/6.png} &  \includegraphics[scale=0.5]{cap4/4_7/8.png} \\
 
-\begin{center}
-	\(n=4\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/4.png}
-\end{center}
+\hspace{3.5cm}\(n=10\) &  \(n=12\) \\
+\includegraphics[scale=0.5]{cap4/4_7/10.png} &  \includegraphics[scale=0.5]{cap4/4_7/12.png} \\
+\end{tabular} \\ \\
 
-\vspace{0.2cm}
+\small\begin{tabular}{l*{5}{c}}
+\hspace{3.5cm}\(n=14\) &  \(n=16\) \\
+\includegraphics[scale=0.5]{cap4/4_7/14.png} &  \includegraphics[scale=0.5]{cap4/4_7/16.png} \\
 
-\begin{center}
-	\(n=6\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/6.png}
-\end{center}
+\hspace{3.5cm}\(n=18\) &  \(n=20\) \\
+\includegraphics[scale=0.5]{cap4/4_7/18.png} &  \includegraphics[scale=0.5]{cap4/4_7/20.png} \\
 
-\begin{center}
-	\(n=8\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/8.png}
-\end{center}
+\hspace{3.5cm}\(n=22\) &  \(n=24\) \\
+\includegraphics[scale=0.5]{cap4/4_7/22.png} &  \includegraphics[scale=0.5]{cap4/4_7/24.png} \\
 
-\begin{center}
-	\(n=10\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/10.png}
-\end{center}
+\hspace{3.5cm}\(n=26\) &  \(n=28\) \\
+\includegraphics[scale=0.5]{cap4/4_7/26.png} &  \includegraphics[scale=0.5]{cap4/4_7/28.png} \\
+\end{tabular}
 
-\begin{center}
-	\(n=12\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/12.png}
-\end{center}
+\small\begin{tabular}{l*{5}{c}}
+\hspace{3.5cm}\(n=30\) &  \(n=32\) \\
+\includegraphics[scale=0.5]{cap4/4_7/30.png} &  \includegraphics[scale=0.5]{cap4/4_7/32.png} \\
 
-\begin{center}
-	\(n=14\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/14.png}
-\end{center}
+\hspace{3.5cm}\(n=34\) &  \(n=36\) \\
+\includegraphics[scale=0.5]{cap4/4_7/34.png} &  \includegraphics[scale=0.5]{cap4/4_7/36.png} \\
 
-\begin{center}
-	\(n=16\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/16.png}
-\end{center}
+\hspace{3.5cm}\(n=38\) &  \(n=40\) \\
+\includegraphics[scale=0.5]{cap4/4_7/38.png} &  \includegraphics[scale=0.5]{cap4/4_7/40.png} \\
+\hspace{2.6cm}\(r(x) = \frac{1}{1+x^2}\): &  \\
+\includegraphics[scale=0.5]{cap4/4_7/runge.png} & \\
+\end{tabular}
+\\
 
-\begin{center}
-	\(n=18\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/20.png}
-\end{center}
+\noindent Il codice Matlab utilizzato per generare i precedenti grafici \'e il seguente.
 
-\begin{center}
-	\(n=20\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/20.png}
-\end{center}
+\lstinputlisting[language=Matlab]{cap4/4_7.m}
 
-\begin{center}
-	\(n=40\) \\
-	\includegraphics[scale=0.55]{cap4/4_7/40.png}
-\end{center}
+\noindent Riguardo alla stima dell'errore commesso, ricordando che, per funzioni sufficientemente regolari:
+\[
+||e|| = \frac{||f^{(n+1)}||}{(n+1)!2^n}
+\]
