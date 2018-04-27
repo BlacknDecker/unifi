@@ -41,16 +41,27 @@
 
 \hspace{3.5cm}\(n=38\) &  \(n=40\) \\
 \includegraphics[scale=0.5]{cap4/4_7/38.png} &  \includegraphics[scale=0.5]{cap4/4_7/40.png} \\
-\hspace{2.6cm}\(r(x) = \frac{1}{1+x^2}\): &  \\
-\includegraphics[scale=0.5]{cap4/4_7/runge.png} & \\
 \end{tabular}
-\\
 
-\noindent Il codice Matlab utilizzato per generare i precedenti grafici \'e il seguente.
+\begin{center}
+\scriptsize{\(r(x) = \frac{1}{1+25x^2}\):}\\
+\includegraphics[scale=0.45]{cap4/4_7/runge.png}
+\end{center}
 
-\lstinputlisting[language=Matlab]{cap4/4_7.m}
 
-\noindent Riguardo alla stima dell'errore commesso, ricordando che, per funzioni sufficientemente regolari:
+\noindent Riguardo alla stima dell'errore commesso, ricordando che, grazie alla scelta dei nodi di Chebyshev come punti di interpolazione, per funzioni sufficientemente regolari abbiamo:
 \[
 ||e|| = \frac{||f^{(n+1)}||}{(n+1)!2^n}
 \]
+
+\noindent Sono quindi state calcolate le seguenti stime:
+
+\begin{center}
+	\includegraphics[scale=0.5]{cap4/4_7/4_7_error.png}
+\end{center}
+
+\noindent Come si pu\'o facilmente vedere, quello che avviene \'e ??? coi nodi di cheby dovrebbe abassare l'errore...
+
+\noindent Il codice Matlab con cui sono stati realizzati i grafci e la tabella mostrati sopra \'e il seguente:
+
+\lstinputlisting[language=Matlab]{cap4/4_7.m}

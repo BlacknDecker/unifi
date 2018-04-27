@@ -1,10 +1,25 @@
 % esempio con f(x) = pi^x
-xi = [0,1,2];
-fi = [1, 3.14, 9.87];
+xi = [0,1,2,3];
+fi = [1, 3.14, 9.87, 31.01];
+x = 1.5;
 
-y = spline3(xi, fi, 1.5, false);
+y_nan = spline3(xi, fi, x, true);
+y_nat = spline3(xi, fi, x, false);
+y = pi^x; % per riferimento
 
+%
+% input:
+%   xi   - vettore delle ascisse
+%   fi   - vettore delle valutazioni di f(x)
+%   x    - punto da valutare
+%   tipo - true se not-a-knot, falso se naturale
+% output:
+%    y - risultato approssimazione di f(x)
+%
 function y = spline3(xi, fi, x, tipo)
+
+    s = polinomi_spline3(xi, fi, tipo);
+
     % trova quale segmento della spline valutare
     n = 0;
     for i = 1:xi(length(xi))
@@ -14,72 +29,45 @@ function y = spline3(xi, fi, x, tipo)
         end
     end
 
-    s = Ex_4_19(xi, fi, tipo);
     y = double(subs(s(n), x));
 end
 
-% [ s ] = Ex_4_19(x, f, type)
-% Algoritmo per la determinazione degli n polinomi che formano una spline
-% cubica di tipo naturale (type = false) o not a knot (type = true).
-% Input:
-% - x: vettore delle ascisse d'interpolazione
-% - f: vettore dei valori assunti nelle ascisse d'interpolazione
-% - type: true se la spline e' di tipo not a knot, false se
-% e' di tipo naturale
-% Output:
-% - s: il vettore contenente le n espressioni dei polinomi costituenti
-% la spline
+function s = polinomi_spline3(xi, fi, tipo)
 
-function [ s ] = Ex_4_19(x, f, type)
-    n = length(x) - 1;
-    xi = zeros(1, n - 1);
+    n = length(xi) - 1;
+    xis = zeros(1, n - 1);
     phi = zeros(1, n - 1);
+
     for i = 1 : n - 1
-        phi(i) = ( x(i + 1) - x(i) ) / ( x(i + 2) - x(i) );
-        xi(i) = ( x(i + 2) - x(i + 1) ) / ( x(i + 2) - x(i) );
+        phi(i) = ( xi(i + 1) - xi(i) ) / ( xi(i + 2) - xi(i) );
+        xis(i) = ( xi(i + 2) - xi(i + 1) ) / ( xi(i + 2) - xi(i) );
     end
-    dd = Ex_4_16_2(x, f);
-    if type
-        m = Ex_4_17(phi, xi, dd);
+
+    dd = diff_div_spline3(xi, fi);
+
+    if tipo
+        m = vettore_sistema_spline3(phi, xis, dd);
     else
-        m = Ex_4_16_1(phi, xi, dd);
+        m = sistema_spline3(phi, xis, dd);
     end
-    s = Ex_4_18(x, f, m);
+
+    s = espressione_spline3(xi, fi, m);
 end
 
+function fi = diff_div_spline3(xi, fi)
 
+    n = length(xi) - 1;
 
-% [ f ] = Ex_4_16_2(x, f)
-% Calcolo del vettore delle differenze divise per la risoluzione del
-% sistema tridiagonale lineare delle spline cubiche.
-% Input:
-% - x: vettore delle ascisse d'interpolazione
-% - f: vettore dei valori assunti dalla funzione in tali ascisse
-% Output:
-% - f: vettore contenente i valori delle differenze divise per il calcolo
-% del sistema lineare tridiagonale per le spline cubiche
-function[ f ] = Ex_4_16_2(x, f)
-    n = length(x) - 1;
     for j = 1 : 2
         for i = n + 1 : - 1 : j + 1
-            f(i) = ( f(i) - f(i - 1) )/(x(i) - x(i - j) );
+            fi(i) = ( fi(i) - fi(i - 1) )/(xi(i) - xi(i - j) );
         end
     end
-    f = f(3 : length(f))';
+
+    fi = fi(3 : length(fi))';
 end
 
-
-% [ m ] = Ex_4_16_1(phi, xi, dd)
-% Algoritmo per il calcolo del vettore m del sistema lineare tridiagonale
-% per determinare i fattori m(i) nell'espressione della spline cubica
-% naturale.
-% Input:
-% - phi: vettore dei fattori phi sulla matrice dei coefficienti (len = n - 1)
-% - xi: vettore dei fattori xi sulla matrice dei coefficienti (len = n - 1)
-% - dd: vettore delle differenze divise (len = n - 1)
-% Output:
-% - m: vettore contenente le m(i) calcolate (len = n + 1)
-function [ m ] = Ex_4_16_1(phi, xi, dd)
+function m = sistema_spline3(phi, xi, dd)
     n = length(xi) + 1;
     u = zeros(1, n - 1);
     l = zeros(1, n - 2);
@@ -99,24 +87,13 @@ function [ m ] = Ex_4_16_1(phi, xi, dd)
     for i = n - 2 : - 1 : 1
         m(i) = (y(i) - xi(i) * m(i + 1)) / u(i);
     end
-    m = [0 m 0]; % condizioni della spline naturale: m(0) = m(n) = 0
+    m = [0 m 0];
 end
 
-
-% [ m ] = Ex_4_17(phi, xi, dd)
-% Algoritmo per il calcolo del vettore m del sistema lineare tridiagonale
-% per determinare i fattori m(i) nell'espressione della spline cubica
-% not a knot.
-% Input:
-% - phi: vettore dei fattori phi sulla matrice dei coefficienti (len = n - 1)
-% - xi: vettore dei fattori xi sulla matrice dei coefficienti (len = n - 1)
-% - dd: vettore delle differenze divise (len = n - 1)
-% Output:
-% - m: vettore contenente le m(i) calcolate (len = n + 1)
-function [ m ] = Ex_4_17( phi, xi, dd )
+function m = vettore_sistema_spline3(phi, xi, dd)
     n = length(xi) + 1;
     if n + 1 < 4
-        error('ATTENZIONE: il numero di ascisse interpolanti è inferiore a 4, questo significa che la spline not a knot interpolante la funzione coincide con la funzione stessa');
+        error('Not-A-Knot con meno di 4 ascisse!');
     end
     dd = [6 * dd(1); 6 * dd; 6 * dd(length(dd))];
     w = zeros(n, 1);
@@ -154,16 +131,8 @@ function [ m ] = Ex_4_17( phi, xi, dd )
     m(n + 1) = m(n + 1) - m(n) - m(n - 1);
 end
 
-% [ s ] = Ex_4_18(x, f, m)
-% Algoritmo per la determinazione dell'espressione, polinomiale a tratti,
-% della spline cubica.
-% Input:
-% - x: vettore delle ascisse d'interpolazione
-% - f: vettore dei valori assunti nelle ascisse d'interpolazione
-% - m: vettore delle m
-% Output:
-% - s: vettore dei polinomi costituenti la spline polinomiale a tratti
-function [ s ] = Ex_4_18( xi, fi, m)
+
+function s = espressione_spline3(xi, fi, m)
     n = length(xi) - 1;
     s = sym('x' , [n 1]);
     syms x;
