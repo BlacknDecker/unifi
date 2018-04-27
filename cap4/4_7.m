@@ -25,7 +25,7 @@ while n<=40
    % il max e' in zero per tutti i p(x)
    % quindi evito il calcolo dela norma 0 e valuto semplicemente in 0
     syms x
-    error = abs(subs(diff(1/(1+25*x^2), n), 0)/factorial(n+1)*2^n);
+    error = abs(subs(diff(1/(1+25*x^2), n + 1), 0) / factorial(n+1)*2^n);
     iteration = {n, double(error)};
     Table = [Table; iteration];
 
