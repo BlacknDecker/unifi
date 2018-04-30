@@ -5,11 +5,17 @@
 	}
 }\end{center}
 
-\noindent Essendo le ascisse di interpolazione i nodi di Chebyshev, la costante di Lebesgue in fuzione di \(n\)si comporta come segue:
+\noindent Essendo le ascisse di interpolazione i nodi di Chebyshev, la costante di Lebesgue in fuzione di \(n\) si comporta come segue:
 \[
 \Lambda_n \approx \frac{2}{\pi}\log n
 \]
 
-\noindent Utilizzando una versione modificata del codice relativo all'esercizio precedente, sono state calcolate le seguenti stime:
+\noindent Ci si aspetta quindi che abbia una crescita logaritmica al crescere di \(n\). Questo fatto \'e stato verificato calcolando le seguenti stime numeriche:
 
-TODO
+\begin{center}
+	\includegraphics[scale=0.7]{cap4/4_8.png}
+\end{center}
+
+\noindent Il codice Matlab usato per realizzare la precedente tabella \'e il seguente:
+
+\lstinputlisting[language=Matlab]{cap4/4_8.m}
