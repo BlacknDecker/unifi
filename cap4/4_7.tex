@@ -5,7 +5,7 @@
 	}
 }\end{center}
 
-\noindent Di seguito i grafici che mostrano i polinomi interpolanti di grado \textit{n} calcolati usando come punti di interpolazione quelli corrispondenti alle \textit{n} ascisse di Chebyshev. \\
+\noindent Di seguito i grafici che mostrano i polinomi interpolanti di grado \textit{n} calcolati usando come punti di interpolazione quelli corrispondenti alle \textit{n} ascisse di Chebyshev (evidenziati in rosso), sovraimposti al grafico della funzione di Runge \(f(x) = \frac{1}{1+x^2}\) (in blu). \\
 
 \noindent\small\begin{tabular}{l*{5}{c}}
 \hspace{3.5cm}\(n=2\) & \(n=4\) \\
@@ -41,12 +41,10 @@
 
 \hspace{3.5cm}\(n=38\) &  \(n=40\) \\
 \includegraphics[scale=0.5]{cap4/4_7/38.png} &  \includegraphics[scale=0.5]{cap4/4_7/40.png} \\
+& \\
+& \\
+& \\
 \end{tabular}
-
-\begin{center}
-\scriptsize{\(r(x) = \frac{1}{1+25x^2}\):}\\
-\includegraphics[scale=0.45]{cap4/4_7/runge.png}
-\end{center}
 
 
 \noindent Riguardo alla stima dell'errore commesso, ricordando che, grazie alla scelta dei nodi di Chebyshev come punti di interpolazione, per funzioni sufficientemente regolari abbiamo:
@@ -54,16 +52,14 @@
 ||e|| = \frac{||f^{(n+1)}||}{(n+1)!2^n}
 \]
 
-\noindent Sono quindi state calcolate le seguenti stime:
+\noindent Sono state calcolate le stime dell'errore mostrate nella seguente tabella:
 
 \begin{center}
-	\includegraphics[scale=0.5]{cap4/4_7/4_7_error.png}
+	\includegraphics[scale=0.7]{cap4/4_7/4_7_error.png}
 \end{center}
 
-\noindent Come si pu\'o facilmente vedere, quello che avviene \'e ??? coi nodi di cheby dovrebbe abassare l'errore...
+\noindent Come si pu\'o facilmente vedere, grazie alla scelta delle ascisse di Chebyshev come punti di interpolazione, l'errore diminuisce all'aumentare di \(n\), tendendo infatti a \(0\) per \(n \to \inf\).\\
 
-CONTROLLARE IL CONTO DELL ERRORE E A STO PUNTO RIFARE ANCHE I GRAFICHETTI DEL CAZZO
-
-\noindent Il codice Matlab con cui sono stati realizzati i grafci e la tabella mostrati sopra \'e il seguente:
+\noindent Il codice Matlab con cui sono stati realizzati i grafci e la tabella mostrati sopra \'e il seguente: \\
 
 \lstinputlisting[language=Matlab]{cap4/4_7.m}
