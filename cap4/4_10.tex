@@ -9,13 +9,7 @@
 \noindent Si parla di moto rettilineo uniformemente accelerato, perci\'o fissando l'origine del sistema di riferimento spaziale in modo da avere \(x_0 = 0\), ricordiamo che:
 
 \[
-  x(t) = v_0t +  \frac{1}{1}at^2
-\]
-
-\noindent e che:
-
-\[
-  v = v_0 + at 
+  y =  s(t) = v_0t +  \frac{1}{2}at^2 \quad \text{con} a \text{e} v_0 \text{costanti}
 \]
 
 \noindent La legge che descrive il fenomeno (in realt\'a ben noto, come appena mostrato) \'e di tipo polinomiale, e mette in relazione due grandezze sperimentali quali un intervallo di tempo ed uno spostamento. Si ricerca quindi il polinomio che meglio approssima le coppie di dati fornite, nel senso di nei minimi quadrati. Tale polinomio avr\'a la seguente forma:
@@ -31,4 +25,6 @@
 \]
 
 \noindent Si tratta quindi di risolvere il sistema sovradeterminato \(V \textbf{a} = \textbf{y} \), con \(V\) matrice di tipo Vandermonde.
+
+\noindent Le coppie di dati fornite sono del tipo \((x, y) \equiv  (tempo, spazio)\) e sono state usate nel seguente codice Matlab per trovare il miglior polinomio approssimante di secondo grado:
 
