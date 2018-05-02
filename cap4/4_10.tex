@@ -6,13 +6,15 @@
 	}
 }\end{center}
 
-\noindent Si parla di moto rettilineo uniformemente accelerato, perci\'o fissando l'origine del sistema di riferimento spaziale in modo da avere \(x_0 = 0\), ricordiamo che:
+\noindent La legge che descrive il fenomeno del moto rettilineo uniformemente accelerato (in realt\'a ben nota, come vedremo) \'e di tipo polinomiale, e mette in relazione due grandezze sperimentali quali un intervallo di tempo ed uno spostamento. Si ricerca quindi il polinomio che meglio approssima le coppie di dati fornite, nel senso di nei minimi quadrati. 
+
+\noindent Ricordando che possiamo esprimere la coordinata spaziale della dimensione che ci interessa in funzione del tempo trascorso da un certo istante zero, abbiamo che:
 
 \[
-  y =  s(t) = v_0t +  \frac{1}{2}at^2 \quad \text{con} a \text{e} v_0 \text{costanti}
+  y =  s(t) = x_0 + v_0t + \frac{1}{2}at^2 \quad \quad \text{con } a \text{, } x_0 \text{ e } v_0 \text{ costanti}
 \]
 
-\noindent La legge che descrive il fenomeno (in realt\'a ben noto, come appena mostrato) \'e di tipo polinomiale, e mette in relazione due grandezze sperimentali quali un intervallo di tempo ed uno spostamento. Si ricerca quindi il polinomio che meglio approssima le coppie di dati fornite, nel senso di nei minimi quadrati. Tale polinomio avr\'a la seguente forma:
+\noindent Il polinomio interpolante tale legge fisica avr\'a la seguente forma:
 
 \[
   y = \sum^m_{k=0}a_kx^k
@@ -25,6 +27,23 @@
 \]
 
 \noindent Si tratta quindi di risolvere il sistema sovradeterminato \(V \textbf{a} = \textbf{y} \), con \(V\) matrice di tipo Vandermonde.
+\\ \\
+\noindent Le coppie di dati fornite sono del tipo \((x, y) \equiv  (tempo, spazio)\) e sono state usate nel seguente codice Matlab per trovare e plottare il miglior polinomio approssimante di secondo grado:
 
-\noindent Le coppie di dati fornite sono del tipo \((x, y) \equiv  (tempo, spazio)\) e sono state usate nel seguente codice Matlab per trovare il miglior polinomio approssimante di secondo grado:
+\begin{center}
+	\includegraphics[scale=0.6]{cap4/4_10.png}
+\end{center}
 
+\lstinputlisting[language=Matlab]{cap4/4_10.m}
+\vspace{0.2cm}
+\noindent Essendo il polinomio interpolante \(p(t) = 1 + t + t^2\) perfettamente analogo alla legge fisica \(s(t) = x_0 + v_0t + \frac{1}{2}at^2\), abbiamo banalmente i seguenti valori per  posizione iniziale, velocit\'a iniziale ed accelerazione:
+
+\[
+  x_0 = 1
+\]
+\[
+  v_0 = 1
+\]
+\[
+  a = 1
+\]
