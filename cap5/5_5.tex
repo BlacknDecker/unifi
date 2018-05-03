@@ -18,7 +18,9 @@ che vale \(10^-6\) in doppia precisione IEEE, con una tolleranza \(10^-9\), util
 
 \end{itemize}
 
-AGGIUNGERE CONSIDERAZIONI
+\noindent Come si pu\'o vedere dai risultati, la scelta di ascisse equispaziate si rivela inaedeguata per una funzione come quella presa in esame, che presenta una rapida variazione di valore in una porzione dell'intervallo molto ristretta. Infatti, si riesce a catturare efficacemente questa variazione --- e quindi a raggiungere l'approssimazione richiesta sul risultato dell'integrale definito --- soltanto scegliendo di utilizzare un numero elevatissimo di punti, con conseguente bisogno di valutare moltissime volte la funzione.\\
+
+\noindent Le formule adattive invece performano molto meglio, perch\'e individuano i nodi della partizione in base al comportamento locale della funzione, permettendo quindi di minimizzare l'errore e, di conseguenza, le chiamate ricorsive necessarie al raggiungimento della soglia di tolleranza prestabilita.\\
 
 \noindent Il codice Matlab utilizzato per realizzare quanto descritto sopra \'e il seguente: \\
 

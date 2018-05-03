@@ -10,6 +10,8 @@ if abs(If_trapcomp-If) < tol
     disp(If_trapcomp-If)
 end
 
+
+
 [If_simpcomp, neval_simpcomp] = simpcomp_val(2*10^6, 0, 1, fun);
 if abs(If_simpcomp-If) < tol
     disp('simpcomp - neval:')
@@ -44,7 +46,7 @@ function [If, neval] = trapcomp_val(n, a, b, fun)
     neval = neval + 2;
 end
 
-% anche in questo caso il calcolo delle valutazioni di fun e' superfluo
+% anche in questo caso il calcolo delle valutazioni e' superfluo
 % servono sempre n+2 valutazioni
 function [If, neval] = simpcomp_val(n, a, b, fun)
     If = fun(a) - fun(b);
@@ -67,7 +69,6 @@ function [If, neval] = trapad_eval(a, b, fun, tol)
     neval = 3;
   
     err = abs(If - If1) / 3;
-
     if err > tol
         [iSx, nSx] = trapad_eval(a, m, fun, tol/2);
         [iDx, nDx] = trapad_eval(m, b, fun, tol/2);
