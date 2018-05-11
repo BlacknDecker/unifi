@@ -1,0 +1,24 @@
+\section{Introduzione}
+
+Analizzeremo, per un generico problema decidibile, le prestazioni dell'algoritmo di una Macchina di Touring che lo risolve.
+
+Quali sono le risorse utilizzate?
+
+\begin{itemize}
+
+	\item \textbf{tempo}: misurato contando il \textit{numero di transazioni} della MdT che risolve il problema
+
+	\item \textbf{spazio}: misurato contando il \textit{numero di celle del nastro utilizzate} dalla MdT oltre a quelle necessarie per memorizzare l'input
+
+\end{itemize}
+
+\subsection{Complessità in Tempo}
+
+Sia:
+\begin{itemize}
+	\item $\Sigma$ un alfabeto
+	\item $\Sigma_n^\ast$ l'insieme delle stringhe su $\Sigma$ di lunghezza $n \in N$
+	\item $M$ una MdT su $\Sigma$
+\end{itemize}
+
+Definiamo $tc_M : N \rightarrow N$ come la funzione che restituisce il massimo numero di transazioni impiegate da una computazione di $M$ su una stringa di $\Sigma_n^\ast$.
