@@ -1,0 +1,23 @@
+\section{Classi di Complessità}
+
+\subsection{Macchine di Turing non deterministiche}
+
+\begin{lemm}
+	Sia $M$ una MdT non deterministica con grado di non determinismo $\sigma$ e con $tc_M(n) = f(n)$. Esiste una MdT non deterministica $M'$ equivalente ad $M$ tale che $tc_{M'}(n) = O(f(n)\sigma^{f(n)})$.
+\end{lemm}
+
+\begin{proof}
+	Basta trasfrmare $M$ in una MdT deterministica: presa in input una stringa $w$ di lunghezza $n$, si genera una tupla di interi $(m_1, \ldots, m_{f(n)})$ con ogni $m_j \leq \sigma$ e si simula la computazione associata. Il costo nel caso peggiore di questo scenario è $f(n)\sigma^{f(n)}$.
+\end{proof}
+
+\subsection{Classe P}
+
+\begin{defn}
+	Un linguaggio $L$ è decidibile in tempo polinomiale quando esiste una MdT $M$ che lo accetta con $tc_M(n) = O(n^r)$ per un qualche $r \in N$. Quando questo si verifica, si dice che $L \in P$.
+\end{defn}
+
+\subsection{Classe NP}
+
+\begin{defn}
+	todo
+\end{defn}
