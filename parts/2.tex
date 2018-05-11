@@ -1,1 +1,64 @@
-\section{Complessità in Tempo}
+\section{Speedup Lineare}
+
+\subsection{Macchine di Turing deterministiche}
+
+Sia:
+\begin{itemize}
+	\item $M$ una MdT a due nastri
+	\item $\Sigma$ l'alfabeto finito di M
+	\item $Q$ l'insieme dei possibili stati di M
+\end{itemize}
+
+Costruiamo una MdT $N$, sempre a due nastri, in cui ogni gruppo di 3 transazioni di $M$ viene simulato da un numero costante di transazioni di $N$.
+
+L'alfabeto di $N$ quindi sarà: $ \Sigma \cup \ \{\#\} \cup \{ \text{triple di elementi di } \Sigma \cup \{\ast\} \cup \{?\} \} $
+
+Gli stati di $N$ saranno invece quartuple del tipo $(q_1, (t_1, t_2, t_3), (u_1, u_2, u_3), (i_1, i_2)$ dove:
+
+\begin{itemize}
+	\item $q \in Q$ è lo stato in cui si trova la versione simulata di $M$
+	\item la tripla $(t_1, t_2, t_3)$ rappresenta le informazioni del nastro 1:
+		\subitem $t_1$ è la tripla precedente a $t_2$
+		\subitem $t_2$ è la tripla su cui si trova la testina
+		\subitem $t_1$ è la tripla successiva a $t_2$
+	\item la tripla $(u_1, u_2, u_3)$ rappresenta le informazioni analoghe relative al nastro 2
+	\item $i_1, i_2 \in \{1, 2, 3\}$ indica su quale elemento delle triple $t_2, u_2$ si trova la testina di M
+\end{itemize}
+
+In questo modo gli stati della MdT $N$ contengono le informazioni necessarie per simulare le transazioni di $M$ a gruppetti di tre per volta. \\
+
+\begin{lemm}
+	Sia $M$ una MdT a k nastri, con $k > 1$, che accetta $L$ con $tc_M(n) = f(n)$.
+	Per ogni $c > 0$ esiste una MdT $N$ che accetta L con $tc_N(n) \leq c*f(n) + 4n + 5$.
+\end{lemm}
+
+\begin{proof}
+	Sia $m \in N$. La simulazione di $M$ su $N$ richiede il seguente numero di transazioni:
+	\begin{itemize}
+		\item \textbf{Inizializzazione} --- $4n + 5$
+			\subitem copiare e codificare in $m$-uple l'input dal nastro 1 al nastro 2 --- $2(n+1)$
+			\subitem riportare la testina all'inizio dei nastri --- $2(n+1)$
+			\subitem scrivere simbolo di fine nastro $\#$ --- 1
+		\item \textbf{Simulazione} --- $8\frac{f(n)}{m}$
+			\subitem lettura cella a sinistra --- 2
+			\subitem lettura cella a sinistra --- 3
+			\subitem tornare alla cella iniziale --- 1
+			\subitem simulazione della $m$-upla --- al più 2 (spostamento e scrittura) \\ \\
+		Tutto questo ripetuto per $\frac{f(n)}{m}$ volte.
+	\end{itemize}
+	In totale quindi il costo in transazioni dell'intera computazione è $8\frac{f(n)}{m} + 4n + 5$.
+\end{proof}
+
+Il fatto più rilevante è che si possono simulare $m$ transazioni di $M$ in 8 trnsazioni di N. Quindi, fissato un opportuno $c > 0$, basta scegliere $m > \frac{8}{c}$ per far sì che $N$ sia più veloce di $M$.
+
+\subsection{Macchine di Turing non deterministiche}
+
+Sia $M$ una MdT non deterministica. La complessità in tempo di $M$ $tc_M(n)$ restituisce il numero \underline{massimo} di transazioni eseguite su una stringa di lunghezza $n$ lungo una qualunque delle computazioni di $M$. \\
+
+\begin{lemm}
+	Sia $M$ una MdT non deterministica con grado di non determinismo $\sigma$ e con $tc_M(n) = f(n)$. Esiste una MdT non deterministica $M'$ equivalente ad $M$ tale che $tc_{M'}(n) = O(f(n)\sigma^{f(n)})$.
+\end{lemm}
+
+\begin{proof}
+	Basta trasfrmare $M$ in una MdT deterministica: presa in input una stringa $w$ di lunghezza $n$, si genera una tupla di interi $(m_1, \ldots, m_{f(n)})$ con ogni $m_j \leq \sigma$ e si simula la computazione associata. Il costo nel caso peggiore di questo scenario è $f(n)\sigma^{f(n)}$.
+\end{proof}
