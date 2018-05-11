@@ -10,14 +10,26 @@
 	Basta trasfrmare $M$ in una MdT deterministica: presa in input una stringa $w$ di lunghezza $n$, si genera una tupla di interi $(m_1, \ldots, m_{f(n)})$ con ogni $m_j \leq \sigma$ e si simula la computazione associata. Il costo nel caso peggiore di questo scenario è $f(n)\sigma^{f(n)}$.
 \end{proof}
 
-\subsection{Classe P}
+\subsection{Classi P e NP}
 
 \begin{defn}
-	Un linguaggio $L$ è decidibile in tempo polinomiale quando esiste una MdT $M$ che lo accetta con $tc_M(n) = O(n^r)$ per un qualche $r \in N$. Quando questo si verifica, si dice che $L \in P$.
+	Un linguaggio $L$ è decidibile in tempo \textbf{polinomiale} quando esiste una MdT $M$ \textbf{deterministica} che lo accetta con $tc_M(n) = O(n^r)$ per un qualche $r \in N$. Quando questo si verifica, si dice che $L \in P$.
 \end{defn}
-
-\subsection{Classe NP}
 
 \begin{defn}
-	todo
+	Un linguaggio si dice decidibile in tempo \textbf{polinomiale non deterministico} quando esiste una MdT $M$ \textbf{non deterministica} che lo accetta con $tc_M(n) = O(n^r)$ per un qualche $r \in N$. In questo caso si dice che $L \in NP$.
 \end{defn}
+
+Osserviamo che $P \subset NP$. \textit{Vale $P = NP$? Oppure $P \neq NP$?} Il problema è aperto.
+
+Un \textbf{esempio di problema NP} è il problema del circuito hamiltoniano. Definiamo:
+
+\begin{itemize}
+	\item $G = (V, E)$ un grafo orientato, con $|V| = n$
+	\item $\Gamma = (v_1, \ldots, v_n)$ il circuito hamiltoniano di $G$
+		\subitem una permutazione di vertici distinti tale che $(v_i, v_i+1) \in E$ per ogni $i \leq n-1$
+\end{itemize}
+
+\textbf{Problema del circuito hamiltoniano}: \textit{dato G, determinare se ha un circuito hamiltoniano.}
+
+Tale problema è decidibile. Se per risolverlo ci avvaliamo di una MdT deterministica, la sua complessità tmeporale è esponenziale. Usando invece una MdT non deterministica, è possibile risolverlo con complessità tmeporale polinomiale. Perciò $HAM \in NP$.
