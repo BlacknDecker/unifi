@@ -1,6 +1,7 @@
 \section{Speedup Lineare}
 
-Sia:
+Partiamo dai seguenti presupposti:
+
 \begin{itemize}
 	\item $M$ una MdT a due nastri
 	\item $\Sigma$ l'alfabeto finito di M
@@ -9,9 +10,9 @@ Sia:
 
 Costruiamo una MdT $N$, sempre a due nastri, in cui ogni gruppo di 3 transazioni di $M$ viene simulato da un numero costante di transazioni di $N$.
 
-L'alfabeto di $N$ quindi sarà: $ \Sigma \cup \ \{\#\} \cup \{ \text{triple di elementi di } \Sigma \cup \{\ast\} \cup \{?\} \} $
+L'\textbf{alfabeto} di $N$ quindi sarà: $ \Sigma \cup \ \{\#\} \cup \{ \text{triple di elementi di } \Sigma \cup \{\ast\} \cup \{?\} \} $
 
-Gli stati di $N$ saranno invece quartuple del tipo $(q_1, (t_1, t_2, t_3), (u_1, u_2, u_3), (i_1, i_2)$ dove:
+Gli \textbf{stati} di $N$ saranno invece quartuple del tipo $(q_1, (t_1, t_2, t_3), (u_1, u_2, u_3), (i_1, i_2)$ dove:
 
 \begin{itemize}
 	\item $q \in Q$ è lo stato in cui si trova la versione simulata di $M$
