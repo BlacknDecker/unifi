@@ -13,7 +13,7 @@ while n <= 40
     fi = f(xi); % valutazioni fun di runge
     p = @(x) lagrange(xi, fi, x);
 
-    % GRAFICO
+    % GRAFICI
     fplot(f, [a, b]) % per riferimento
     hold on
     fplot(p, [a, b])
