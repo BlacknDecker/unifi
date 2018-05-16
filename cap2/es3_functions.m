@@ -54,6 +54,5 @@ function [radice, it, valf, val1] = aitken(f, f1, x0, tolx, imx)
         valf = valf + 2;
         val1 = val1 + 2;
         it = it + 1;
-
     end
 end

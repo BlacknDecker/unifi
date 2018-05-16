@@ -21,6 +21,7 @@ while n <= 40
     hold off
     print('-dpng', strcat(num2str(n), '.png'));
 
+
     % STIMA DELL'ERRORE
     x = linspace(a, b, 100001);
     e = norm(f(x) - p(x), inf);

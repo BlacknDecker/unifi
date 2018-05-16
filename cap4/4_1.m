@@ -7,7 +7,7 @@ y = lagrange(xi, fi, 1.5);
 % input:
 %   xi - vettore dei punti di ascissa
 %   fi - vettore dei valori di f(x)
-%   x  - punto in cui calcolare f(x)
+%   x  - vettore di punti in cui calcolare f(x)
 % output:
 %   y  - valore di f(x)
 %

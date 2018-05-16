@@ -43,16 +43,23 @@
 \includegraphics[scale=0.5]{cap4/4_7/38.png} &  \includegraphics[scale=0.5]{cap4/4_7/40.png} \\
 & \\
 & \\
-& \\
 \end{tabular}
 
 
-\noindent Riguardo alla stima dell'errore commesso, ricordando che, grazie alla scelta dei nodi di Chebyshev come punti di interpolazione, per funzioni sufficientemente regolari abbiamo:
+\noindent Riguardo all'errore commesso, grazie alla scelta dei nodi di Chebyshev come punti di interpolazione, per funzioni sufficientemente regolari abbiamo:
 \[
 ||e|| \leq \frac{||f^{(n+1)}||}{(n+1)!2^n}
 \]
 
-\noindent Tuttavia, calcolare la $(n+1)-esima$ derivata risulterebbe molto dispendioso in termini computazionali. Quindi,..... SCRIVI QUALCOSA
+\noindent Tuttavia, calcolare le derivate di ordine elevato della funzione di Runge risulterebbe molto dispendioso in termini computazionali. Quindi, ricaveremo una stima dell'errore in funzione di $n$ calcolandolo nel modo seguente:
+
+$$
+||e|| \approx ||f(x) - p_n(x)||_{inf}
+$$
+
+\noindent con ovviamente $f$ intesa come la funzione di Runge e $p$ il suo polinomio interpolante.
+
+\noindent L'errore così stimato è mostrato nella seguente tabella:
 
 \begin{center}
 	\includegraphics[scale=0.7]{cap4/4_7/4_7_error.png}
