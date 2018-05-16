@@ -9,7 +9,7 @@ function [T, sqrt_alpha] = newton_sqrt(alpha, x0, imax, tolx, T)
     row = {i, sqrt_alpha, abs( sqrt(alpha) - sqrt_alpha )};
     T = [T; row];
 
-    while(i < imax) && (abs(sqrt_alpha-x0) > tolx)
+    while (i < imax) && (abs(sqrt_alpha-x0) > tolx)
         x0 = sqrt_alpha;
         i = i+1;
         sqrt_alpha = (x0 + alpha/x0) / 2;
