@@ -12,8 +12,10 @@ while n <= 40
     xi = ceby(n, a, b); % ascisse di chebyshev
     fi = f(xi); % valutazioni fun di runge
     p = @(x) lagrange(xi, fi, x);
+    e = @(x) abs(f(x) - p(x)); % errore di interp
 
-    % GRAFICI
+    % GRAFICI FUNZIONI E POLINOMI
+    figure(1)
     fplot(f, [a, b]) % per riferimento
     hold on
     fplot(p, [a, b])
@@ -21,6 +23,11 @@ while n <= 40
     hold off
     print('-dpng', strcat(num2str(n), '.png'));
 
+    % GRAFICO ERRORE
+    figure(2)
+    x = linspace(0, b, 100001);
+    plot(x, e(x), 'DisplayName', strcat('n = ', num2str(n)))
+    hold on
 
     % STIMA DELL'ERRORE
     x = linspace(a, b, 100001);
@@ -32,5 +39,6 @@ while n <= 40
 end
 
 % mostra la tabella
+figure(3)
 uitable('Data',Table{:,:},'ColumnName',Table.Properties.VariableNames,...
     'RowName',Table.Properties.RowNames,'Units', 'Normalized', 'Position',[0, 0, 1, 1]);
