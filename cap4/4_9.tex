@@ -47,19 +47,30 @@
 & \\
 \end{tabular}
 
-\noindent Riguardo alla stima della costante di Lebesgue in funzione di \(n\), ricordando che:
+\noindent Riguardo alla stima della costante di Lebesgue in funzione di \(n\), abbiamo che:
 
 \[
-\Lambda_n \equiv ||\lambda_n|| \equiv \sum^n_{k=0}|L_{k,n}(x)|
+\Lambda_n \equiv ||\lambda_n|| \text{ con } \lambda_n(x) = \sum^n_{k=0}|L_{k,n}(x)|
 \]
 
-\noindent Sono state calcolate le stime numeriche mostrate nella seguente tabella:
+\newpage
+
+\noindent Sono state quindi calcolate le stime numeriche mostrate nella seguente tabella:
 
 \begin{center}
 	\includegraphics[scale=0.7]{cap4/4_9/4_9.png}
 \end{center}
 
-\noindent Il codice Matlab con cui sono stati realizzati i grafci e la tabella mostrati sopra \'e il seguente: \\
+\noindent Inoltre, è stato realizzato anche il seguente grafico mostrante l'andamento dell'errore nell'estremo destro dell'intervallo esmainato. Si noti che \'e stata omessa la parte centrale poich\'e poco interessante, e la parte sinistra dato che l'andamento dell'errore di interpolazione \'e simmetrico rispetto all'asse delle ordinate: questo ha permesso un elevato livello di dettaglio migliorando la chiarezza del grafico.
+
+\begin{center}
+	\includegraphics[scale=0.7]{cap4/4_9/4_9_error_plot.png}
+\end{center}
+
+\noindent Come si può vedere, all'aumentare di $n$ l'errore aumenta a causa della scelta delle ascisse equispaziate. \\
+
+\noindent Di seguito \'e riportato il codice Matlab con cui sono stati realizzati i grafci e la tabella mostrati. \\
+
+\newpage
 
 \lstinputlisting[language=Matlab]{cap4/4_9.m}
-
