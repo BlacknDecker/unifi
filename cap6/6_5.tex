@@ -1,28 +1,6 @@
 \begin{center}
 \footnotesize\noindent\fbox{
 	\parbox{\textwidth}{
-Calcolare quante valutazioni di funzione sono necessarie per ottenere una approssimazione di 
-\[I(f) = \int_0^1 \exp(-10^6 x) dx \] 
-che vale \(10^-6\) in doppia precisione IEEE, con una tolleranza \(10^-9\), utilizzando le functions dei precedenti esercizi. Argomentare quantitativamente la risposta.
+	Con riferimento al sistema lineare dell'Esercizio 2, con $n=1000$, graficare la norma dei residui rispetto all'indice di iterazione, generati dai metodi di Jacobi e Gauss-Seidel. Utilizzare il formato \lstinline[language=Matlab]{semiology} per realizzare il grafico, corredandolo di opportune $label$. 
 } }
 \end{center}
-
-\noindent Utilizzando versioni leggermente modificate delle function realizzate peri precedenti esercizi, sono stati calcolati i segueni valori:
-
-\begin{itemize}
-
-  \item \textbf{formula composita dei trapezi con \(n+1\) ascisse equidistanti} \\ con \(n=10^7\), \(10^7 +1\) valutazioni di \(\exp(-10^6 x)\), errore pari a \(8.3319 \times 10^{-10}\)
-  \item \textbf{formula composita di Simpson su \(2n+1\) ascisse equidistanti } \\ con \(n=2 \times 10^6\), \(2 \times 10^6 + 2\) valutazioni di \(\exp(-10^6 x)\), errore pari a \(3.3715 \times 10^{-10}\)
-  \item \textbf{formula dei trapezi adattativa} \\ \(77823\) valutazioni di \(\exp(-10^6 x)\), errore pari a \(1.1253 \times 10^{-14}\)
-  \item \textbf{formula di Simpson adattativa} \\ \(1038\) valutazioni di \(\exp(-10^6 x)\), errore pari a \(1.6470 \times 10^{-14}\)
-
-\end{itemize}
-
-\noindent Come si pu\'o vedere dai risultati, la scelta di ascisse equispaziate si rivela inaedeguata per una funzione come quella presa in esame, che presenta una rapida variazione di valore in una porzione dell'intervallo molto ristretta. Infatti, si riesce a catturare efficacemente questa variazione --- e quindi a raggiungere l'approssimazione richiesta sul risultato dell'integrale definito --- soltanto scegliendo di utilizzare un numero elevatissimo di punti, con conseguente bisogno di valutare moltissime volte la funzione.\\
-
-\noindent Le formule adattive invece performano molto meglio, perch\'e individuano i nodi della partizione in base al comportamento locale della funzione, permettendo quindi di minimizzare l'errore e, di conseguenza, le chiamate ricorsive necessarie al raggiungimento della soglia di tolleranza prestabilita.\\
-
-\noindent Il codice Matlab utilizzato per realizzare quanto descritto sopra \'e il seguente: \\
-
-\lstinputlisting[language=Matlab]{cap5/5_5.m}
-

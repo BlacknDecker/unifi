@@ -1,6 +1,11 @@
 \begin{center}
 \footnotesize\noindent\fbox{
 	\parbox{\textwidth}{
-	  Scrivere una function Matlab che implementi la formula composita dei trapezi adattativa nell'intervallo \([a, b]\) relativamente alla funzione implementata da \lstinline[language=Matlab]{fun(x)} e con tolleranza \lstinline[language=Matlab]{tol}. \\ \\ La function deve essere del tipo \lstinline[language=Matlab]{If = trapad(a, b, fun, tol)}.
+	  Utilizzare il metodo di Jacobi per risolvere il sistema lineare
+	  $$
+	  A_n \textbf{x} = \begin{pmatrix} 1 \\ \vdots \\ 1 \end{pmatrix}
+	  $$
+
+	  dove $A_n$ è la matrice definita nell'Esercizio 1, con tolleranza $tol=10^{-5}$, e partendo dal vettore nullo. Graficare il numero di iterazioni necessarie, rispetto alla dimensione $n$ del problema, con $n$ che varia da 100 a 1000 (con passo 20).
 }
 }\end{center}
