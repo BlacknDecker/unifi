@@ -10,8 +10,8 @@ for n=100:100:1000
 
    [l, i] = potenze(A, tol);
 
-    record = {n, i, l};
-    Table = [Table; record];
+   record = {n, i, l};
+   Table = [Table; record];
 end
 
 uitable('Data',Table{:,:},'ColumnName',Table.Properties.VariableNames,...
