@@ -3,12 +3,8 @@ Table.Properties.VariableNames = {'n' 'iterazioni', 'autovalore'};
 
 tol = 10^(-5);
 
-
-for n=100:100:1000
-
-   A = matr_sparsa_es1(n);
-
-   [l, i] = potenze(A, tol);
+for n = 100:100:1000
+   [l, i] = potenze(matr_sparsa_es1(n), tol);
 
    record = {n, i, l};
    Table = [Table; record];
@@ -35,7 +31,7 @@ function [lambda1, it] = potenze(A, tol)
         z = A * q;
         lambda0 = lambda1;
         lambda1 = q'*z;
-        err = abs(lambda0-lambda1);
+        err = abs(lambda0 - lambda1);
         it = it + 1;
     end
 end

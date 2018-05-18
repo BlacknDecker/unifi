@@ -1,5 +1,4 @@
 function A = matr_sparsa_es1(n)
-
     if n <= 10
         error('n deve essere > 10')
     end
