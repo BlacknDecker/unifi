@@ -13,3 +13,6 @@ pdf: clean
 view: pdf
 	firefox-developer-edition main.pdf
 
+prog:
+	pdflatex programma/prog.tex
+
