@@ -61,6 +61,26 @@ Dato un polinomio booleano $p \in PB(x_1, \ldots, x_n)$ in $CNF$, determinare se
 
 Si parte dagli stessi presupposti del problema $SAT$ originale, con la condizione addizionale che il polinomio di cui decidere la soddisfacibilità è in \textbf{3CNF}, ovvero le sue clausole contengono \textit{esattamente} 3 letterali.
 
+\vspace{0.4cm}
+
 \begin{lemm}
   $3SAT \in NP$.
 \end{lemm}
+
+\begin{proof}
+	Segue immediatamente dal fatto che $SAT$ sia un problema $NP$ (alla fine $SAT$ è solo una definizione più generale di $3SAT$).
+\end{proof}
+
+\vspace{0.4cm}
+
+\begin{lemm}
+	$3SAT$ è un problema $NP-Completo$. 
+\end{lemm}
+
+\begin{remark}
+	$3SAT$ è il primo fra tutti i $k-SAT$ ad essere $NPC$. Spesso per dimostrare che un problema è $NPC$, si cerca una riduzione ad esso da $3SAT$ perché è il più semplice in $NPC$. 
+\end{remark}
+
+\begin{proof}
+	coming soon
+\end{proof}
