@@ -77,10 +77,14 @@ Si parte dagli stessi presupposti del problema $SAT$ originale, con la condizion
 	$3SAT$ è un problema $NP-Completo$. 
 \end{lemm}
 
+\begin{proof}
+	Per ridurre $SAT$ a $3SAT$, basta dimostrare che si può trasformare un polinomio booleano generico in uno equivalente le cui clausole abbiano esattamente 3 letterali. \\ \\
+	Dato un polinomio $p \in PB(n)$ in $CNF$, sia $f : PB(n) \rightarrow PB(n)$ la nostra riduzione polinomiale da $SAT$ a $3SAT$: $f(p)$ sarà un polinomio $p' \in PB(n)$ in $3CNF$ tale che $p$ sia soddisfacibile se e solo se $p'$ lo è.  La descrizione della riduzione $f$ è piuttosto intricata, perciò la saltiamo del tutto.
+\end{proof}
+
+\vspace{0.4cm}
+
 \begin{remark}
 	$3SAT$ è il primo fra tutti i $k-SAT$ ad essere $NPC$. Spesso per dimostrare che un problema è $NPC$, si cerca una riduzione ad esso da $3SAT$ perché è il più semplice in $NPC$. 
 \end{remark}
 
-\begin{proof}
-	coming soon
-\end{proof}
