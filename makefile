@@ -1,18 +1,12 @@
 .PHONY: 	clean
 .PHONY:		view
 
-.DEFAULT_GOAL := 	view
+.DEFAULT_GOAL := all
 
-clean:
-	-rm -f main.out main.toc main.aux
+all: elab prog
 
-# I know, I know
-pdf: clean
-	pdflatex main.tex; pdflatex main.tex;
-	
-view: pdf
-	firefox-developer-edition main.pdf
+elab:
+	pdflatex main.tex;
 
 prog:
-	pdflatex programma/prog.tex
-
+	pdflatex progr/prog.tex

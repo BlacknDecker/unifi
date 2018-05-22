@@ -1,22 +1,20 @@
 \begin{center}
 \footnotesize\noindent\fbox{
 	\parbox{\textwidth}{
-		Sia \(x=e \approx 2.7183 = \overline{x}\). Si calcoli il corrispondente errore relativo \(\epsilon_x\) e il numero di cifre significative \(k\) con cui \(\overline{x}\) approssima \(x\). Si verifichi che \(|\epsilon_x|\approx \frac{1}{2}10^{-k}\).
+		Sia \(x=e \approx 2.7183 = \overline{x}\). Si calcoli il corrispondente errore relativo \(\varepsilon_x\) e il numero di cifre significative \(k\) con cui \(\overline{x}\) approssima \(x\). Si verifichi che \(|\varepsilon_x|\approx \frac{1}{2}10^{-k}\).
 	}
 }\end{center}
 
-\noindent Dato \(\overline{x} = 2.7183\) e dato \(x = e = 2.718281828459\ldots \) si calcolano l'errore assoluto e l'errore relativo.
+\noindent Dato \(\overline{x} = 2.7183\) e dato \(x = e = 2.718281828459\ldots \space \) si calcolano l'errore assoluto e l'errore relativo.
 
 \begin{itemize}
-
-\item errore assoluto: \(\Delta x = \overline{x} - x = 2.7183 - e \approx 1.82 \times 10^{-5}\)
-\item errore relativo: \(\epsilon_x = \frac{\Delta x}{x} = \frac{ 1.82 \times 10^{-5}}{e} \approx 6.68 \times 10^{-6}\)
-
+	\item errore assoluto: \(\Delta x = \overline{x} - x = 2.7183 - e \approx 1.82 \times 10^{-5}\)
+	\item errore relativo: \(\varepsilon_x = \frac{\Delta x}{x} = \frac{ 1.82 \times 10^{-5}}{e} \approx 6.68 \times 10^{-6}\)
 \end{itemize}
 
 \noindent Si verfica adesso che:
 
 \begin{itemize}
-\item \(\overline{x} = 2.7183\) approssima \(e\) con \(k=5\) cifre significative
-\item \( \frac{1}{2}10^{-k} = 0.5 \times 10^{-5} \approx 6.68 \times 10^{-6} = |\epsilon_x|\)
+	\item \(\overline{x} = 2.7183\) approssima \(e\) con \(k=5\) cifre significative
+	\item \( \frac{1}{2}10^{-k} = 0.5 \times 10^{-5} \approx 6.68 \times 10^{-6} = |\varepsilon_x|\)
 \end{itemize}

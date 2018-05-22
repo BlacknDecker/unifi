@@ -17,11 +17,18 @@ R_{n,x_0}(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}
 \]
 \noindent Abbiamo:
 \[
-f_T(x) = P_2(x) + R_{2, x_0}(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2 + \frac{f'''(c)}{6}(x-x_0)^3
+f_T(x) = P_2(x) + R_{2, x_0}(x)
 \]
+\[
+f_T(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2}(x-x_0)^2 + \frac{f'''(c)}{6}(x-x_0)^3
+\]
+
+\noindent Quindi, considerando il rapporto incrementale che definisce \(f'(x)\):
+
 \[
 f_T(x + h) = f(x) + f'(x)h + \frac{1}{2} f''h^2 + \frac{f'''(c)}{6}h^3
 \]
+
 \[
 f_T(x - h) = f(x) - f'(x)h + \frac{1}{2} f''h^2 + \frac{f'''(c)}{6}h^3
 \]

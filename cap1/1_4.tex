@@ -14,24 +14,24 @@
 
 \end{itemize}
 
-\noindent Ricordando che \(fl(a) = a + a\epsilon_a = a (1 + \epsilon_a)\) e che \(|\epsilon_a| \leq u\) con \(u\) precisione di macchina, possiamo ricavare:
+\noindent Ricordando che \(fl(a) = a + a\varepsilon_a = a (1 + \varepsilon_a)\) e che \(|\varepsilon_a| \leq u\) con \(u\) precisione di macchina, possiamo ricavare:
 
 \[
-|\epsilon_{(x \oplus y) \oplus z }| = \frac{|fl( fl( fl(x) + fl(y) ) + fl(z)) - (x + y + z)|}{|x+y+z|}
+|\varepsilon_{(x \oplus y) \oplus z }| = \frac{|fl( fl( fl(x) + fl(y) ) + fl(z)) - (x + y + z)|}{|x+y+z|}
 \]
 \[=
-\frac{|((x + x\epsilon_x + y + y\epsilon_y)(1+\epsilon_{x \oplus y}) + z + z\epsilon_z)(1 +\epsilon_{(x \oplus y) \oplus z }) - (x+y+z)|}{|x+y+z|}
+\frac{|((x + x\varepsilon_x + y + y\varepsilon_y)(1+\varepsilon_{x \oplus y}) + z + z\varepsilon_z)(1 +\varepsilon_{(x \oplus y) \oplus z }) - (x+y+z)|}{|x+y+z|}
 \]
 \[
-=\frac{\left|\splitfrac{x\epsilon_x + y\epsilon_y + x\epsilon_{x \oplus y} + x\epsilon_x\epsilon_{x \oplus y} + y\epsilon_{x \oplus y} + y\epsilon_y\epsilon_{x \oplus y} + z\epsilon_z + x\epsilon_x\epsilon_{(x \oplus y) \oplus z} + y\epsilon_y\epsilon_{(x \oplus y) \oplus z}    }{     + x\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + x\epsilon_x\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + y\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + y\epsilon_y\epsilon_{x \oplus y}\epsilon_{(x \oplus y) \oplus z} + z\epsilon_z\epsilon_{(x \oplus y) \oplus z}}\right|}{|x+y+z|}
+=\frac{\left|\splitfrac{x\varepsilon_x + y\varepsilon_y + x\varepsilon_{x \oplus y} + x\varepsilon_x\varepsilon_{x \oplus y} + y\varepsilon_{x \oplus y} + y\varepsilon_y\varepsilon_{x \oplus y} + z\varepsilon_z + x\varepsilon_x\varepsilon_{(x \oplus y) \oplus z} + y\varepsilon_y\varepsilon_{(x \oplus y) \oplus z}    }{     + x\varepsilon_{x \oplus y}\varepsilon_{(x \oplus y) \oplus z} + x\varepsilon_x\varepsilon_{x \oplus y}\varepsilon_{(x \oplus y) \oplus z} + y\varepsilon_{x \oplus y}\varepsilon_{(x \oplus y) \oplus z} + y\varepsilon_y\varepsilon_{x \oplus y}\varepsilon_{(x \oplus y) \oplus z} + z\varepsilon_z\varepsilon_{(x \oplus y) \oplus z}}\right|}{|x+y+z|}
 \]
 \[
-\leq \frac{\left|\splitfrac{\max \{\epsilon_x, \epsilon_y, \epsilon_z\}(2x+2y+z) }{  \splitfrac{+ \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} ^2 (3x+3y+z) }{+  \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} ^3 (x+y)}}\right|}{|x+y+z|}
+\leq \frac{\left|\splitfrac{\max \{\varepsilon_x, \varepsilon_y, \varepsilon_z\}(2x+2y+z) }{  \splitfrac{+ \max \{\varepsilon_x, \varepsilon_y, \varepsilon_z, \varepsilon_{x \oplus y}, \varepsilon_{(x \oplus y) \oplus z}\} ^2 (3x+3y+z) }{+  \max \{\varepsilon_x, \varepsilon_y, \varepsilon_z, \varepsilon_{x \oplus y}, \varepsilon_{(x \oplus y) \oplus z}\} ^3 (x+y)}}\right|}{|x+y+z|}
 \]
 
-\noindent Data la natura dell'errore relativo, possiamo trascurare tutti i termini di gradi superiore al primo in quanto sensibilmente pi\'u piccoli di \(\max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} \). Avremo quindi:
+\noindent Data la natura dell'errore relativo, possiamo trascurare tutti i termini di gradi superiore al primo in quanto sensibilmente pi\'u piccoli di \(\max \{\varepsilon_x, \varepsilon_y, \varepsilon_z, \varepsilon_{x \oplus y}, \varepsilon_{(x \oplus y) \oplus z}\} \). Avremo quindi:
 \[
-|\epsilon_{(x \oplus y) \oplus z }| \leq \max \{\epsilon_x, \epsilon_y, \epsilon_z, \epsilon_{x \oplus y}, \epsilon_{(x \oplus y) \oplus z}\} \frac{|2x + 2y + z|}{|x+y+z|}
+|\varepsilon_{(x \oplus y) \oplus z }| \leq \max \{\varepsilon_x, \varepsilon_y, \varepsilon_z, \varepsilon_{x \oplus y}, \varepsilon_{(x \oplus y) \oplus z}\} \frac{|2x + 2y + z|}{|x+y+z|}
 \]
 \[
 \leq u \frac{|2x + 2y + z|}{|x+y+z|}
@@ -40,5 +40,5 @@
 \noindent Svolgendo un procedimento del tutto analogo al precedente, nel caso di \((y \oplus z) \oplus x \) avremo:
 
 \[
-\epsilon_{(y \oplus z) \oplus x } \leq u \frac{|2y + 2z + x|}{|x+y+z|}
+\varepsilon_{(y \oplus z) \oplus x } \leq u \frac{|2y + 2z + x|}{|x+y+z|}
 \]
