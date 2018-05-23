@@ -1,28 +1,18 @@
 \section{Classi di Complessità}
 
-\subsection{Macchine di Turing non deterministiche}
-
-\begin{lemm}
-	Sia $M$ una MdT non deterministica con grado di non determinismo $\sigma$ e con $tc_M(n) = f(n)$. Esiste una MdT non deterministica $M'$ equivalente ad $M$ tale che $tc_{M'}(n) = O(f(n)\sigma^{f(n)})$.
-\end{lemm}
-
-\begin{proof}
-	Basta trasfrmare $M$ in una MdT deterministica: presa in input una stringa $w$ di lunghezza $n$, si genera una tupla di interi $(m_1, \ldots, m_{f(n)})$ con ogni $m_j \leq \sigma$ e si simula la computazione associata. Il costo nel caso peggiore di questo scenario è $f(n)\sigma^{f(n)}$.
-\end{proof}
-
 \subsection{Classi P e NP}
 
-\begin{defn}
-	Un linguaggio $L$ è decidibile in tempo \textbf{polinomiale} quando esiste una MdT $M$ \textbf{deterministica} che lo accetta con $tc_M(n) = O(n^r)$ per un qualche $r \in N$. Quando questo si verifica, si dice che $L \in P$.
+\begin{defn}[Classe P]
+	Un linguaggio $L$ è decidibile in tempo \textbf{polinomiale} quando esiste una MdT $M$ \textbf{deterministica} che lo accetta con $tc_M(n) = O(n^r)$ per un qualche $r \in N$. \\ Quando questo si verifica, si dice che $L \in P$.
 \end{defn}
 
-\vspace{0.2cm}
+\vspace{0.25cm}
 
-\begin{defn}
-	Un linguaggio si dice decidibile in tempo \textbf{polinomiale non deterministico} quando esiste una MdT $M$ \textbf{non deterministica} che lo accetta con $tc_M(n) = O(n^r)$ per un qualche $r \in N$. In questo caso si dice che $L \in NP$.
+\begin{defn}[Classe NP]
+	Un linguaggio si dice decidibile in tempo \textbf{polinomiale non deterministico} quando esiste una MdT $M$ \textbf{non deterministica} che lo accetta con $tc_M(n) = O(n^r)$ per un qualche $r \in N$. \\ In questo caso si dice che $L \in NP$.
 \end{defn}
 
-Osserviamo che $P \subset NP$. \textit{Vale $P = NP$? Oppure $P \neq NP$?} Il problema è aperto.
+Osserviamo che $P \subset NP$. \textit{Vale $P = NP$? Oppure $P \neq NP$?} Il problema è aperto. \\
 
 Un \textbf{esempio di problema NP} è il problema del circuito hamiltoniano. Definiamo:
 
@@ -32,37 +22,36 @@ Un \textbf{esempio di problema NP} è il problema del circuito hamiltoniano. Def
 		\subitem una permutazione di vertici distinti tale che $(v_i, v_i+1) \in E$ per ogni $i \leq n-1$
 \end{itemize}
 
-\textbf{Problema del circuito hamiltoniano}: \textit{dato G, determinare se ha un circuito hamiltoniano.}
+\noindent\textbf{Problema del circuito hamiltoniano}: \textit{dato G, determinare se ha un circuito hamiltoniano, cioè se esiste un cammmino che tocca tutti i vertici una volta sola.}
 
-Tale problema è decidibile. Se per risolverlo ci avvaliamo di una MdT deterministica, la sua complessità tmeporale è esponenziale. Usando invece una MdT non deterministica, è possibile risolverlo con complessità tmeporale polinomiale. Perciò $HAM \in NP$.
+Tale problema è decidibile. Se per risolverlo ci avvaliamo di una MdT deterministica, la sua complessità temporale nel caso peggiore è esponenziale: occorre generare tutte le possibili sequenze di vertici e provare a percorrerle, quindi con $n$ vertici si avranno $n^n-1$ possibili sequenze. Usando invece una MdT non deterministica, è possibile risolverlo con complessità temporale polinomiale. Perciò $HAM \in NP$.
 
 \subsection{Classe NP-Difficile}
 
-\begin{defn}
+\begin{defn}[Classe NPH]
 	Un linguaggio $L$ si dice $Np-Difficile$ (o $NP-hard$) quando per ogni $L' \in NP$ esiste una riduzione polinomiale da $L'$ a $L$. In altre parole, un linguaggio è $NP-Difficile$ quando ogni linguaggio in $NP$ può essere ridotto ad esso con una riduzione polinomiale.
 \end{defn}
 
 \subsection{NP-Completezza}
 
-\begin{defn}
+\begin{defn}[Classe NPC]
 	Quando un linguaggio è sia $NP-Difficle$ che appartenente ad $NP$, si dice che è $NP-Completo$.
 \end{defn}
 
-\vspace{0.2cm}
+Se trovassimo un linguaggio $NP-Completo$ che appartenga alla classe $P$, questo dimostrerebbe che $P = NP$. Di seguito una formalizzazione di questo concetto:
 
-\begin{lemm}
-	Sia $Q \in P$ e anche $NP-Completo$, allora per ogni $L \in NP$ vale anche $L \in P$. Ne seguirebbe che $P = NP$.
+\begin{lemm}[Implicazione della NP-Completezza]
+	Sia $Q \in P$ e anche $NP-Completo$, allora per ogni $L \in NP$ vale anche $L \in P$.
 \end{lemm}
 
 \begin{proof}
-	Se $Q$ è un problema $NP-Completo$, per sua definizione ogni linguaggio nella classe $NP$ può essere ridotto a $Q$. Se $Q \in P$, ogni linguaggio della classe $NP$ può essere ridotto ad un linguaggio della classe $P$, sigificando che in realtà $P = NP$. \\ Prendiamo $L \in NP$ come il generico linguaggio in classe $NP$, e sia $f$ una riduzione polinomiale da $L$ al nostro linguaggio $NP-Completo$ $Q$, che esiste sicuramente per definizione di $Np-Completezza$. Dato un input $w$, calcolo $f(w)$ e valuto se $f(w) \in Q$ usando una MdT deterministica polinomiale che ho per ipotesi dato che $Q \in P$. Questo appena descritto è un algoritmo di decisione per $L$ con complessità temporale polinomiale, quindi ogni generico $L \in P$ e, conseguentemente, $P = NP$.
+	Se $Q$ è un problema $NP-Completo$, per sua definizione ogni linguaggio nella classe $NP$ può essere ridotto a $Q$. Se $Q \in P$, ogni linguaggio della classe $NP$ può essere ridotto ad un linguaggio della classe $P$, sigificando che in realtà $P = NP$. \\ Prendiamo $L \in NP$ come il generico linguaggio in classe $NP$, e sia $f$ una riduzione polinomiale da $L$ al nostro linguaggio $NP-Completo$ $Q$, che esiste sicuramente per definizione di $Np-Completezza$. Dato un input $w$, calcolo $f(w)$ e valuto se $f(w) \in Q$ usando una MdT deterministica polinomiale che ho per ipotesi dato che $Q \in P$. Questo appena descritto è un algoritmo di decisione per $L$ con complessità temporale polinomiale, quindi ogni generico $L \in P$ e, conseguentemente, $P = NP$. \\
+	In estrema sintesi, per ogni $L \in NP$, se ho un $Q \in P$ che è anche $NP-Completo$, per ogni stringa $w$ calcolo la riduzione $f(w)$ e valuto se appartiene a $Q$, tutto in tempo polinomiale. Quindi, in realtà, ogni $L \in NP$ sarebbe anche in $P$.
 
 \end{proof}
 
-\vspace{0.2cm}
-
-\begin{lemm}
-	Se fosse $P = NP$, ogni linguaggio $L \in NP$ tale che $L \neq \O$ e che $L^C \neq \O$ è $Np-Completo$.
+\begin{lemm}[Implicazione di P=NP]
+	Se fosse $P = NP$, ogni linguaggio $L \in NP$ tale che $L \neq \O$ e che $L^C \neq \O$ è $NP-Completo$.
 \end{lemm}
 
 \begin{proof}
@@ -73,10 +62,9 @@ Tale problema è decidibile. Se per risolverlo ci avvaliamo di una MdT determini
 	Quindi, se $\O \notin NPC$, la riduzione esiste per tutti i linguaggi in $NP$.
 \end{proof}
 
-\vspace{0.2cm}
-
-\begin{lemm}
-	$L \in NPC$, $f$ riduzione polinomiale da $L$ a $Q$, $Q \in NP-Hard$. In altre parole, se c'è una riduzione polinomiale da un linguaggio $Np-Completo$ ad un altro linguaggio, quest'ultimo è $NP-Difficile$.
+\begin{lemm}[Implicazione della riducibilità da linguaggi NPC]
+	$L \in NPC$, $f$ riduzione polinomiale da $L$ a $Q$, $Q \in NP-Hard$. \\
+	In altre parole, se c'è una riduzione polinomiale da un linguaggio $Np-Completo$ ad un altro linguaggio, quest'ultimo è $NP-Difficile$.
 \end{lemm}
 
 \begin{proof}
