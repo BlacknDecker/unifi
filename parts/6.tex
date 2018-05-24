@@ -27,11 +27,15 @@ In altre parole, il vertex cover è un insieme di vertici tale che ogni arco del
         \item $V = V_1 \bigcup V_2$ insieme di tutti i vertici di $G(p)$
         \item Un complesso sistema di specchi e leve$^{cit.}$ che consiste nel collegare fra loro con degli archi le coppie $x_i, x_i'$, le terne $u_{n,1}, u_{n,2}, u_{n,3}$ ed i vari $u_{i,j}$ alla variabile che rappresentano in $p$.
     \end{itemize}
-\end{proof}
 
-\begin{remark}
-	Il vertex cover di $G(p)$ è composto da almeno $n+2m$ vertici, con $n$ numero delle variabili e $m$ numero delle clausole.
-\end{remark}
+    \begin{remark}
+	    Il vertex cover di $G(p)$ è composto da almeno $n+2m$ vertici, con $n$ numero delle variabili e $m$ numero delle clausole.
+    \end{remark}
+
+    Ora, sia $t$ l'assegnamento che soddisfa $p$. Possiamo ricostruire il vertex cover $C \subseteq V$ di cardinalità $n+2m$ considerando l'insieme $C = \{x_i \text{variabile di } p | t(x_i)=1\} \bigcup \{\{x_i' \text{variabile di } p | t(x_i')=1\}$. Intanto abbiamo un insieme di $n$ elementi che copre i vertici rappresentanti le variabili. Per coprire anche i vertici $u_{j,s}$ che rappresentano i letterali, per ogni clausola $u_j$ vado a vedere quale è collegata al letterale tale che $t(u_{js}) = 1$ ed aggiungo a $C$le altre due. In questo modo si aggiungono altri $2m$ elementi, ed ho finalmente la cardinalità $n+2m$. \\
+    Quella mostrata è una riduzione polinomiale da $3SAT$ a $VC$, in quanto $p \in PB(n)$ in $3CNF$ con $m$ clausole risulta soddisfacibile solo se $G(p)$ ha almeno un vertex cover di cardinalità $n+2m$. Ciò significa che $VC$ è un problema $NP-Difficile$, ed in quanto problema $NP$, è anche $NP-Completo$.
+\end{proof}
 
 \subsection{Clique}
 
+Coming soon?

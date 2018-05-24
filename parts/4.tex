@@ -8,6 +8,14 @@
 
 \vspace{0.25cm}
 
+Sia $L$ un linguaggio su $sum$. $L^C$ detto linguaggio complementare di $L$ è definito come $\Sigma^\ast \setminus L$. In pratica, $L^C$ è composto dalle possibili parole su $\Sigma$ che non sono in $L$. \\
+
+\begin{remark}
+	La classe $P$ è chiusa per complementazione.
+\end{remark}
+
+Immaginando una classe di complessità $co-P$, popolata da tutti i linguaggi $L^C$ tali che $L \in P$, avremo che $P = co-P = {L^C \text{ tale che } L \in P}$. Dimostrarlo è una sciocchezza, se una MdT deterministica accetta $L$ in tempo polinomiale, invertendo le condizioni di verifica accetterà anche $L^C$ in tempo polinomiale. \\
+
 \begin{defn}[Classe NP]
 	Un linguaggio si dice decidibile in tempo \textbf{polinomiale non deterministico} quando esiste una MdT $M$ \textbf{non deterministica} che lo accetta con $tc_M(n) = O(n^r)$ per un qualche $r \in N$. \\ In questo caso si dice che $L \in NP$.
 \end{defn}
@@ -38,7 +46,7 @@ Tale problema è decidibile. Se per risolverlo ci avvaliamo di una MdT determini
 	Quando un linguaggio è sia $NP-Difficle$ che appartenente ad $NP$, si dice che è $NP-Completo$.
 \end{defn}
 
-Se trovassimo un linguaggio $NP-Completo$ che appartenga alla classe $P$, questo dimostrerebbe che $P = NP$. Di seguito una formalizzazione di questo concetto:
+Se trovassimo un linguaggio $NP-Completo$ che appartenga alla classe $P$, questo dimostrerebbe che $P = NP$. Di seguito una formalizzazione di questo concetto: \\
 
 \begin{lemm}[Implicazione della NP-Completezza]
 	Sia $Q \in P$ e anche $NP-Completo$, allora per ogni $L \in NP$ vale anche $L \in P$.
@@ -70,3 +78,13 @@ Se trovassimo un linguaggio $NP-Completo$ che appartenga alla classe $P$, questo
 \begin{proof}
 	Ovvio, perché se $L$ è $NP-Completo$ ogni linguaggio $NP$ può essere ridotto ad $L$ e la riduzione $f$ da $L$ a $Q$ esiste per ipotesi. Quindi, ogni linguaggio $NP$ può essere ridotto a $Q$ tramite la composizione delle funzioni di riduzione verso $L$ con $f$.
 \end{proof}
+
+\subsection{Linguaggi Np-Intermedi}
+
+La classe $NPI$ è una classe di linguaggi che comprende quelli di classe $NP$ che però non sono $NP-Completi$. Conseguentemente, risolvere un problema $NP-Intermedio$ in tempo polinomiale deterministico \textbf{non} consentirebbe di dimostrare che $P=NP$. \\
+
+Supponendo che $P \neq NP$, abbiamo che $NPC \bigcap P = 0$ e che $NPI = NP \setminus \{NPC \bigcup P\}$. \\
+
+\begin{lemm}[Teorema di Ladner]
+	Se $P \neq NP$, allora $NPI \neq \emptyset$. \\ Analogamente, se $P \neq NP$, esiste almeno un $L \in NPI$.
+\end{lemm}
