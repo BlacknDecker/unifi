@@ -53,7 +53,7 @@ Se trovassimo un linguaggio $NP-Completo$ che appartenga alla classe $P$, questo
 \end{lemm}
 
 \begin{proof}
-	Se $Q$ è un problema $NP-Completo$, per sua definizione ogni linguaggio nella classe $NP$ può essere ridotto a $Q$. Se $Q \in P$, ogni linguaggio della classe $NP$ può essere ridotto ad un linguaggio della classe $P$, sigificando che in realtà $P = NP$. \\ Prendiamo $L \in NP$ come il generico linguaggio in classe $NP$, e sia $f$ una riduzione polinomiale da $L$ al nostro linguaggio $NP-Completo$ $Q$, che esiste sicuramente per definizione di $Np-Completezza$. Dato un input $w$, calcolo $f(w)$ e valuto se $f(w) \in Q$ usando una MdT deterministica polinomiale che ho per ipotesi dato che $Q \in P$. Questo appena descritto è un algoritmo di decisione per $L$ con complessità temporale polinomiale, quindi ogni generico $L \in P$ e, conseguentemente, $P = NP$. \\
+	Se $Q$ è un problema $NP-Completo$, per sua definizione ogni linguaggio nella classe $NP$ può essere ridotto a $Q$. Se $Q \in P$, ogni linguaggio della classe $NP$ può essere ridotto ad un linguaggio della classe $P$, sigificando che in realtà $P = NP$. \\ \\ Prendiamo $L \in NP$ come il generico linguaggio in classe $NP$, e sia $f$ una riduzione polinomiale da $L$ al nostro linguaggio $NP-Completo$ $Q$, che esiste sicuramente per definizione di $Np-Completezza$. Dato un input $w$, calcolo $f(w)$ e valuto se $f(w) \in Q$ usando una MdT deterministica polinomiale che ho per ipotesi dato che $Q \in P$. Questo appena descritto è un algoritmo di decisione per $L$ con complessità temporale polinomiale, quindi ogni generico $L \in P$ e, conseguentemente, $P = NP$. \\ \\
 	In estrema sintesi, per ogni $L \in NP$, se ho un $Q \in P$ che è anche $NP-Completo$, per ogni stringa $w$ calcolo la riduzione $f(w)$ e valuto se appartiene a $Q$, tutto in tempo polinomiale. Quindi, in realtà, ogni $L \in NP$ sarebbe anche in $P$.
 
 \end{proof}
@@ -78,13 +78,3 @@ Se trovassimo un linguaggio $NP-Completo$ che appartenga alla classe $P$, questo
 \begin{proof}
 	Ovvio, perché se $L$ è $NP-Completo$ ogni linguaggio $NP$ può essere ridotto ad $L$ e la riduzione $f$ da $L$ a $Q$ esiste per ipotesi. Quindi, ogni linguaggio $NP$ può essere ridotto a $Q$ tramite la composizione delle funzioni di riduzione verso $L$ con $f$.
 \end{proof}
-
-\subsection{Linguaggi Np-Intermedi}
-
-La classe $NPI$ è una classe di linguaggi che comprende quelli di classe $NP$ che però non sono $NP-Completi$. Conseguentemente, risolvere un problema $NP-Intermedio$ in tempo polinomiale deterministico \textbf{non} consentirebbe di dimostrare che $P=NP$. \\
-
-Supponendo che $P \neq NP$, abbiamo che $NPC \bigcap P = 0$ e che $NPI = NP \setminus \{NPC \bigcup P\}$. \\
-
-\begin{lemm}[Teorema di Ladner]
-	Se $P \neq NP$, allora $NPI \neq \emptyset$. \\ Analogamente, se $P \neq NP$, esiste almeno un $L \in NPI$.
-\end{lemm}

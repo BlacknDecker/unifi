@@ -23,7 +23,7 @@ Definiamo due concetti:
 
 \subsection{SAT}
 
-Dato un polinomio booleano $p \in PB(x_1, \ldots, x_n)$ in $CNF$, determinare se esiste una n-upla $(t_1, \ldots, t_n) \in \{0, 1\}^n$ tale da soddisfare $p$.
+Dato un polinomio booleano $p \in PB(x_1, \ldots, x_n)$ in $CNF$, determinare se esiste una n-upla $(t_1, \ldots, t_n) \in \{0, 1\}^n$ tale da soddisfare $p$. \\
 
 \begin{lemm}
 	$SAT \in NP$.
@@ -41,7 +41,7 @@ Dato un polinomio booleano $p \in PB(x_1, \ldots, x_n)$ in $CNF$, determinare se
 	Sia $L$ un generico linguaggio $NP$. Evidentemente, esiste una MdT $M$ non deterministica che accetta $L$ in tempo polinomiale. Possiamo descrivere una riduzione polinomiale da $L$ a $L_{SAT}$, ovvero descrivere una MdT che trasforma l'input $w$ di $M$ in un polinomio booleano tale che $M$ accetta $w$ se e solo se questo polinomio è soddisfacibile.
 \end{proof}
 
-In altre parole, ogni $L \in NP$ è riducibile a $L_{SAT}$ tramite una riduzione polinomiale $f$ tale che $w \in L$ se e solo se $f(w) \in L_{SAT}$.
+In altre parole, ogni $L \in NP$ è riducibile a $L_{SAT}$ tramite una riduzione polinomiale $f$ tale che $w \in L$ se e solo se $f(w) \in L_{SAT}$. \\
 
 \begin{lemm}[\textbf{Teorema di Cook}]
 	$SAT$ è un problema $NP-Completo$.
@@ -53,7 +53,7 @@ In altre parole, ogni $L \in NP$ è riducibile a $L_{SAT}$ tramite una riduzione
 
 \subsection{3SAT}
 
-Si parte dagli stessi presupposti del problema $SAT$ originale, con la condizione addizionale che il polinomio di cui decidere la soddisfacibilità è in \textbf{3CNF}, ovvero le sue clausole contengono \textit{esattamente} 3 letterali.
+Si parte dagli stessi presupposti del problema $SAT$ originale, con la condizione addizionale che il polinomio di cui decidere la soddisfacibilità è in \textbf{3CNF}, ovvero le sue clausole contengono \textit{esattamente} 3 letterali. \\
 
 \begin{lemm}
   $3SAT \in NP$.
