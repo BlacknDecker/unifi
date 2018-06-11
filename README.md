@@ -1,2 +1,3 @@
-# unifi
-Projects and notes raked up during my university career, Università degli Studi di Firenze
+# Università degi Studi di Firenze
+
+Projects and notes raked up during my Computer Science career.

@@ -1,5 +1,4 @@
-# networks-class-homework
-Title says it all, uh?
+# Reti di Calcolatori - specifica progetto
 
 Spec [ITA]: martedì, 5 dicembre 2017, 12:16
 
@@ -9,7 +8,7 @@ L'obiettivo del progetto è quello di sviluppare un server HTTP.  Il progetto pr
     La realizzazione di una serie di test in Java che verifichino il corretto funzionamento delle funzionalità base;
     La realizzazione di una serie di script Python che mostrano il comportamento del server.
 
-Il progetto può essere svolto in gruppo. In questo caso il gruppo non può contenere più di tre persone e tutti i componenti del gruppo devono sostenere l'esame nella stessa data. 
+Il progetto può essere svolto in gruppo. In questo caso il gruppo non può contenere più di tre persone e tutti i componenti del gruppo devono sostenere l'esame nella stessa data.
 
 Per semplificare l'accesso alle classi sviluppate, il progetto dovrà fornire una implementazione per l'interfaccia HTTPFactory (vedere le specifiche sotto). I metodi eventualmente non implementati dovranno restituire null. La classe, chiamata MyHTTPFactory, dovrà far parte del pacchetto:
 
@@ -22,7 +21,7 @@ Livello 0. Fornire l'implementazione per le interfacce:
     HTTPRequest
     HTTPReply
 
-Queste interfacce identificano, rispettivamente, una richiesta ed una risposta del protocollo HTTP. 
+Queste interfacce identificano, rispettivamente, una richiesta ed una risposta del protocollo HTTP.
 
 Livello 1. Fornire una implementazione per le classi astratte:
 
@@ -60,7 +59,7 @@ Valutazione: Il progetto verrà valutato rispetto a tre aspetti:
 
     Corretto funzionamento del codice consegnato;
     Organizzazione e pulizia del codice (presenza di commenti, struttura dei metodi,...);
-    Design della soluzione proposta. 
+    Design della soluzione proposta.
 
 Consegna: Il progetto dovrà essere consegnato almeno una settimana prima dell'orale
 
