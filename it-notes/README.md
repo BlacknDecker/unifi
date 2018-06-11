@@ -1,2 +1,3 @@
-# tcs-notes
-Theoretical computer science notes, translates from Hieroglyphs to Italian
+# Informatica Teorica - Theoretical Computer Science
+
+Theoretical computer science notes, translated from Hieroglyphs to Italian
