@@ -1,0 +1,80 @@
+=== Run information ===
+
+Scheme:       weka.clusterers.SimpleKMeans -init 0 -max-candidates 100 -periodic-pruning 10000 -min-density 2.0 -t1 -1.25 -t2 -1.0 -V -M -N 4 -A "weka.core.EuclideanDistance -R first-last" -I 500 -num-slots 1 -S 110
+Relation:     TRE ANNI IMMATRICOLATI 2010-2013 PER STUDENTI-weka.filters.unsupervised.attribute.Remove-R6-45-weka.filters.unsupervised.attribute.Normalize-S100.0-T0.0-weka.filters.unsupervised.attribute.NumericToNominal-Rfirst
+Instances:    212
+Attributes:   5
+              test
+              crediti_totali
+              crediti_con_voto
+              voto_medio
+Ignored:
+              coorte
+Test mode:    Classes to clusters evaluation on training data
+
+=== Clustering model (full training set) ===
+
+
+kMeans
+======
+
+Number of iterations: 7
+Within cluster sum of squared errors: 12.31523879921128
+
+Initial starting points (random):
+
+Cluster 0: 68,98.333333,100,30.769231
+Cluster 1: 44,11.666667,8.163265,15.384615
+Cluster 2: 44,30,28.571429,38.461538
+Cluster 3: 80,50,53.061224,46.153846
+
+
+Final cluster centroids:
+                                Cluster#
+Attribute           Full Data          0          1          2          3
+                      (212.0)    (101.0)     (30.0)     (45.0)     (36.0)
+=========================================================================
+test                  57.5849    62.2178    42.1333    59.5556         55
+                   +/-15.9495 +/-14.1135 +/-14.8828 +/-13.9668 +/-16.0392
+
+crediti_totali        58.5404    92.7063     3.2222    20.3333    56.5432
+                   +/-37.2117  +/-8.0686   +/-5.103 +/-10.3084 +/-11.5867
+
+crediti_con_voto      60.0982    96.6862     1.5646    16.5986    60.6009
+                   +/-40.1568  +/-5.7278  +/-3.5422 +/-12.2958 +/-13.9437
+
+voto_medio            46.4078    57.4257     6.4103    47.8632    47.0085
+                   +/-22.3971 +/-14.8589 +/-10.5129 +/-17.6549 +/-13.6094
+
+
+
+
+
+Time taken to build model (full training data) : 0 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0      101 ( 48%)
+1       30 ( 14%)
+2       45 ( 21%)
+3       36 ( 17%)
+
+
+Class attribute: coorte
+Classes to Clusters:
+
+  0  1  2  3  <-- assigned to cluster
+ 16  3  8  3 | 2010
+ 18  5 10  5 | 2011
+ 38  6 10  5 | 2012
+ 29 16 17 23 | 2013
+
+Cluster 0 <-- 2012
+Cluster 1 <-- 2010
+Cluster 2 <-- 2011
+Cluster 3 <-- 2013
+
+Incorrectly clustered instances :	138.0	 65.0943 %
+

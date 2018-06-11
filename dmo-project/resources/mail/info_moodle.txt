@@ -1,0 +1,16 @@
+Dato che mi stanno arrivando varie richieste di chiarimento sul progetto,  riporto qui per tutti alcune indicazioni generali già discusse ampiamente a lezione o che trovate su questo sito alla voce Modalità d’esame. Si tratta di un progetto di data mining completo che prevede le seguenti fasi che dovranno essere descritte e commentate in una breve relazione e successivamente presentate in una discussione di gruppo.
+
+Data understanding e preprocessing - questa e’ forse la fase piu’ laboriosa durante la quale dovrete prima “comprendere” i dati a disposizione e vedere ad esempio se esistono particolari correlazioni tra essi, eventualmente utilizzando tecniche di visualizzazione (in tal caso probabilmente dovrete usare R, come fatto all’inizio del corso). I dati dovranno quindi essere preparati per la successiva fase di analisi in Weka. In particolare dovrete decidere come comportarvi in caso di dati mancanti o inconsistenti, decidere quali attributi considerare per l’analisi e trasformare i dati nel formato richiesto dall’algoritmo che desiderate applicare.
+Applicazione degli algoritmi di data mining - in questa fase dovrete applicare gli algoritmi utilizzando diversi valori dei parametri che li caratterizzano mostrando e commentando i risultati. Oltre alle misure direttamente restituite dalle implementazioni Weka degli algoritmi potrete effettuare ulteriori validazioni dei risultati con le tecniche viste a lezione.
+Postprocessing - potrebbe essere necessaria/utile una fase di postprocessing per tener conto in qualche modo dei risultati trovati nella fase precedente. Ad esempio, potreste decidere di inserire un pattern particolarmente interessante nel dataset per capire quali caratteristiche hanno i record che lo soddisfano oppure utilizzare di nuovo le tecniche di visualizzazione per mettere in evidenza i risultati trovati.
+Analisi dei risultati - in questa fase dovrete cercare di interpretare i risultati trovati. Vengono fuori delle regolarità interessanti dai dati? Che significato  e che  ripercussioni potrebbero avere i vostri risultati?
+Ovviamente ci dovete mettere un po' di fantasia e tirar fuori la vostra anima data scientist!
+
+Oltre alla relazione dovrete consegnare anche i file con i dati rielaborati in modo che sia possibile poter rieseguire le vostre prove.
+
+
+Per quanto riguarda la scelta del progetto vi rimando al mio avviso del 21 dicembre. 
+
+Infine, non ho fissato una data precisa per la consegna, appena siete pronti mi avvertite e fissiamo una data per la presentazione del progetto in gruppo (possibilmente insieme all’esame orale).
+
+Buon lavoro

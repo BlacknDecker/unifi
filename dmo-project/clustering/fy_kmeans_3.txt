@@ -1,0 +1,67 @@
+=== Run information ===
+
+Scheme:       weka.clusterers.SimpleKMeans -init 0 -max-candidates 100 -periodic-pruning 10000 -min-density 2.0 -t1 -1.25 -t2 -1.0 -N 3 -A "weka.core.EuclideanDistance -R first-last" -I 10000 -num-slots 1 -S 7
+Relation:     TRE ANNI IMMATRICOLATI 2010-2013 PER STUDENTI-weka.filters.unsupervised.attribute.NumericToNominal-Rfirst-weka.filters.unsupervised.attribute.Remove-R2-5,16-45-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C2-Lfirst-last-M-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C4-Lfirst-last-M-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C6-Lfirst-last-M-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C8-Lfirst-last-M-weka.filters.unsupervised.instance.RemoveWithValues-S0.0-C10-Lfirst-last-M
+Instances:    116
+Attributes:   11
+              coorte
+              ASD
+              data_ASD
+              ARC
+              data_ARC
+              PRG
+              data_PRG
+              ANI
+              data_ANI
+              MDL
+              data_MDL
+Test mode:    evaluate on training data
+
+
+=== Clustering model (full training set) ===
+
+
+kMeans
+======
+
+Number of iterations: 5
+Within cluster sum of squared errors: 508.19032167895875
+
+Initial starting points (random):
+
+Cluster 0: 2013,24,2015-01-16,28,2017-01-26,22,2015-09-03,21,2015-06-30,19,2016-09-28
+Cluster 1: 2013,22,2014-09-12,25,2015-09-14,30,2015-01-08,28,2015-07-07,25,2016-02-08
+Cluster 2: 2012,31,2013-06-21,25,2013-07-08,27,2013-07-18,28,2014-09-16,24,2013-06-12
+
+Missing values globally replaced with mean/mode
+
+Final cluster centroids:
+                           Cluster#
+Attribute      Full Data          0          1          2
+                 (116.0)     (25.0)     (48.0)     (43.0)
+=========================================================
+coorte              2013       2011       2013       2012
+ASD              27.1034      26.52      26.75    27.8372
+data_ASD      2014-07-17 2012-07-11 2014-07-17 2013-07-11
+ARC              24.9741      24.36    24.4375    25.9302
+data_ARC      2014-02-28 2011-08-30 2014-09-15 2014-02-28
+PRG              25.9483      24.44    26.1458    26.6047
+data_PRG      2014-09-03 2012-07-10 2014-09-03 2013-07-18
+ANI              27.6638      26.36    28.7917    27.1628
+data_ANI      2015-07-14 2013-07-01 2015-07-14 2014-07-23
+MDL              23.3534      21.92         24    23.4651
+data_MDL      2015-02-05 2014-01-14 2015-02-05 2013-09-11
+
+
+
+
+Time taken to build model (full training data) : 0 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0       25 ( 22%)
+1       48 ( 41%)
+2       43 ( 37%)
+
