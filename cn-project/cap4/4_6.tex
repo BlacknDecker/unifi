@@ -1,0 +1,10 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+	Scrivere una function Matlab che implementi il calcolo delle ascisse di Chebyshev per il polinomio interpolante di grado \textit{n}, su un generico intervallo \([a, b]\). \\ \\La function deve essere del tipo: \lstinline[language=Matlab]{ xi = ceby(n, a, b)}
+	}
+}\end{center}
+
+\noindent Il seguente codice Matlab implementa la function richiesta. Si noti che la trasformazione lineare delle ascisse di Chebyshev dall'intervallo \([-1, 1]\) all'intervallo dato \([a, b]\) avviene direttamente come parte del calcolo delle stesse, evitando di scorrere il vettore in seguito con un altro ciclo, aumentando quindi l'efficienza della function. \\
+
+\lstinputlisting[language=Matlab]{cap4/4_6.m}

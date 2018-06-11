@@ -1,0 +1,48 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+	Inserire alcuni esempi di utilizzo delle due function implementate per i punti 3 e 4, scegliendo per ciascuno di essi un vettore \(\overline{x}\) e ponendo \(b = A\overline{x}\). Riportare \(\overline{x}\) e la soluzione \(x\) da essi prodotta. Costruire anche una tabella in cui, per ogni esempio considerato, si riportano il numero di condizionamento di A in norma 2 (usare \lstinline[language=Matlab]{cond} di Matlab) e le quantit\'a \(||r||/||b||\) e \(||x-\overline{x}||/||\overline{x}||\).
+	}
+}\end{center}
+
+\noindent Si presenta di seguito un esempio per la function dell'Esercizio 3 (risoluzione di sistemi con scomposizione \(LDL^T\)) ed un esempio per la function dell'Esercizio 4 (scomposizione LU con pivoting parziale). La matrice scelta per entrambi gli esempi \'e la seguente:
+\[
+A = \begin{pmatrix} 1 & -1 & 2 & 2 \\ -1 & 5 & -14 & 2\\ 2 & -14 & 42 & 2\\ 2 & 2 & 2 & 65 \end{pmatrix}
+\]
+
+\noindent I vettori scelti sono, rispettivamente per gli Esercizi 3 e 4:
+
+\[
+\overline{x}_3 = \begin{bmatrix} 3.1416 \\ 2.7183 \\ 1.4142 \\ 1.7320 \end{bmatrix},
+\overline{x}_4 = \begin{bmatrix} 2.2360 \\ 2.6457 \\ 3.1416 \\ 3.3166 \end{bmatrix}
+\]
+
+\noindent Ponendo \(b=A\overline{x}\) si ha quindi:
+\\
+\[
+b_3 = \begin{bmatrix} 6.7157 \\ -5.8849 \\ 31.0874 \\ 127.1282 \end{bmatrix},
+b_4 = \begin{bmatrix} 12.5067 \\ -26.3567 \\ 106.0126 \\ 231.6256 \end{bmatrix}
+\]
+
+\noindent Lanciando le opportune function per la preparazione delle matrici e per la risoluzione del sistema (come mostrato nel dettaglio nel codice Matlab in coda a questa spiegazione), vengono prodotti i seguenti vettori soluzione:
+
+\[
+x_3 = \begin{bmatrix} 3.141600000000039 \\ 2.718300000000078 \\ 1.41420000000002 \\ 1.73200000000000 \end{bmatrix},
+x_4 = \begin{bmatrix} 2.23599999999992 \\ 2.64569999999982 \\ 3.14159999999994 \\ 3.31660000000001 \end{bmatrix}
+\]
+\\
+\noindent A seguire la tabella richiesta, che mostra il condizionamento della matrice restituita dagli algoritmi di fattorizzazione ed i confronti fra le quantit\'a richieste, analoghe ad errori relativi sui dati di ingresso (\(||r||/||b||\)) e sul risultato (\(||x-\overline{x}||/||\overline{x}||\)).
+\\
+
+\noindent\begin{tabular}{l*{20}{c}}
+function & \vline& tipo & \vline& \(\overline{x}\) & \vline& \(cond(A, 2)\) & \vline& \(||r||/||b||\) & \vline& \(||x-\overline{x}||/||\overline{x}||\) \\
+\hline
+sol\_es\_3 & \vline& \(LDL^T\)    & \vline& \(\overline{x}_3\) & \vline& \(3.6158 \times 10^3\)    & \vline& \(1.0854 \times 10^{-16}\)	& \vline& \(1.9164 \times 10^{-14}\)   \\
+sol\_es\_4 & \vline& \(LU\) pivot & \vline& \(\overline{x}_4\) & \vline& 319.10                    & \vline& \(1.2020 \times 10^{-16}\)	& \vline& \(3.5848 \times 10^{-14}\) 	 \\
+
+\end{tabular}
+\\
+\\
+
+\noindent Il codice Matlab usato per realizzare i precedenti esempi \'e il seguente. Le function riferite nel codice per le quali non \'e riportata l'implementazione sono quelle impiegate per risolvere gli esercizi precedenti.
+\lstinputlisting[language=Matlab]{cap3/3_5.m}

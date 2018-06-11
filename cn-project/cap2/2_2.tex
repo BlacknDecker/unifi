@@ -1,0 +1,37 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+	Completare la tabella precedente riportando anche il numero di iterazioni e di valutazioni di \(P\) richieste dal metodo di Newton, dal metodo delle corde e dal metodo delle secanti (con secondo termine della successione ottenuto con Newton) a partire dal punto \(x_0 = 3\). Commentare i risultati riportati in tabella. \'E possibile utilizzare \(x_0=\frac{5}{3}\) come punto di innesco?
+	}
+}\end{center}
+
+\noindent Si faccia ancora riferimento ad \(f(x)\) relativa a \(P(x)=x^3 - 4x^2 + 5x - 2\) con radici in \(x_1=1\) e \(x_2=2\) e la sua derivata prima \(f'(x) = 3x^2 - 8x + 5\). Si estende di seguito la tabella dell'esercizio precedente, aggiungendo i risultati ottenuti lanciando delle implementazioni dei metodi di Newton, delle corde e delle secanti a partire dal punto \(x_0 = 3\).\\
+
+\footnotesize\noindent\begin{tabular}{l*{20}{c}}
+& \vline& \tiny\textbf{Bisez.} &     &      & \vline& \tiny\textbf{Newton} &     &      &\vline& \tiny\textbf{Corde} &    &      &\vline& \tiny\textbf{Secanti} \\
+ \(tolx\) & \vline& \(x_2\)   & it. & val. & \vline& \(x_2\)   & it. & val.  &\vline& \(x_2\)  & it.& val. &\vline& \(x_2\) & it.&val.\\
+\hline
+ 1/10                 &\vline& 1.8750 & 2  & 3  &\vline& 2.0043 & 4 & 4+4 &\vline& 2.3594 & 3 & 3+1  &\vline& 2.0502 & 4 & 7+1  \\
+ 1/50                 &\vline& 2.0156 & 7  & 8  &\vline& 2.0000 & 5 & 5+5 &\vline& 2.1236 & 8 & 8+1  &\vline& 2.0010 & 6 & 11+1 \\
+ 1/100                &\vline& 1.9922 & 8  & 9  &\vline& 2.0000 & 5 & 5+5 &\vline& 2.0643 & 12& 12+1 &\vline& 2.0010 & 6 & 11+1 \\
+ 1/500                &\vline& 1.9980 & 10 & 11 &\vline& 2.0000 & 6 & 6+6 &\vline& 2.0152 & 22& 22+1 &\vline& 2.0000 & 7 & 13+1 \\
+ \(1 \times 10^{-3}\) &\vline& 2.0010 & 11 & 12 &\vline& 2.0000 & 6 & 6+6 &\vline& 2.0077 & 27& 27+1 &\vline& 2.0000 & 7 & 13+1 \\
+ \(2 \times 10^{-3}\) &\vline& 1.9995 & 12 & 13 &\vline& 2.0000 & 6 & 6+6 &\vline& 2.0039 & 32& 32+1 &\vline& 2.0000 & 8 & 15+1 \\
+ \(5 \times 10^{-3}\) &\vline& 1.9999 & 14 & 15 &\vline& 2.0000 & 6 & 6+6 &\vline& 2.0015 & 39& 39+1 &\vline& 2.0000 & 8 & 15+1 \\
+ \(1 \times 10^{-4}\) &\vline& 2.0001 & 15 & 16 &\vline& 2.0000 & 6 & 6+6 &\vline& 2.0008 & 44& 44+1 &\vline& 2.0000 & 8 & 15+1 \\
+ \(1 \times 10^{-5}\) &\vline& 2.0000 & 18 & 19 &\vline& 2.0000 & 7 & 7+7 &\vline& 2.0001 & 62& 62+1 &\vline& 2.0000 & 9 & 17+1  \\
+ \(1 \times 10^{-6}\) &\vline& 2.0000 & 21 & 22 &\vline& 2.0000 & 7 & 7+7 &\vline& 2.0000 & 79& 79+1 &\vline& 2.0000 & 9 & 17+1  \\
+\end{tabular}\\
+\\
+
+\normalsize\noindent Si noti che, ovviamente, partendo dal punto di innesco \(x_0 = 3\), lo zero a cui tendono il metodo di Newton e gli altri metodi derivati \'e sempre quello in \(x_2 = 2\).
+\\
+
+\noindent Riguardo alle valutazioni della funzione \(f(x)\) relativa a \(P(x)\) ed al numero di iterazioni necessarie, si noti che, come era facilmente prevedibile, ogni metodo ha performato coerentemente al suo ordine di convergenza ed alle caratteriestiche della sua funzione di iterazione. Per il metodo di bisezione le valutazioni riportate in tabella si intendono le sole relative alla funzione \(f(x)\), mentre per gli altri metodi sono riportate anche le valutazioni delal derivata prima \(f'(x)\).
+\\
+
+\noindent Nel merito della domanda finale posta nel testo dell'esercizio, non \'e possibile utilizzare come punto di innesco \(x_0=\frac{5}{3}\) in quanto \(\frac{5}{3}\) \'e uno zero della derivata prima, la cui valutazione in \(x_0\) sta al denominatore nel primo passo di tutti i metodi impiegati.\\
+
+\noindent Di seguito le implementazioni Matlab dei metodi utilizzati.
+
+\lstinputlisting[language=Matlab]{cap2/es2_functions.m}

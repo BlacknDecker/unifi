@@ -1,0 +1,61 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+	 Eseguire le seguenti istruzioni in Matlab:
+	 \[
+	 x=0;\ count = 0;\
+	 while\ x \neq 1,\ x=x+delta, \ count = count +1, \ end
+	 \]
+	 dapprima ponendo \(delta = 1/16\) e poi ponendo \(delta = 1/20\).\\ Commentare i risultati ottenuti e in particolare il non funzionamento nel secondo caso.
+	}
+}\end{center}
+
+\noindent \'E stato eseguito questo codice Matlab, che ha prodotto i risutlati illustrati in tabella:
+\\
+
+\lstinputlisting[language=Matlab]{cap1/es5_1-16.m}
+
+\begin{tabular}{l*{6}{c}}
+ x  &  count \\
+\hline
+ 0.0625 & 1 \\
+ 0.1250 & 2 \\
+ 0.1875 & 3 \\
+ 0.2500 & 4 \\
+ 0.3125 & 5 \\
+ 0.3750 & 6 \\
+ 0.4375 & 7 \\
+ 0.5000 & 8 \\
+ 0.5625 & 9 \\
+ 0.6250 & 10 \\
+ 0.6875 & 11 \\
+ 0.7500 & 12 \\
+ 0.8125 & 13 \\
+ 0.8750 & 14 \\
+ 0.9375 & 15 \\
+      1 & 16 \\
+\end{tabular} \\
+
+\noindent Il ciclo \(while\) esegue esattamente 16 iterazioni prima di fermarsi sulla condizione \(x \neq 1\), che viene meno nell'ultimo passo. Questo avviene ovviamente in accordo all'incremento di \(x\) pari a \(\frac{1}{16}\) ad ogni iterazione, dato che la rappresentazione binaria di del numero decimale \(\frac{1}{16} = 0.0625\) risulta esatta (\( \frac{1}{16} = 2^{-4}\), rappresentabile facilmente in una variabile \lstinline[language=Matlab]{float} o \lstinline[language=Matlab]{double})
+\\
+\\
+\noindent Eseguendo invece il seguente codice Matlab, il ciclo non termina.
+
+\lstinputlisting[language=Matlab]{cap1/es5_1-20.m}
+
+\begin{tabular}{l*{6}{c}}
+ x  &  count \\
+\hline
+ 0.050000000000000 & 1 \\
+ 0.100000000000000 & 2 \\
+ 0.150000000000000 & 3 \\
+ 0.200000000000000 & 4 \\
+ 0.250000000000000 & 5 \\
+ 0.300000000000000 & 6 \\
+ 0.350000000000000 & 7 \\
+ \ldots & \ldots \\
+ 1.000000000000000 & 20 \\
+ \ldots & \ldots \\
+\end{tabular} \\
+
+Dato che il valore di \(delta\) questa volta risulta uguale a \(\frac{1}{20} = 0.05\), la sua rappresentazione nel calcolatore non risulta esatta. L'errore di approssimazione della variabile \(delta\) si accumula ad ogni iterazione nella variabile \(x\). Essendo la condizione del ciclo \(while\) vincolata al raggiungimento del numero esatto \(1\), non viene mai verificata ed il ciclo continua indefinitamente.

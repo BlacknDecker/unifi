@@ -1,0 +1,53 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+	Sia \(A = \begin{pmatrix} \epsilon & 1 \\ 1 & 1 \end{pmatrix}\) con \(\epsilon=10^{-13}\).  Definire L triangolare inferiore a diagonale unitaria e U triangolare superiore in modo che il prodotto LU sia la fattorizzazione LU di A e, posto \(b=Ae\) con \(e=(1,1)^{T}\), confrontare l'accuratezza della soluzione che si ottiene usando il comando \(U \textbackslash (L \textbackslash b)\) (Gauss senza pivoting) e il comando \(A \textbackslash b\) (Gauss con pivoting).
+	}
+}\end{center}
+
+\noindent La rappresentazione in una sola matrice della fattorizzazione LU di A, ottenuta mediante l'applicazione dell'algoritmo 3.5 del libro, \'e la seguente:
+\[
+A_{LU} = \begin{pmatrix} 10^{-13} & 1 \\ 10^{13} & -10^{13}\end{pmatrix}
+\]
+
+\noindent Le due matrici L ed U quindi sono:
+
+\[
+L = \begin{pmatrix} 1 & 0 \\ 10^{13} & 1\end{pmatrix}\]
+\[
+U = \begin{pmatrix} 10^{-13} & 1 \\ 0 & -10^{13}\end{pmatrix}
+\]
+\\
+\noindent Riguardo l'altra richiesta, si sono verificati i seguenti fatti:
+
+\[
+b = Ae = \begin{pmatrix} \epsilon & 1 \\ 1 & 1 \end{pmatrix} \begin{bmatrix} 1 \\ 1\end{bmatrix} = \begin{bmatrix} \approx 1 \\ 2 \end{bmatrix}
+\]
+\[
+U \textbackslash (L \textbackslash b) = \begin{bmatrix} 0.992 \\ 1\end{bmatrix}
+\]
+\[
+A \textbackslash b = \begin{bmatrix} 1 \\ 1\end{bmatrix}
+\]
+
+\noindent Si pu\'o notare come il vettore \(b\) calcolato col metodo di Gauss senza pivoting abbia un'accuratezza minore rispetto alla sua versione calcolata col metodo di Gauss con pivoting.
+\\
+\\In generale, i problemi che sorgono in quel caso sono dati tutti dal fatto che \(\epsilon \) \'e un numero molto piccolo. La condizione necessaria per l'esistenza dell procedimento di \textit{eliminazione di Gauss} senza \textit{pivoting} (cio\'e, al passo \textit{i}-esimo, \(a_{i,i} \neq 0\)) \'e molto vicina al venire meno gi\'a alla prima ed unica iterazione, per la quale abbiamo \(a_{1,1} = \epsilon \approx 0\).
+\\
+
+\noindent A causa di questo, succede che la matrice \(L_1A\), con \(L_1\) la prima --- ed unica --- \textit{matrice elementare di Gauss}, \'e molto vicina all'essere singolare.
+
+\[
+L_1 = \begin{pmatrix} 1 & 0 \\ -\frac{1}{\epsilon} & 1 \end{pmatrix} \quad L_1A = \begin{pmatrix} \epsilon & 1 \\ 0 & 1\end{pmatrix} \quad \det(L_1A) \approx 0
+\]
+\\
+Persino Matlab restituisce un'avvertimento:
+\lstinputlisting[language=Matlab]{cap3/warning.m}
+
+\noindent Il metodo di Gauss con pivoting invece \'e studiato appositamente per funzionare senza bisogno di avere come ipotesi la condizione \(a_{i,i} \neq 0\) al passo \textit{i}-esimo, pertanto approssima in maniera soddisfacente il risultato.
+\\
+\\
+\noindent L'intero codice Matlab usato per svolgere questo Esercizio \'e quello che segue.
+\\
+\lstinputlisting[language=Matlab]{cap3/3_6.m}
+

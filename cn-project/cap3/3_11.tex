@@ -1,0 +1,72 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+Verificato che la funzione \(f(x_1,x_2) = x_1^2+x_2^3-x_1x_2\) ha un punto di minimo relativo in (1/12, 1/6), costruire una tabella in cui si riportano il numero di iterazioni eseguite, e la norma euclidea dell'ultimo incremento e quella dell'errore con cui viene approssimato il risultato esatto utilizzando la function sviluppata al punto precedente per valori delle tolleranze pari a \(10^{-t}\), con t = 3,6. Utilizzare (1/2, 1/2) come punto di innesco. Verificare che la norma dell'errore \'e molto pi\'u piccola di quella dell'incremento (come mai?)
+	}
+}\end{center}
+
+\noindent Si verifica innanzitutto analiticamente l'esistenza di un punto di minimo relativo in \((\frac{1}{12}, \frac{1}{6})\) considerando il sistema non lineare:
+\[
+F(\vec{x}) = \vec{0} \quad \text{con} \quad F = \begin{bmatrix}\frac{\partial}{\partial x_1}f(x_1,x_2) \\ \frac{\partial}{\partial x_2}f(x_1,x_2)  \end{bmatrix}
+\]
+\[
+\frac{\partial}{\partial x_1}f(x_1,x_2) = 2x_1 -x_2 \quad \frac{\partial}{\partial x_2}f(x_1,x_2) = 3x_2^2 - x_1
+\]
+\[
+\begin{cases}
+2x_1 -x_2 = 0 \\
+3y^2 - x_1 = 0
+\end{cases}
+\quad \text{ha come soluzioni} \quad \begin{bmatrix}0 & 0 \end{bmatrix} \quad \text{e} \quad \begin{bmatrix}\frac{1}{12} & \frac{1}{6}\end{bmatrix}
+\]
+\\
+\noindent I punti trovati sono quindi punti stazionari della funzione data. Si consideri ora la matrice Hessiana della funzione \(f(x,x_2)\), che coincide con la matrice Jacobiana della funzione \(F\):
+\[
+H =
+\begin{bmatrix} f_{x_1x_1} & f_{x_1x_2} \\ f_{x_2x_1} & f_{x_2x_2} \end{bmatrix}
+=
+\begin{bmatrix} 2 & -1 \\ -1 & 6x_2 \end{bmatrix}
+= J_F
+\quad
+\det(H) = 12x_2 - 1
+\]
+
+\noindent Il determinante dell'Hessiana \'e positivo per \(x_2=\frac{1}{6}\), ed il primo elemento \'e positivo: abbiamo un punto di minimo relativo in \((\frac{1}{12}, \frac{1}{6})\).
+\\
+\\
+\noindent Per avere una ulteriore conferma visiva, \'e stata definita la seguente funzione \(\overline{f}(x_1,x_2)\):
+
+\[
+f(\frac{1}{12}, \frac{1}{6}) = -\frac{1}{432} \quad \overline{f}(x_1,x_2) = f(x_1,x_2) + \frac{1}{432} \quad \text{in modo che} \quad \overline{f}(\frac{1}{12}, \frac{1}{6}) = 0
+\]
+\\
+
+\noindent Si \'e quindi studiato il segno di \(\overline{f} \) con il seguente codice Matlab con cui \'e stato prodotto il plot 3D mostrante il comportamento di \(\overline{f} \) in un intorno di \((\frac{1}{12}, \frac{1}{6})\):
+\\
+\lstinputlisting[language=Matlab]{cap3/3_11_sign.m}
+
+\begin{center}
+	\includegraphics[scale=0.7]{cap3/3_11_sign.png}
+\end{center}
+
+\noindent Poich\'e \(\overline{f}\) \'e tutta positiva in un intorno di \((\frac{1}{12}, \frac{1}{6})\) e pari a zero solo in quel punto, possiamo concludere che \((\frac{1}{12}, \frac{1}{6})\) \'e sicuramente un minimo relativo di \(f\).
+\\
+\\
+\noindent Per quanto riguarda l'utilizzo del metodo di Newton, \'e stata scritta una versione modificata della function dell'Esercizio precedente per restituire i dati da mostrare nella tabella richiesta.
+
+\lstinputlisting[language=Matlab]{cap3/3_11.m}
+
+\noindent I seguenti dati sono stati ottenuti considerando come soluzione esatta \(\overline{x} = [\frac{1}{12}, \frac{1}{6}]\) e come ultimo incremento la quantit\'a \(||x^{(i)} - x^{(i-1)}||\) data dall'espressione \lstinline[language=Matlab]{norm(x-xold)} nella sua ultima iterazione all'interno del ciclo \lstinline[language=Matlab]{while}.
+\\
+
+\noindent\begin{tabular}{l*{15}{c}}
+ toll. & \vline& it. & \vline& \(x_1\) &\vline& \(x_2\) & \vline& \(||x^{(i)} - x^{(i-1)}||\) & \vline& \(||x - \overline{x}||\) \\
+\hline
+ \(10^{-3}\) & \vline& 5 & \vline& \scriptsize{0.083333526485450}& \vline& \scriptsize{0.166667052970899} &\vline& 2.8369 \(\times 10^{-4}\) & \vline& 4.3190 \(\times 10^{-7}\) \\
+ \(10^{-4}\) & \vline& 6 & \vline& \scriptsize{0.083333333333781}& \vline& \scriptsize{0.166666666667562} &\vline& 4.3190 \(\times 10^{-7}\) & \vline& 1.0011 \(\times 10^{-12}\) \\
+ \(10^{-5}\) & \vline& 6 & \vline& \scriptsize{0.083333333333781}& \vline& \scriptsize{0.166666666667562} &\vline& 4.3190 \(\times 10^{-7}\) & \vline& 1.0011 \(\times 10^{-12}\) \\
+ \(10^{-6}\) & \vline& 6 & \vline& \scriptsize{0.083333333333781}& \vline& \scriptsize{0.166666666667562} &\vline& 4.3190 \(\times 10^{-7}\) & \vline& 1.0011 \(\times 10^{-12}\) \\
+\end{tabular} \\
+\\
+\\
+\noindent Come prevedibile, la norma dell'ultimo incremento \'e molto minore della norma dell'errore sull'approssimazione del risutlato. Questo avviene grazie all'ordine di convergenza del metodo di Newton per sistemi nonlineari (che \'e 2, infatti il metodo ha convergenza quadratica), che consente all'approssimazione del risultato di convergere rapidamente verso la soluzione esatta.

@@ -1,0 +1,24 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+Scrivere una function Matlab specifica per la risoluzione di un sistema lineare con matrice dei coefficienti \(A \in R^{n \times n}\) bidiagonale inferiore a diagonale unitaria di Toeplitz, specificabile con uno scalare \(\alpha\). Sperimentarne e commentarne le prestazioni (considerare il numero di condizionamento della matrice) nel caso in cui \(n=12\) e \(\alpha=100\) ponendo dapprima \(b=(1, 101, \ldots, 101)^T\) (soluzione esatta \(\overline{x}=(1,\ldots ,1)^T\)) e quindi \(b=0.1 * (1, 101, \ldots, 101)^T\) (soluzione esatta \(\overline{x}=(0.1,\ldots ,0.1)^T\)).
+	}
+}\end{center}
+
+\noindent Ricordando che le matrici bidiagonali inferiori a diagonale unitaria di Toeplitz sono le matrici \(A \in R^{n \times n}\) del tipo \[\begin{pmatrix} 1 & 0 & 0 & \cdots & 0 \\ \alpha & 1 & 0 & \cdots & 0 \\ 0 & \alpha & 1 & \cdots & 0 \\ \vdots & \vdots & \vdots & \vdots & \vdots \\ 0 & \cdots & 0 & \alpha & 1\end{pmatrix}\]
+
+\noindent \'E stato scritto il seguente codice Matlab per realizzare quanto chiesto:
+\lstinputlisting[language=Matlab]{cap3/3_7.m}
+
+\noindent Il numero condizionamento della matrice creata con le regole specificate risulta essere infinito, mentre riguardo al confronto delle soluzioni esatte con quelle ricavate dalla function implementata abbiamo quanto segue:
+\[
+b_1 = \begin{bmatrix}1\\101\\\vdots \\101 \end{bmatrix} \quad \overline{x}_1=\begin{bmatrix}1\\\vdots \\1 \end{bmatrix}^T = x_1
+\]
+\[
+b_2 = 0.1 \times \begin{bmatrix}1\\101\\\vdots \\101 \end{bmatrix} \quad \overline{x}_2=\begin{bmatrix}0.1\\\vdots \\0.1 \end{bmatrix}^T \quad x_2=\begin{bmatrix}0.1000\\ \vdots \\ 0.1014 \\ -0.0407 \\ 14.1702 \\ -1.4069 \times 10^3 \\ 1.4070 \times 10^5 \end{bmatrix}^T
+\]
+\\
+Quanto avviene \'e dato dal fatto che nel primo caso non vi \'e perturbazione sui dati in ingresso --- il vettore \(b_1\) \'e composto solo da numeri interi --- mentre nel secondo caso c'\'e, dato che il vettore \(b_2\) \'e composto da numeri decimali che subiscono gli errori indotti dell'aritmetica finita.
+\\
+\\
+\noindent Dato il pessimo condizionamento del problema, gli errori vengono amplificati enormemente ad ogni passaggio, fino a portare ad avere una perturbazione estrema del risultato finale, nel quale si \'e persa completamente l'informazione della soluzione.

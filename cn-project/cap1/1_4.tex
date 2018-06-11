@@ -1,0 +1,44 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+	 Si dia una maggiorazione del valore assoluto dell'errore relativo con cui \(x+y+z\) viene approssimato dall'approssimazione prodotta dal calcolatore, ossia \((x \oplus y) \oplus z\) (supporre che non ci siano problemi di overflow o di underflow). Ricavare l'analoga maggiorazione anche per \(x \oplus (y \oplus z)\) tenendo presente che \(x \oplus (y \oplus z) = (y \oplus z) \oplus x \).
+	}
+}\end{center}
+
+\noindent Si consideri la definizione dell'operazione somma in aritmetica di macchina e la si applichi al caso richiesto:
+
+\begin{itemize}
+
+\item \((x \oplus y) \oplus z = fl( fl( fl(x) + fl(y) ) + fl(z)) \)
+\item \((y \oplus z) \oplus x = fl( fl( fl(y) + fl(z) ) + fl(x)) \)
+
+\end{itemize}
+
+\noindent Ricordando che \(fl(a) = a + a\varepsilon_a = a (1 + \varepsilon_a)\) e che \(|\varepsilon_a| \leq u\) con \(u\) precisione di macchina, possiamo ricavare:
+
+\[
+|\varepsilon_{(x \oplus y) \oplus z }| = \frac{|fl( fl( fl(x) + fl(y) ) + fl(z)) - (x + y + z)|}{|x+y+z|}
+\]
+\[=
+\frac{|((x + x\varepsilon_x + y + y\varepsilon_y)(1+\varepsilon_{x \oplus y}) + z + z\varepsilon_z)(1 +\varepsilon_{(x \oplus y) \oplus z }) - (x+y+z)|}{|x+y+z|}
+\]
+\[
+=\frac{\left|\splitfrac{x\varepsilon_x + y\varepsilon_y + x\varepsilon_{x \oplus y} + x\varepsilon_x\varepsilon_{x \oplus y} + y\varepsilon_{x \oplus y} + y\varepsilon_y\varepsilon_{x \oplus y} + z\varepsilon_z + x\varepsilon_x\varepsilon_{(x \oplus y) \oplus z} + y\varepsilon_y\varepsilon_{(x \oplus y) \oplus z}    }{     + x\varepsilon_{x \oplus y}\varepsilon_{(x \oplus y) \oplus z} + x\varepsilon_x\varepsilon_{x \oplus y}\varepsilon_{(x \oplus y) \oplus z} + y\varepsilon_{x \oplus y}\varepsilon_{(x \oplus y) \oplus z} + y\varepsilon_y\varepsilon_{x \oplus y}\varepsilon_{(x \oplus y) \oplus z} + z\varepsilon_z\varepsilon_{(x \oplus y) \oplus z}}\right|}{|x+y+z|}
+\]
+\[
+\leq \frac{\left|\splitfrac{\max \{\varepsilon_x, \varepsilon_y, \varepsilon_z\}(2x+2y+z) }{  \splitfrac{+ \max \{\varepsilon_x, \varepsilon_y, \varepsilon_z, \varepsilon_{x \oplus y}, \varepsilon_{(x \oplus y) \oplus z}\} ^2 (3x+3y+z) }{+  \max \{\varepsilon_x, \varepsilon_y, \varepsilon_z, \varepsilon_{x \oplus y}, \varepsilon_{(x \oplus y) \oplus z}\} ^3 (x+y)}}\right|}{|x+y+z|}
+\]
+
+\noindent Data la natura dell'errore relativo, possiamo trascurare tutti i termini di gradi superiore al primo in quanto sensibilmente pi\'u piccoli di \(\max \{\varepsilon_x, \varepsilon_y, \varepsilon_z, \varepsilon_{x \oplus y}, \varepsilon_{(x \oplus y) \oplus z}\} \). Avremo quindi:
+\[
+|\varepsilon_{(x \oplus y) \oplus z }| \leq \max \{\varepsilon_x, \varepsilon_y, \varepsilon_z, \varepsilon_{x \oplus y}, \varepsilon_{(x \oplus y) \oplus z}\} \frac{|2x + 2y + z|}{|x+y+z|}
+\]
+\[
+\leq u \frac{|2x + 2y + z|}{|x+y+z|}
+\]
+\\
+\noindent Svolgendo un procedimento del tutto analogo al precedente, nel caso di \((y \oplus z) \oplus x \) avremo:
+
+\[
+\varepsilon_{(y \oplus z) \oplus x } \leq u \frac{|2y + 2z + x|}{|x+y+z|}
+\]

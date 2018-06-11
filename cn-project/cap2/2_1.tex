@@ -1,0 +1,58 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+	Determinare analiticamente gli zeri del polinomio
+	\[
+	P(x) = x^3 - 4x^2 + 5x - 2
+	\]
+	e la loro molteplicit\'a. Dire perch\'e il metodo i bisezione \'e utilizzabile per approssimarne uno a partire dall'intervallo di confidenza \([a,b] = [0,3]\). A quale zero di \(P\) potr\'a tendere la successione generata dal metodo di bisezione a partire da tale intervallo? Costruire una tabella i cui si riportano il numero di iterazioni e di valutazioni di \(P\) richieste per valori decrescenti della tolleranza \(tolx\).
+	}
+}\end{center}
+
+\noindent Dato \(P(x) = x^3 - 4x^2 + 5x - 2\), si determinano anzitutto le sue radici analiticamente:
+
+\[
+P(x) = x^3 - 4x^2 + 5x - 2\ = (x-2)(x-1)^2
+\]
+
+\noindent Gli zeri di \(P(x)\) sono quindi \(x_1=1\) con molteplicit\'a \(2\) e \(x_2=2\) con molteplicit\'a \(1\).\\
+
+\noindent Il metodo di bisezione \'e utilizzabile in quanto le ipotesi necessarie per il suo impiego sono soddisfatte:
+
+\begin{itemize}
+
+\item \(f(x)\) associata a \(P(x)\) \'e definita e continua nell'intervallo \([0,3]\)
+\item \(f(0)f(3) = (-2)(4) = -8 < 0\)
+
+\end{itemize}
+
+\noindent Per conoscere a quale zero di \(P(x)\) tender\'a la successione generata dal metodo di bisezione, basta eseguire manualmente la prima iterazione:
+
+\begin{itemize}
+\item \(f(\frac{3-0}{2}) = -\frac{1}{8}\)
+\item \(f(0)f(\frac{3}{2}) = \frac{1}{4}\)
+\item \(f(\frac{3}{2})f(3) = -\frac{1}{2}\)
+\end{itemize}
+
+\noindent Dato che si prosegue la bisezione nell'intervallo \([\frac{3}{2}, 3]\), si tender\'a allo zero in \(x_2=2\).
+
+\noindent Si applica adesso il metodo di bisezione con il seguente nella sua interezza e si mostra il numero di iterazioni necessarie al variare della soglia di tolleranza \(tolx\).\\
+
+\begin{tabular}{l*{6}{c}}
+ \(tolx\) &\vline& appross. \(x_2\) &\vline& iterazioni &\vline& valutazioni di P\\
+\hline
+ 1/10 &\vline& 1.5000 &\vline& 2 &\vline& 3\\
+ 1/50 &\vline& 2.0156 &\vline& 7 &\vline& 8\\
+ 1/100 &\vline& 1.9922 &\vline& 8 &\vline& 9\\
+ 1/500 &\vline& 1.9980 &\vline& 10 &\vline& 11\\
+ \(1 \times 10^{-3}\) &\vline& 2.0010 &\vline& 11 &\vline& 12\\
+ \(2 \times 10^{-3}\) &\vline& 1.9995 &\vline& 12 &\vline& 13\\
+ \(5 \times 10^{-3}\) &\vline& 1.9999 &\vline& 14 &\vline& 15\\
+ \(1 \times 10^{-4}\) &\vline& 2.0001 &\vline& 15 &\vline& 16\\
+ \(1 \times 10^{-5}\) &\vline& 2.0000 &\vline& 18 &\vline& 19\\
+ \(1 \times 10^{-6}\) &\vline& 2.0000 &\vline& 21 &\vline& 22\\
+\end{tabular} \\
+
+\noindent La precedente tabella \'e stata riempita in riferimento alla seguente implementazione del metodi di bisezione, descritta in codice Matlab.\\
+
+\lstinputlisting[language=Matlab]{cap2/es1.m}

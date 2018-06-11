@@ -1,0 +1,16 @@
+\begin{center}
+\footnotesize\noindent\fbox{
+	\parbox{\textwidth}{
+	  Scrivere una function Matlab che generi la matrice \textit{sparsa} $n \times n$, con $n > 10$
+
+$$
+A_n = \begin{pmatrix} a_{11} & \ldots & a_{1n} \\ \vdots & & \vdots \\ a_{n1} & \ldots & a_{nn}\end{pmatrix} \text {con } a_{ij} \begin{cases} 4 \text{ se } i = j \\ -1 \text{ se } i = j \pm 1 \\ -1 \text{ se } i = j \pm 10\end{cases}
+$$
+
+Utilizzare a questo fine la function Matlab \lstinline[language=Matlab]{spdiags}.
+}
+}\end{center}
+
+\noindent Il seguente codice Matlab implementa la function richeista. \'E stato inserito un controllo sull'input \lstinline[language=Matlab]{n} ed è stata usata la funzione \lstinline[language=Matlab]{spdiags}, come richeisto dal testo dell'esercizio.\\
+
+\lstinputlisting[language=Matlab]{cap6/6_1.m}
