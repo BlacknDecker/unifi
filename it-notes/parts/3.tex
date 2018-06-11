@@ -1,0 +1,21 @@
+\section{Riducibilità Polinomiale}
+
+\begin{defn}[Riducibilità tramite funzione di riduzione]
+	Siano $L, Q$ due linguaggi su rispettivi alfabeti $\Sigma_1$ e $\Sigma_2$. $L$ è polinomialmente riducibile a Q se esiste una funzione $f : \Sigma_1 \rightarrow \Sigma_2$ computabile in tempo polinomiale e tale che per ogni $w \in \Sigma_1$, $w \in L$ se e solo se $f(w) \in Q$.
+\end{defn}
+
+In altre parole, $L$ è polinomialmente riducibile a Q quando esiste una funzione che trasforma le parole di $L$ in parole di $Q$ in tempo polinomiale. \\
+
+\begin{remark}
+	Le MdT che calcolano le funzioni di riduzione polinomiale sono tutte deterministiche.
+\end{remark}
+
+\vspace{0.25cm}
+
+\begin{defn} [Implicazione della riducibilità]
+	Se $L$ è polinomialmente riducibile a $Q$, e $Q \in P$, allora $L \in P$.
+\end{defn}
+
+\begin{proof}
+	Data $w \in \Sigma_L^\ast$, calcolo $f(w) \in \Sigma_Q^\ast$ e valuto se appartiene a $Q$ oppure no. Supponiamo di avere le seguenti MdT: $M_f$ che calcola la riduzione polinomiale $f$ con $tc_{M_f}(n) = O(n^r)$, $M_Q$ che accetta Q con $tc_{M_Q}(n) = O(n^s)$, entrambe deterministiche per ipotesi. La MdT che accetta $L$ lancia in successione $M_f$ e $M_Q$, perciò $L \in P$.
+\end{proof}

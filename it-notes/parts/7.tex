@@ -1,0 +1,21 @@
+\section{Altre classi di Complessità}
+
+\subsection{Linguaggi Np-Intermedi}
+
+La classe $NPI$ è una classe di linguaggi che comprende quelli di classe $NP$ che però non sono $NP-Completi$. Conseguentemente, risolvere un problema $NP-Intermedio$ in tempo polinomiale deterministico \textbf{non} consentirebbe di dimostrare che $P=NP$.
+
+Supponendo che $P \neq NP$, abbiamo che $NPC \bigcap P = 0$ e che $NPI = NP \setminus \{NPC \bigcup P\}$.
+
+\begin{lemm}[Teorema di Ladner]
+	Se $P \neq NP$, allora $NPI \neq \emptyset$. \\ Analogamente, se $P \neq NP$, esiste almeno un $L \in NPI$.
+\end{lemm}
+
+\subsection{Classe co-NP}
+
+Consideriamo il linguaggio del problema $SAT$, $L_{SAT}$. Il suo complementare si definisce ovviamente come $L_{UNSAT} = L_{SAT	}^C$. Ma in cosa consiste in pratica il problema $UNSAT$? Nel determinare se il polinomio $p \in PB(n)$ non è soddisfacibile da \textit{nessun} assegnamento di valori booleani alle sue variabili.
+
+Appare subito evidente che il metodo non deterministico per risolvere $SAT$ non si può invertire per risolvere analogamente $UNSAT$. \\
+
+\begin{remark}
+	Il non determinismo è \textbf{asimmetrico}.
+\end{remark}

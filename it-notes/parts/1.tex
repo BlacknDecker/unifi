@@ -1,0 +1,31 @@
+\section{Introduzione}
+
+Analizzeremo, per un generico problema decidibile, le prestazioni dell'algoritmo di una Macchina di Turing che lo risolve. \\
+
+Quali sono le risorse utilizzate?
+
+\begin{itemize}
+	\item \textbf{tempo}: misurato contando il \textit{numero di transazioni} della MdT che risolve il problema
+	\item \textbf{spazio}: misurato contando il \textit{numero di celle del nastro utilizzate} dalla MdT oltre a quelle necessarie per memorizzare l'input
+\end{itemize}
+
+\subsection{Complessità in Tempo}
+
+Sia:
+\begin{itemize}
+	\item $\Sigma$ un alfabeto
+	\item $\Sigma_n^\ast$ l'insieme delle stringhe su $\Sigma$ di lunghezza $n \in N$
+	\item $M$ una MdT deterministica su $\Sigma$
+\end{itemize}
+
+Definiamo $tc_M : N \rightarrow N$ come la funzione che restituisce il massimo numero di transazioni impiegate da una computazione di $M$ su una stringa di $\Sigma_n^\ast$. \\
+
+Inoltre, sia invece $M$ una MdT non deterministica. La complessità in tempo di $M$ $tc_M(n)$ restituisce il numero \underline{massimo} di transazioni eseguite su una stringa di lunghezza $n$ lungo una qualunque delle computazioni di $M$.
+
+\begin{lemm}[Complessità della simulazione di MdT non deterministiche]
+	Sia $M$ una MdT non deterministica con grado di non determinismo $\sigma$ e con $tc_M(n) = f(n)$. Esiste una MdT deterministica $M'$ equivalente ad $M$ tale che $tc_{M'}(n) = O(f(n)\sigma^{f(n)})$.
+\end{lemm}
+
+\begin{proof}
+	Basta ricordare come si può trasformare $M$ in una MdT deterministica: presa in input una stringa $w$ di lunghezza $n$, si genera una tupla di interi $(m_1, \ldots, m_{f(n)})$ con ogni $m_j \leq \sigma$ e si simula la computazione associata. Il costo nel caso peggiore di questo scenario è $f(n)\sigma^{f(n)}$.
+\end{proof}
